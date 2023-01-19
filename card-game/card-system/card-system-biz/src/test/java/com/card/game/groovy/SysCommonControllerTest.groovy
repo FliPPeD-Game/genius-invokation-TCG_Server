@@ -1,26 +1,15 @@
 package com.card.game.groovy
 
 import com.card.game.common.result.Result
-import com.card.game.controller.SysCommonController
-import com.card.game.mapper.SysImageInfoMapper
 import com.card.game.pojo.vo.ImageInfoVO
 import com.card.game.service.SysImageInfoService
-import org.junit.Assert
-import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.mock.mockito.MockBean
-import org.springframework.context.annotation.Import
-import org.springframework.test.context.ContextConfiguration
 import org.springframework.test.web.reactive.server.FluxExchangeResult
 import org.springframework.test.web.reactive.server.WebTestClient
-import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
-import org.springframework.test.web.servlet.MockMvc;
-import org.spockframework.spring.SpringExtension
-import com.sun.org.apache.xerces.internal.parsers.SecurityConfiguration
+
 
 import spock.lang.Specification
 import spock.lang.Unroll
