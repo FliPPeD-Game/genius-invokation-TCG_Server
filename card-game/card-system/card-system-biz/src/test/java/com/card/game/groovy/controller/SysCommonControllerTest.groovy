@@ -1,4 +1,4 @@
-package com.card.game.groovy
+package com.card.game.groovy.controller
 
 import com.card.game.common.result.Result
 import com.card.game.pojo.vo.ImageInfoVO
