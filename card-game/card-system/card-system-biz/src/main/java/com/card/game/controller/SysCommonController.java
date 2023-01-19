@@ -44,14 +44,15 @@ public class SysCommonController {
 
     /**
      * 获取头像相关信息
+     *
      * @return 头像信息
      */
     @GetMapping("/getProfilePhotos")
-    public Result<List<ImageInfoVO>> getProfilePhotos(){
+    public Result<List<ImageInfoVO>> getProfilePhotos() {
         List<ImageInfoVO> profilePhotos = sysImageInfoService.getProfilePhotos();
-        if(CollectionUtils.isEmpty(profilePhotos)){
+        if (CollectionUtils.isEmpty(profilePhotos)) {
             return Result.error("没有数据");
-        }else {
+        } else {
             return Result.success(profilePhotos);
         }
     }

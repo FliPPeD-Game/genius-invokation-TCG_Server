@@ -37,6 +37,7 @@ import java.util.concurrent.TimeUnit;
 @Service
 @RequiredArgsConstructor
 public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUserEntity> implements SysUserService {
+
     private final SysUserMapper sysUserMapper;
 
     private final RedisCache redisCache;
@@ -53,7 +54,8 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUserEntity
         }
 
         //校验邮箱验证码
-        String cacheCode = redisCache.getCacheObject(RedisPrefixConstant.MAIL_CODE_PREFIX + emailRegisterDTO.getEmail());
+        String cacheCode = redisCache.getCacheObject(
+                RedisPrefixConstant.MAIL_CODE_PREFIX + emailRegisterDTO.getEmail());
         //判断验证码是否存在
         if (StringUtils.isBlank(cacheCode)) {
             throw new BizException(ResultCode.MAIL_CODE_IS_EXPIRE);
@@ -76,7 +78,8 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUserEntity
         // 获取随机头像
         String avatar = sysImageInfoService.getRandomAvatar();
         defaultUser.setAvatar(avatar);
-        SecurityMailUserDetails principal = new SecurityMailUserDetails(BeanMapperUtils.map(defaultUser, SysUserDTO.class));
+        SecurityMailUserDetails principal = new SecurityMailUserDetails(
+                BeanMapperUtils.map(defaultUser, SysUserDTO.class));
 
         //存入数据库
         sysUserMapper.insert(defaultUser);

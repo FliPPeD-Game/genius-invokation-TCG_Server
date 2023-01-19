@@ -63,7 +63,7 @@ public class SysImageInfoServiceImpl extends ServiceImpl<SysImageInfoMapper, Sys
         });
         // 保存或更新缓存
         if (CollectionUtils.isNotEmpty(successImageInfos)) {
-           redisCache.setCacheList(RedisPrefixConstant.IMAGE_INFO_PREFIX+"ProfilePhotos",successImageInfos);
+            redisCache.setCacheList(RedisPrefixConstant.IMAGE_INFO_PREFIX + "ProfilePhotos", successImageInfos);
         }
         // 若存在更新失败的数据，则返回更新或保存失败数据
         if (!flag.get() && CollectionUtils.isNotEmpty(failImageInfos)) {
@@ -82,7 +82,7 @@ public class SysImageInfoServiceImpl extends ServiceImpl<SysImageInfoMapper, Sys
             imageInfoEntities = BeanMapperUtils.mapList(cacheList, SysImageInfoEntity.class);
         } else {
             imageInfoEntities = this.list();
-            redisCache.setCacheList(RedisPrefixConstant.IMAGE_INFO_PREFIX+"ProfilePhotos",imageInfoEntities);
+            redisCache.setCacheList(RedisPrefixConstant.IMAGE_INFO_PREFIX + "ProfilePhotos", imageInfoEntities);
         }
         Map<String, List<SysImageInfoEntity>> imageMap = imageInfoEntities.stream()
                 .collect(Collectors.groupingBy(SysImageInfoEntity::getCountry));

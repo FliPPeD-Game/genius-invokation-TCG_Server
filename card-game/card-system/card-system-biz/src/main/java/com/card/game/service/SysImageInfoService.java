@@ -16,6 +16,7 @@ public interface SysImageInfoService extends IService<SysImageInfoEntity> {
 
     /**
      * 保存头像信息
+     *
      * @param imageInfoList 头像信息
      * @return 失败头像信息
      */
@@ -24,12 +25,14 @@ public interface SysImageInfoService extends IService<SysImageInfoEntity> {
 
     /**
      * 获取所有头像
+     *
      * @return 头像信息
      */
     List<ImageInfoVO> getProfilePhotos();
 
     /**
      * 随机获取头像
+     *
      * @return 头像信息
      */
     String getRandomAvatar();
