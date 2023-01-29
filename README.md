@@ -1,8 +1,16 @@
-# 七圣召唤游戏服务端
+<p align='center'>
+  <img src='assets/tcg_logo.png' alt='' width='200'/>
+<p>
 
-![img.png](img.png)
-
-七圣召唤是一个有趣的卡牌游戏
+<p align='center'>
+  <img src='assets/element/anemo.png' alt='' width='50'/>
+  <img src='assets/element/cryo.png' alt='' width='50'/>
+  <img src='assets/element/dendro.png' alt='' width='50'/>
+  <img src='assets/element/electro.png' alt='' width='50'/>
+  <img src='assets/element/geo.png' alt='' width='50'/>
+  <img src='assets/element/hydro.png' alt='' width='50'/>
+  <img src='assets/element/pyro.png' alt='' width='50'/>
+</p>
 
 ## Getting Started
 
