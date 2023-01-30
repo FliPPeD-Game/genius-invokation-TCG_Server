@@ -42,8 +42,9 @@ spring:
       matching-strategy: ant_path_matcher
 
   redis:
-    host: 9.135.92.198
+    host: 43.136.135.78
     port: 6380
+    password: usertest
   #配置邮件发送
   mail:
     host: smtp.qq.com
