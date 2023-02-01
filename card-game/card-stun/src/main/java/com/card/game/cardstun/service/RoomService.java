@@ -101,11 +101,7 @@ public class RoomService {
     public void removeUserFromRoom( String roomId, String userId){
         Set<Connection> room = rooms.get(roomId);
         if (room != null) {
-            for (Connection user : room) {
-                if (user.getUserId().equals(userId)) {
-                    room.remove(user);
-                }
-            }
+            room.removeIf(user -> user.getUserId().equals(userId));
         }
 
     }
