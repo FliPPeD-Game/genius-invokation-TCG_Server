@@ -1,15 +1,16 @@
-package com.example.geniusinvokationtcg_stun.service;
+package com.card.game.cardstun.service;
 
 import com.alibaba.fastjson.JSON;
-import com.example.geniusinvokationtcg_stun.model.Message;
-import com.example.geniusinvokationtcg_stun.websocket.Connection;
+import com.card.game.cardstun.model.Message;
+import com.card.game.cardstun.websocket.Connection;
+import java.util.Collection;
+import java.util.Set;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.util.Collection;
-import java.util.Set;
+
 
 /**
  * @ClassName: MessageService

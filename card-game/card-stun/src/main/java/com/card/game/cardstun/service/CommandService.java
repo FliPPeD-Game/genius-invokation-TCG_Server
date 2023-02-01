@@ -1,4 +1,4 @@
-package com.example.geniusinvokationtcg_stun.service;
+package com.card.game.cardstun.service;
 
 import org.springframework.stereotype.Service;
 

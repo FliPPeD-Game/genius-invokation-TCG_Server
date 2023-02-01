@@ -1,6 +1,6 @@
-package com.example.geniusinvokationtcg_stun.controller;
+package com.card.game.cardstun.controller;
 
-import com.example.geniusinvokationtcg_stun.service.RoomService;
+import com.card.game.cardstun.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,4 +1,4 @@
-package com.example.geniusinvokationtcg_stun.config;
+package com.card.game.cardstun.config;
 
 import javax.servlet.ServletRequestEvent;
 import javax.servlet.ServletRequestListener;

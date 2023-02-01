@@ -1,6 +1,6 @@
-package com.example.geniusinvokationtcg_stun.service;
+package com.card.game.cardstun.service;
 
-import com.example.geniusinvokationtcg_stun.websocket.Connection;
+import com.card.game.cardstun.websocket.Connection;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;

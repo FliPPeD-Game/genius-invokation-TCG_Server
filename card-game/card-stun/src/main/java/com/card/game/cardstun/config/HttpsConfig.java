@@ -1,4 +1,4 @@
-package com.example.geniusinvokationtcg_stun.config;
+package com.card.game.cardstun.config;
 
 import org.apache.catalina.Context;
 import org.apache.catalina.connector.Connector;

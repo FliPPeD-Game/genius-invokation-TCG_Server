@@ -1,4 +1,4 @@
-package com.example.geniusinvokationtcg_stun.model;
+package com.card.game.cardstun.model;
 
 import lombok.Data;
 

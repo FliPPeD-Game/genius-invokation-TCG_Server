@@ -1,13 +1,13 @@
-package com.example.geniusinvokationtcg_stun.websocket;
+package com.card.game.cardstun.websocket;
 
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.example.geniusinvokationtcg_stun.config.ConfiguratorForClientIp;
-import com.example.geniusinvokationtcg_stun.model.Message;
-import com.example.geniusinvokationtcg_stun.service.CommandService;
-import com.example.geniusinvokationtcg_stun.service.ForwardMessageService;
-import com.example.geniusinvokationtcg_stun.service.RoomService;
+import com.card.game.cardstun.config.ConfiguratorForClientIp;
+import com.card.game.cardstun.model.Message;
+import com.card.game.cardstun.service.CommandService;
+import com.card.game.cardstun.service.ForwardMessageService;
+import com.card.game.cardstun.service.RoomService;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
