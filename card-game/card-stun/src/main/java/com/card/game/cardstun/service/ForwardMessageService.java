@@ -5,8 +5,8 @@ import com.card.game.cardstun.model.Message;
 import com.card.game.cardstun.websocket.Connection;
 import java.util.Collection;
 import java.util.Set;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -15,15 +15,15 @@ import java.io.IOException;
 /**
  * @ClassName: MessageService
  * @Description: 处理websocket消息
- * @auther: caiwei
+ * @auther: cunzhiwang
  * @date: 2019/8/17 18:31
  */
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class ForwardMessageService {
 
-    @Autowired
-    private RoomService roomService;
+    private final RoomService roomService;
 
     /**
      * 给房间内的所有人发送消息（包括自己）

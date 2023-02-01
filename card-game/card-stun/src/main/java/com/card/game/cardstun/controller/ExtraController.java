@@ -1,6 +1,7 @@
 package com.card.game.cardstun.controller;
 
 import com.card.game.cardstun.service.RoomService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,9 +19,10 @@ import java.util.Map;
  * @date: 2019/8/15 14:26
  */
 @RestController
+@RequiredArgsConstructor
 public class ExtraController {
 
-    private static String ipOfInet4Address;
+    private final RoomService roomService;
 
 
     //拿到本机在wifi中的局域网ip
@@ -40,7 +42,7 @@ public class ExtraController {
                     // 获取IPv4 地址
                     if (addr instanceof Inet4Address) {
                         if ("wlan0".equals(nif.getName())) {
-                            ipOfInet4Address = addr.getHostAddress();
+                            String ipOfInet4Address = addr.getHostAddress();
                         }
                         System.out.println("网卡接口名称：" + nif.getName());
                         System.out.println("网卡接口地址：" + addr.getHostAddress());
@@ -57,9 +59,6 @@ public class ExtraController {
 
     @Value("${server.port:8843}")
     private Integer port;
-
-    @Autowired
-    private RoomService roomService;
 
     @GetMapping("/getWebSocketUrl")
     public Map<String, String> getIpAddress() {
