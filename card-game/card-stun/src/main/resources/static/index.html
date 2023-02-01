@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>webrtc</title>
+    <script type="text/javascript" src="js/utils.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <style>
+        .main{ float:left;width:33%;border:1px solid #000000}
+        .log{ float:left;width:33%;border:1px solid #000000}
+        .video{ float:left;width:33%;border:1px solid #000000}
+    </style>
+</head>
+<body>
+<div class="main" >
+    <label for="showUserId">用户ID: </label><span id = "showUserId"></span>
+    <h2>房间列表</h2>
+    <div>
+        <label for="roomId">房间号: </label><input id = "roomId"/>
+        <button id="enterRoom">创建房间</button>
+    </div>
+    <div id="roomList"><!-- 根据后台返回数据，动态添加--></div>
+
+    <h2>消息列表</h2>
+    <label for="textMessage">消息: </label><input  id="textMessage" type="text"/>
+    <button id="sendMessage">发送</button>
+    <div id="dialogueList"><!-- 根据后台返回数据，动态添加--></div>
+</div>
+<div id="log" class="log">
+    <h3>log区域:</h3>
+    <button id="clearLog">清空</button>
+    <div id="logContent"></div>
+</div>
+<div class="video">
+    <h3>己方摄像头:</h3>
+    <video id="localVideo" width="300px" height="300px" autoplay="autoplay" style="border:1px solid #000000" ></video>
+    <h3>对方摄像头:</h3>
+    <video id="remoteVideo" width="300px" height="300px" autoplay="autoplay"   style="border:1px solid #000000"></video>
+</div>
+</body>
+</html>
