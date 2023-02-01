@@ -76,7 +76,6 @@ security:
       - "/user/**"
       - "/message/**"
       - "/sys/**"
-      - "/websocket/**"
 
 mybatis-plus:
   global-config:

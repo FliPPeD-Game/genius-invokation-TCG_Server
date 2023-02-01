@@ -21,7 +21,7 @@ import org.springframework.security.web.DefaultSecurityFilterChain;
 @EnableWebSecurity(debug = true)
 @EnableConfigurationProperties({SecurityUrlProperties.class})
 @RequiredArgsConstructor
-public class SecurityConfig {
+public class SecurityConfig  {
 
     private final MailAuthenticationConfigurer mailAuthenticationConfigurer;
 
