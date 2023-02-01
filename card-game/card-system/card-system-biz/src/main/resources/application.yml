@@ -56,6 +56,12 @@ spring:
 
 server:
   port: 8888
+  ssl:
+    enabled: false
+    keyStore: server.keystore
+    keyAlias: tomcat
+    keyStorePassword: 1518290
+    keyStoreType: JKS
 
 
 
