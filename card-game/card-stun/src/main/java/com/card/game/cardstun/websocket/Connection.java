@@ -158,8 +158,8 @@ public class Connection {
     }
 
     private void createRoom(Message message){
-      message.setMessage(JSON.toJSONString(roomService.createRoom(this)));
-        message.setMessage(JSON.toJSONString(roomService.queryAllRoomName(),SerializerFeature.WriteNullListAsEmpty));
+        message.setRoomId(JSON.toJSONString(roomService.createRoom(this)));
+        message.setMessage("房间创建成功");
         try {
             session.getBasicRemote().sendText(JSON.toJSONString(message));
         } catch (IOException e) {
