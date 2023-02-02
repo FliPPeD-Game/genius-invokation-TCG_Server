@@ -123,17 +123,17 @@ public class Connection {
                 break;
             case Message.TYPE_COMMAND_DIALOGUE:
                 forwardMessageService.sendMessageForEveryInRoom(message);
-                break;
-            case Message.TYPE_COMMAND_ROOM_LIST:
-                //前端从服务器拉取房间列表
-                pullRoomList(message);
-                break;
+                break;//前端从服务器拉取房间列表
             case Message.TYPE_COMMAND_READY:
             case Message.TYPE_COMMAND_OFFER:
             case Message.TYPE_COMMAND_ANSWER:
             case Message.TYPE_COMMAND_CANDIDATE:
                 forwardMessageService.sendMessageForEveryExcludeSelfInRoom(message);
                 break;
+            case Message.TYPE_COMMAND_CREATE:
+                createRoom(message);
+            default:
+                pullRoomList(message);
         }
     }
 
@@ -148,6 +148,17 @@ public class Connection {
     }
 
     private void pullRoomList(Message message) {
+        message.setMessage(JSON.toJSONString(roomService.queryAllRoomName(),SerializerFeature.WriteNullListAsEmpty));
+        try {
+            session.getBasicRemote().sendText(JSON.toJSONString(message));
+        } catch (IOException e) {
+            log.error("error");
+            e.printStackTrace();
+        }
+    }
+
+    private void createRoom(Message message){
+      message.setMessage(JSON.toJSONString(roomService.createRoom(this)));
         message.setMessage(JSON.toJSONString(roomService.queryAllRoomName(),SerializerFeature.WriteNullListAsEmpty));
         try {
             session.getBasicRemote().sendText(JSON.toJSONString(message));

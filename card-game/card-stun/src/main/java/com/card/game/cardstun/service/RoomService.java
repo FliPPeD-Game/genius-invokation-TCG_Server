@@ -1,6 +1,11 @@
 package com.card.game.cardstun.service;
 
 import com.card.game.cardstun.websocket.Connection;
+import com.card.game.common.redis.RedisCache;
+import com.card.game.common.redis.RedisIdWorker;
+import com.card.game.common.redis.constant.RedisPreKey;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -17,11 +22,13 @@ import java.util.concurrent.ConcurrentHashMap;
  * @date: 2019/8/17 18:05
  */
 @Service
+@Slf4j
+@RequiredArgsConstructor
 public class RoomService {
 
     private Map<String,Set<Connection>> rooms = new ConcurrentHashMap<>();
 
-
+   private final RedisIdWorker redisIdWorker;
     /**
      * 加入到大厅
      */
@@ -40,7 +47,7 @@ public class RoomService {
      * 离开大厅
      */
     public void leaveLobby(Connection connection) {
-        System.out.println(connection);
+        log.info(String.valueOf(connection));
         Set<Connection> lobby =rooms.get("lobby");
         lobby.remove(connection);
     }
@@ -49,7 +56,7 @@ public class RoomService {
      * 加入指定的房间
      */
     public String enterRoom(String roomId, Connection connection) {
-
+        Long key = redisIdWorker.nextId("key");
         String operate;
         Set<Connection> room =rooms.get(roomId);
         if(room == null){
@@ -64,6 +71,19 @@ public class RoomService {
         //离开大厅
         leaveLobby(connection);
         return operate;
+    }
+
+    /**
+     * 创建房间
+     * @param connection 连接
+     * @return 返回房间id
+     */
+    public String createRoom(Connection connection){
+        Long roomId = redisIdWorker.nextId(RedisPreKey.ROOM_ID);
+        rooms.put(String.valueOf(roomId),new HashSet<>());
+        Set<Connection> room = rooms.get(String.valueOf(roomId));
+        room.add(connection);
+        return String.valueOf(roomId);
     }
 
     /**

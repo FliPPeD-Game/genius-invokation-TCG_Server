@@ -1,7 +1,6 @@
 package com.card.game.cardstun.config;
 
 import java.util.List;
-import java.util.Map;
 import javax.servlet.http.HttpSession;
 import javax.websocket.HandshakeResponse;
 import javax.websocket.server.HandshakeRequest;
