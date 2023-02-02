@@ -8,6 +8,7 @@ import com.card.game.cardstun.model.Message;
 import com.card.game.cardstun.service.CommandService;
 import com.card.game.cardstun.service.ForwardMessageService;
 import com.card.game.cardstun.service.RoomService;
+import groovy.json.StringEscapeUtils;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -158,7 +159,7 @@ public class Connection {
     }
 
     private void createRoom(Message message){
-        message.setRoomId(JSON.toJSONString(roomService.createRoom(this)));
+        message.setRoomId(roomService.createRoom(this));
         message.setMessage("房间创建成功");
         try {
             session.getBasicRemote().sendText(JSON.toJSONString(message));
