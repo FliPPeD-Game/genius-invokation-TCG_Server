@@ -14,8 +14,8 @@
     <sql id="Base_Column_List">
         id, name, src,country
     </sql>
-    <select id="getRandomAvatar" resultType="java.lang.String">
-        SELECT src
+    <select id="getRandomAvatar" resultType="com.card.game.pojo.entity.SysImageInfoEntity">
+        SELECT *
         FROM sys_imageInfo sii
         ORDER BY rand()
         LIMIT 1

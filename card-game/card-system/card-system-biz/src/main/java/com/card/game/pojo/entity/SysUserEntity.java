@@ -47,6 +47,9 @@ public class SysUserEntity implements Serializable {
     @ApiModelProperty("头像")
     private String avatar;
 
+    @ApiModelProperty("城市")
+    private String country;
+
     @ApiModelProperty("邮箱")
     private String email;
 

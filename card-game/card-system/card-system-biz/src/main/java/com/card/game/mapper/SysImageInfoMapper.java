@@ -11,6 +11,6 @@ import com.card.game.pojo.entity.SysImageInfoEntity;
  */
 public interface SysImageInfoMapper extends BaseMapper<SysImageInfoEntity> {
 
-    String getRandomAvatar();
+    SysImageInfoEntity getRandomAvatar();
 
 }

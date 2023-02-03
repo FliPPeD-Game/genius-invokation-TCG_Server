@@ -46,6 +46,11 @@ public class SysUserDTO {
     private String avatar;
 
     /**
+     * 城市
+     */
+    private String country;
+
+    /**
      * 用户邮箱帐号
      */
     private String email;

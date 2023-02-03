@@ -98,7 +98,7 @@ public class SysImageInfoServiceImpl extends ServiceImpl<SysImageInfoMapper, Sys
     }
 
     @Override
-    public String getRandomAvatar() {
+    public SysImageInfoEntity getRandomAvatar() {
         return sysImageInfoMapper.getRandomAvatar();
     }
 }

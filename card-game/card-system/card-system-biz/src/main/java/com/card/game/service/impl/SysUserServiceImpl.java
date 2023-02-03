@@ -11,6 +11,7 @@ import com.card.game.common.result.ResultCode;
 import com.card.game.common.web.utils.BeanMapperUtils;
 import com.card.game.mapper.SysUserMapper;
 import com.card.game.pojo.dto.EmailRegisterDTO;
+import com.card.game.pojo.entity.SysImageInfoEntity;
 import com.card.game.pojo.entity.SysUserEntity;
 import com.card.game.security.constant.SecurityConstants;
 import com.card.game.security.enums.SecurityLoginType;
@@ -76,8 +77,9 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUserEntity
         defaultUser.setPassword(passwordEncoder.encode(emailRegisterDTO.getPassword()));
 
         // 获取随机头像
-        String avatar = sysImageInfoService.getRandomAvatar();
-        defaultUser.setAvatar(avatar);
+        SysImageInfoEntity avatar = sysImageInfoService.getRandomAvatar();
+        defaultUser.setAvatar(avatar.getSrc());
+        defaultUser.setCountry(avatar.getCountry());
         SecurityMailUserDetails principal = new SecurityMailUserDetails(
                 BeanMapperUtils.map(defaultUser, SysUserDTO.class));
 

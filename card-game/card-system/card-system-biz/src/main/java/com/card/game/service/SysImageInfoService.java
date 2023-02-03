@@ -35,6 +35,6 @@ public interface SysImageInfoService extends IService<SysImageInfoEntity> {
      *
      * @return 头像信息
      */
-    String getRandomAvatar();
+   SysImageInfoEntity getRandomAvatar();
 
 }
