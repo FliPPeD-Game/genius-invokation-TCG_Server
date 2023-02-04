@@ -6,6 +6,7 @@ import com.card.game.common.redis.RedisIdWorker
 import com.card.game.common.redis.constant.RedisPreKey
 import org.junit.Assert
 import org.mockito.Mock
+import org.springframework.boot.test.mock.mockito.MockBean
 import spock.lang.Specification
 
 import static org.mockito.Mockito.when
@@ -18,7 +19,7 @@ import static org.mockito.Mockito.when
  * @Date 2023/2/2 11:58
  */
 class RoomServiceTest extends Specification {
-    @Mock
+    @MockBean
     private RedisIdWorker redisIdWorker;
     def "test createRome"() {
         given:

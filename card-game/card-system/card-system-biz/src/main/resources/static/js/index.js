@@ -7,6 +7,8 @@ const TYPE_COMMAND_READY = "ready";
 const TYPE_COMMAND_OFFER = "offer";
 const TYPE_COMMAND_ANSWER = "answer";
 const TYPE_COMMAND_CANDIDATE = "candidate";
+const TYPE_COMMAND_CREATE = "create";
+
 
 
 
@@ -86,7 +88,7 @@ window.onload = ()=>{
     //初始化各种按钮
     document.getElementById("enterRoom").onclick = () =>{
         roomId = document.getElementById("roomId").value;
-        websocket.send(JSON.stringify({command:TYPE_COMMAND_ROOM_ENTER,userId:userId,roomId : roomId}));
+        websocket.send(JSON.stringify({command:TYPE_COMMAND_CREATE,userId:userId,roomId : roomId}));
         //不用向服务器请求房间列表，在服务器的创建房间函数中，向每个终端发送TYPE_COMMAND_ROOM_LIST事件
         //websocket.send(JSON.stringify({command: TYPE_COMMAND_ROOM_LIST}));
     };
