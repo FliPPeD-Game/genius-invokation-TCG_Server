@@ -6,9 +6,10 @@ import com.card.game.common.redis.RedisIdWorker
 import com.card.game.common.redis.constant.RedisPreKey
 import org.junit.Assert
 import org.mockito.Mock
-import org.springframework.boot.test.mock.mockito.MockBean
+import org.springframework.data.redis.core.StringRedisTemplate
 import spock.lang.Specification
 
+import static org.mockito.ArgumentMatchers.any
 import static org.mockito.Mockito.when
 
 
@@ -19,11 +20,14 @@ import static org.mockito.Mockito.when
  * @Date 2023/2/2 11:58
  */
 class RoomServiceTest extends Specification {
-    @MockBean
-    private RedisIdWorker redisIdWorker;
+
+
+    private StringRedisTemplate redisTemplate=Mock(StringRedisTemplate.class);
+    private RedisIdWorker redisIdWorker = new RedisIdWorker(redisTemplate);;
     def "test createRome"() {
         given:
         Connection connection=new Connection();
+        when(redisTemplate.opsForValue().increment(any())).thenReturn(123456L)
         RoomService roomService= new RoomService(redisIdWorker)
         when(redisIdWorker.nextId(RedisPreKey.ROOM_ID)).thenReturn(123456L);
         expect:
