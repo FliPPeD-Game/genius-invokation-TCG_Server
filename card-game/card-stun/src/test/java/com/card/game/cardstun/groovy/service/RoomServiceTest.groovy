@@ -6,6 +6,7 @@ import com.card.game.common.redis.RedisIdWorker
 import com.card.game.common.redis.constant.RedisPreKey
 import org.junit.Assert
 import org.mockito.Mock
+import org.springframework.data.redis.core.DefaultValueOperations
 import org.springframework.data.redis.core.StringRedisTemplate
 import spock.lang.Specification
 
@@ -23,13 +24,16 @@ class RoomServiceTest extends Specification {
 
 
     private StringRedisTemplate redisTemplate=Mock(StringRedisTemplate.class);
-    private RedisIdWorker redisIdWorker = new RedisIdWorker(redisTemplate);;
+    private RedisIdWorker redisIdWorker = new RedisIdWorker(redisTemplate);
+    /**
+     * 测试返回全局唯一自增id
+     */
     def "test createRome"() {
         given:
         Connection connection=new Connection();
         when(redisTemplate.opsForValue().increment(any())).thenReturn(123456L)
-        RoomService roomService= new RoomService(redisIdWorker)
         when(redisIdWorker.nextId(RedisPreKey.ROOM_ID)).thenReturn(123456L);
+        RoomService roomService= new RoomService(redisIdWorker)
         expect:
 
         Assert.assertEquals(123456L,roomService.createRoom(connection))

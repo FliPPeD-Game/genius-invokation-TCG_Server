@@ -19,6 +19,7 @@
         <module>card-common-security</module>
         <module>card-common-message</module>
         <module>card-common-websocket</module>
+        <module>card-common-task</module>
     </modules>
 
     <properties>
