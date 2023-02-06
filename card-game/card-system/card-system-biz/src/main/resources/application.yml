@@ -61,6 +61,17 @@ spring:
     test-connection: true
     username: 3144279133@qq.com
     password: vkpvmdlcxbjsdhaj
+  quartz:
+    job-store-type: jdbc
+    wait-for-jobs-to-complete-on-shutdown: true
+      scheduler-name: SpringBootDemoScheduler
+      properties:
+        org.quartz.threadPool.threadCount: 5
+        org.quartz.threadPool.threadPriority: 5
+        org.quartz.threadPool.threadsInheritContextClassLoaderOfInitializingThread: true
+        org.quartz.jobStore.misfireThreshold: 5000
+        org.quartz.jobStore.class: org.quartz.impl.jdbcjobstore.JobStoreTX
+        org.quartz.jobStore.driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate
 
 
 

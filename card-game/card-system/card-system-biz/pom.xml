@@ -85,6 +85,11 @@
             <groupId>com.card.game</groupId>
             <artifactId>card-common-message</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.card.game</groupId>
+            <artifactId>card-common-task</artifactId>
+        </dependency>
     </dependencies>
 
 
