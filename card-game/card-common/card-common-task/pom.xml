@@ -8,7 +8,6 @@
         <groupId>com.card.game</groupId>
         <version>${revision}</version>
     </parent>
-    <groupId>com.card.game</groupId>
     <artifactId>card-common-task</artifactId>
     <packaging>jar</packaging>
     <name>card-common-task</name>
@@ -29,6 +28,10 @@
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.card.game</groupId>
+            <artifactId>card-common-mybatis</artifactId>
         </dependency>
     </dependencies>
 
