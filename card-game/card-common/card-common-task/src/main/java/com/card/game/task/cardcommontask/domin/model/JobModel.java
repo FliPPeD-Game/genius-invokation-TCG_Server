@@ -1,5 +1,11 @@
 package com.card.game.task.cardcommontask.domin.model;
 
+import javax.validation.constraints.NotBlank;
+import lombok.Data;
+import lombok.experimental.Accessors;
+
+@Data
+@Accessors(chain = true)
 public class JobModel {
     /**
      * 定时任务全类名
