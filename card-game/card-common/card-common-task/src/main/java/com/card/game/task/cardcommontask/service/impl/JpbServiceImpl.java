@@ -14,6 +14,7 @@ import org.quartz.JobDetail;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
 import org.quartz.TriggerBuilder;
+import org.springframework.stereotype.Service;
 
 /**
  * job service
@@ -23,6 +24,7 @@ import org.quartz.TriggerBuilder;
  */
 @RequiredArgsConstructor
 @Slf4j
+@Service
 public class JpbServiceImpl implements JobService {
 
     private final Scheduler scheduler;
