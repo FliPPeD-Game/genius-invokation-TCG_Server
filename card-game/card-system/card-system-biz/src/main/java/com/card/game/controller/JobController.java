@@ -7,17 +7,14 @@ import com.card.game.task.cardcommontask.common.ApiResponse;
 import com.card.game.task.cardcommontask.domin.model.JobModel;
 import com.card.game.task.cardcommontask.service.JobService;
 import javax.validation.Valid;
+
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 异步任务控制
@@ -28,19 +25,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/job")
 @Slf4j
+@RequiredArgsConstructor
 public class JobController {
-    private final JobService jobService;
 
-    @Autowired
-    public JobController(JobService jobService) {
-        this.jobService = jobService;
-    }
+private final JobService jobService;
 
     /**
      * 保存定时任务
      */
-    @PostMapping
-    public ResponseEntity<ApiResponse> addJob(@Valid JobModel jobModel) {
+    @PostMapping("/addJob")
+    public ResponseEntity<ApiResponse> addJob( @Valid@RequestBody JobModel jobModel) {
         try {
             jobService.addJob(jobModel);
         } catch (Exception e) {

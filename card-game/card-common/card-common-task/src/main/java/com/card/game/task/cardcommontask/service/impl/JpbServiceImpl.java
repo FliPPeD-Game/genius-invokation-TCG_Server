@@ -14,6 +14,7 @@ import org.quartz.JobDetail;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
 import org.quartz.TriggerBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -26,6 +27,7 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 public class JpbServiceImpl implements JobService {
+
 
     private final Scheduler scheduler;
 
@@ -41,7 +43,9 @@ public class JpbServiceImpl implements JobService {
         CronScheduleBuilder cron = CronScheduleBuilder.cronSchedule(jobModel.getCronExpression());
 
         //根据Cron表达式构建一个Trigger
-        CronTrigger trigger = TriggerBuilder.newTrigger().withIdentity(jobModel.getJobClassName(), jobModel.getJobGroupName()).withSchedule(cron).build();
+        CronTrigger trigger = TriggerBuilder.newTrigger().
+                withIdentity(jobModel.getJobClassName(), jobModel.getJobGroupName())
+                .withSchedule(cron).build();
 
         try {
             scheduler.scheduleJob(jobDetail, trigger);
