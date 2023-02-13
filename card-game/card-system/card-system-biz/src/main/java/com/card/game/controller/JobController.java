@@ -1,10 +1,9 @@
-package com.card.game.task.cardcommontask.controller;
+package com.card.game.controller;
 
 import cn.hutool.core.lang.Dict;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.card.game.task.cardcommontask.common.ApiResponse;
-import com.card.game.task.cardcommontask.domin.entity.JobAndTriggerEntity;
 import com.card.game.task.cardcommontask.domin.model.JobModel;
 import com.card.game.task.cardcommontask.service.JobService;
 import javax.validation.Valid;
