@@ -22,4 +22,10 @@ public class JobModel {
      */
     @NotBlank(message = "cron表达式不能为空")
     private String cronExpression;
+
+    /**
+     * 定时任务类型
+     */
+    @NotBlank(message = "定时任务类型不能为空")
+    private String taskType;
 }

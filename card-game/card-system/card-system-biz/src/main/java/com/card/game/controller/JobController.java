@@ -4,6 +4,7 @@ import cn.hutool.core.lang.Dict;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.card.game.common.constants.TaskType;
 import com.card.game.task.common.ApiResponse;
 import com.card.game.task.domain.entity.JobAndTriggerEntity;
 import com.card.game.task.domain.model.JobModel;
@@ -37,6 +38,10 @@ private final JobService jobService;
     @PostMapping("/addJob")
     public ResponseEntity<ApiResponse> addJob( @Valid@RequestBody JobModel jobModel) {
         try {
+            boolean exist = TaskType.isExist(jobModel.getTaskType());
+            if (!exist) {
+                new ResponseEntity<>(ApiResponse.msg("taskType填写错误"), HttpStatus.INTERNAL_SERVER_ERROR);
+            }
             jobService.addJob(jobModel);
         } catch (Exception e) {
             return new ResponseEntity<>(ApiResponse.msg(e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);

@@ -1,4 +1,4 @@
-package com.card.game.task;
+package com.card.game.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
