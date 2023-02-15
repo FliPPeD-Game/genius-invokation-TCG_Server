@@ -1,4 +1,4 @@
-package com.card.game.task.cardcommontask.common;
+package com.card.game.task.common;
 
 import lombok.Data;
 import org.springframework.http.HttpStatus;

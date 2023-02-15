@@ -3,15 +3,16 @@ package com.card.game.controller;
 import cn.hutool.core.lang.Dict;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
-import com.card.game.task.cardcommontask.common.ApiResponse;
-import com.card.game.task.cardcommontask.domin.model.JobModel;
-import com.card.game.task.cardcommontask.service.JobService;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.card.game.task.common.ApiResponse;
+import com.card.game.task.domain.entity.JobAndTriggerEntity;
+import com.card.game.task.domain.model.JobModel;
+import com.card.game.task.service.JobService;
 import javax.validation.Valid;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.SchedulerException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -97,7 +98,7 @@ private final JobService jobService;
         return new ResponseEntity<>(ApiResponse.msg("修改成功"), HttpStatus.OK);
     }
 
-    @GetMapping
+    @GetMapping("list")
     public ResponseEntity<ApiResponse> jobList(Integer currentPage, Integer pageSize) {
         if (ObjectUtil.isNull(currentPage)) {
             currentPage = 1;
@@ -105,8 +106,8 @@ private final JobService jobService;
         if (ObjectUtil.isNull(pageSize)) {
             pageSize = 10;
         }
-//        PageInfo<JobAndTriggerEntity> all = jobService.list(currentPage, pageSize);
-        return ResponseEntity.ok(ApiResponse.ok(Dict.create().set("total","")));
+        IPage<JobAndTriggerEntity> jobData = jobService.list(currentPage, pageSize);
+        return ResponseEntity.ok(ApiResponse.ok(Dict.create().set("total",jobData)));
     }
 
 }

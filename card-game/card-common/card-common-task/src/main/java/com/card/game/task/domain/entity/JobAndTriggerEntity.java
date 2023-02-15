@@ -1,4 +1,4 @@
-package com.card.game.task.cardcommontask.domin.entity;
+package com.card.game.task.domain.entity;
 
 import lombok.Data;
 

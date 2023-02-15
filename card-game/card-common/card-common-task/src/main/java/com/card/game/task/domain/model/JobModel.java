@@ -1,4 +1,4 @@
-package com.card.game.task.cardcommontask.domin.model;
+package com.card.game.task.domain.model;
 
 import javax.validation.constraints.NotBlank;
 import lombok.Data;
