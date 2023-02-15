@@ -3,6 +3,7 @@ package com.card.game.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.card.game.mapper.JobMapper;
+import com.card.game.mapper.SysAttributeSyncConfigMapper;
 import com.card.game.task.Until.JobUtil;
 import com.card.game.task.domain.entity.JobAndTriggerEntity;
 import com.card.game.task.domain.model.JobModel;
@@ -42,7 +43,8 @@ public class JpbServiceImpl implements JobService {
         scheduler.start();
 
         // 构建Job信息
-        JobDetail jobDetail = JobBuilder.newJob(JobUtil.getClass(jobModel.getJobClassName()).getClass()).withIdentity(jobModel.getJobClassName(), jobModel.getJobGroupName()).build();
+        JobDetail jobDetail = JobBuilder.newJob(JobUtil.getClass(jobModel.getJobClassName()).getClass())
+                .withIdentity(jobModel.getJobClassName(), jobModel.getJobGroupName()).build();
 
         // Cron表达式调度构建器(即任务执行的时间)
         CronScheduleBuilder cron = CronScheduleBuilder.cronSchedule(jobModel.getCronExpression());

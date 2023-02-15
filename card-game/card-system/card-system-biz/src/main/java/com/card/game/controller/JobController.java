@@ -79,7 +79,7 @@ private final JobService jobService;
     /**
      * 恢复定时任务
      */
-    @RequestMapping(params = "/resume",method = RequestMethod.POST)
+    @RequestMapping(value = "/resume",method = RequestMethod.POST)
     public ResponseEntity<ApiResponse> resumeJob( @RequestBody JobModel jobModel) throws SchedulerException {
         if (StrUtil.hasBlank(jobModel.getJobGroupName(), jobModel.getJobClassName())) {
             return new ResponseEntity<>(ApiResponse.msg("参数不能为空"), HttpStatus.BAD_REQUEST);
