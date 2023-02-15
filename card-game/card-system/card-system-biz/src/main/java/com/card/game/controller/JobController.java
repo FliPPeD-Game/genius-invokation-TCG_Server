@@ -48,8 +48,8 @@ private final JobService jobService;
     /**
      * 删除定时任务
      */
-    @DeleteMapping
-    public ResponseEntity<ApiResponse> deleteJob(JobModel jobModel) throws SchedulerException {
+    @DeleteMapping("/deleteJob")
+    public ResponseEntity<ApiResponse> deleteJob(@RequestBody JobModel jobModel) throws SchedulerException {
         if (StrUtil.hasBlank(jobModel.getJobGroupName(), jobModel.getJobClassName())) {
             return new ResponseEntity<>(ApiResponse.msg("参数不能为空"), HttpStatus.BAD_REQUEST);
         }
@@ -61,8 +61,8 @@ private final JobService jobService;
     /**
      * 暂停定时任务
      */
-    @PutMapping(params = "pause")
-    public ResponseEntity<ApiResponse> pauseJob(JobModel jobModel) throws SchedulerException {
+   @RequestMapping(value = "/pause",method = RequestMethod.POST)
+    public ResponseEntity<ApiResponse> pauseJob(@RequestBody JobModel jobModel) throws SchedulerException {
         if (StrUtil.hasBlank(jobModel.getJobGroupName(), jobModel.getJobClassName())) {
             return new ResponseEntity<>(ApiResponse.msg("参数不能为空"), HttpStatus.BAD_REQUEST);
         }
@@ -74,8 +74,8 @@ private final JobService jobService;
     /**
      * 恢复定时任务
      */
-    @PutMapping(params = "resume")
-    public ResponseEntity<ApiResponse> resumeJob(JobModel jobModel) throws SchedulerException {
+    @RequestMapping(params = "/resume",method = RequestMethod.POST)
+    public ResponseEntity<ApiResponse> resumeJob( @RequestBody JobModel jobModel) throws SchedulerException {
         if (StrUtil.hasBlank(jobModel.getJobGroupName(), jobModel.getJobClassName())) {
             return new ResponseEntity<>(ApiResponse.msg("参数不能为空"), HttpStatus.BAD_REQUEST);
         }
@@ -87,8 +87,8 @@ private final JobService jobService;
     /**
      * 修改定时任务，定时时间
      */
-    @PutMapping(params = "cron")
-    public ResponseEntity<ApiResponse> cronJob(@Valid JobModel jobModel) {
+    @PutMapping(params = "/cron")
+    public ResponseEntity<ApiResponse> cronJob(@Valid  @RequestBody JobModel jobModel) {
         try {
             jobService.cronJob(jobModel);
         } catch (Exception e) {
