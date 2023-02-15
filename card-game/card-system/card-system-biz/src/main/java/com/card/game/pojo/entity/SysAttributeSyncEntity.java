@@ -3,6 +3,7 @@ package com.card.game.pojo.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 /**
  * 表格数据同步配置
@@ -10,6 +11,7 @@ import io.swagger.annotations.ApiModelProperty;
  * @author cunzhiwang
  * @Date 2023/2/15 15:31
  */
+@Data
 public class SysAttributeSyncEntity {
 
     private static final long serialVersionUID = 1L;
@@ -21,11 +23,11 @@ public class SysAttributeSyncEntity {
     @ApiModelProperty("数据库名称")
     private String database;
 
-    @ApiModelProperty("图片路径")
-    private String table1;
+    @ApiModelProperty("对应mapper1路径")
+    private String mapper1;
 
-    @ApiModelProperty("城市")
-    private String table2;
+    @ApiModelProperty("对应mapper2路径")
+    private String mapper2;
 
 
     @ApiModelProperty("表一属性")

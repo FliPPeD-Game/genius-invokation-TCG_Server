@@ -1,9 +1,8 @@
-package com.card.game.service;
+package com.card.game.service.impl;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.card.game.mapper.JobMapper;
-import com.card.game.mapper.SysAttributeSyncConfigMapper;
+import com.card.game.mapper.SysJobMapper;
 import com.card.game.task.Until.JobUtil;
 import com.card.game.task.domain.entity.JobAndTriggerEntity;
 import com.card.game.task.domain.model.JobModel;
@@ -35,7 +34,7 @@ public class JpbServiceImpl implements JobService {
 
     private final Scheduler scheduler;
 
-    private final JobMapper jobMapper;
+    private final SysJobMapper jobMapper;
 
     @Override
     public void addJob(JobModel jobModel) throws Exception {
