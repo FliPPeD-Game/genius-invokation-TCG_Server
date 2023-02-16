@@ -45,7 +45,11 @@ public class AttributeSyncJob implements BaseJob {
                     log.error(String.format("对应mapper1【%s】路径或mapper2【%s】配置错误", attribute.getMapper1(),
                             attribute.getMapper2()));
                 }
-                IService service = (IService)appCtx.getBean("");
+                assert mapper1 != null;
+                IService service = (IService)appCtx.getBean(mapper1);
+
+                System.out.println(service.list());
+
             });
 
         } catch (SchedulerException e1) {

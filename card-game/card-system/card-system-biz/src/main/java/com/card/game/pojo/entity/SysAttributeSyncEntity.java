@@ -2,6 +2,8 @@ package com.card.game.pojo.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -12,6 +14,8 @@ import lombok.Data;
  * @Date 2023/2/15 15:31
  */
 @Data
+@TableName("sys_attribute_sync_config")
+@ApiModel(value = "SysAttributeSyncInfo对象", description = "")
 public class SysAttributeSyncEntity {
 
     private static final long serialVersionUID = 1L;
