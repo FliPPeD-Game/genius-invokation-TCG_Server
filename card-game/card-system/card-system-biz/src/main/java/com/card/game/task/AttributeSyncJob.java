@@ -1,22 +1,22 @@
 package com.card.game.task;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.card.game.mapper.SysAttributeSyncConfigMapper;
 import com.card.game.pojo.entity.SysAttributeSyncEntity;
-import com.card.game.pojo.entity.SysImageInfoEntity;
 import com.card.game.service.SysAttributeSyncService;
 import com.card.game.task.job.base.BaseJob;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
-import com.card.game.task.service.JobService;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.*;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.stereotype.Component;
+
+import javax.sql.DataSource;
 
 /**
  * 属性同步异步任务
@@ -27,7 +27,7 @@ public class AttributeSyncJob implements BaseJob {
     @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {
         Scheduler scheduler = (Scheduler) context.getScheduler();
-//获取JobExecutionContext中的service对象
+             //获取JobExecutionContext中的service对象
         try {
             //获取JobExecutionContext中的service对象
             SchedulerContext schCtx = context.getScheduler().getContext();
@@ -36,21 +36,32 @@ public class AttributeSyncJob implements BaseJob {
             SysAttributeSyncService configService = appCtx.getBean(SysAttributeSyncService.class);
             List<SysAttributeSyncEntity> attributeSyncEntities = configService.list();
             attributeSyncEntities.forEach(attribute -> {
-                Class<?> mapper1 = null;
-                Class<?> mapper2 = null;
+                DataSource dataSource = appCtx.getBean(DataSource.class);
                 try {
-                    mapper1 = Class.forName(attribute.getMapper1());
-                    mapper2 = Class.forName(attribute.getT2Attribute());
-                } catch (ClassNotFoundException e) {
+                    Connection connection = dataSource.getConnection();
+                    StringBuilder sql1 =new StringBuilder("select ");
+                    sql1.append(attribute.getRelationshipField());
+                    sql1.append("from");
+                    sql1.append("where");
+                    sql1.append(attribute.getT2Attribute());
+                    sql1.append("is null");
+                    PreparedStatement preparedStatement = connection.prepareStatement(sql1.toString());
+                    List<String> resultField=new ArrayList<>();
+                    ResultSet result = preparedStatement.executeQuery();
+                    if(!result.first()){
+                        resultField=null;
+                        log.info("对应字段数据都已填充，没有需要填充的字段");
+                        return;
+                    }
+                    while (result.next()){
+
+                    }
+
+
+                } catch (SQLException e) {
                     e.printStackTrace();
-                    log.error(String.format("对应mapper1【%s】路径或mapper2【%s】配置错误", attribute.getMapper1(),
-                            attribute.getMapper2()));
+                    log.error("获取数据库链接失败");
                 }
-                assert mapper1 != null;
-                IService service = (IService) appCtx.getBean(mapper1);
-
-                System.out.println(service.list());
-
             });
 
         } catch (SchedulerException e1) {

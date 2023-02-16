@@ -25,13 +25,13 @@ public class SysAttributeSyncEntity {
     private Long id;
 
     @ApiModelProperty("数据库名称")
-    private String database;
+    private String source;
 
     @ApiModelProperty("对应mapper1路径")
-    private String mapper1;
+    private String table1;
 
     @ApiModelProperty("对应mapper2路径")
-    private String mapper2;
+    private String table2;
 
 
     @ApiModelProperty("表一属性")
@@ -39,5 +39,8 @@ public class SysAttributeSyncEntity {
 
     @ApiModelProperty("表二属性")
     private String t2Attribute;
+
+    @ApiModelProperty("relationship_field")
+    private String relationshipField;
 
 }

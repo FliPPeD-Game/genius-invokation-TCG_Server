@@ -9,6 +9,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 @Configuration
 @RequiredArgsConstructor
@@ -16,7 +19,7 @@ public class SchedulerConfig {
     private final DataSource dataSource;
     private final ApplicationContext applicationContext;
     @Bean(name="SchedulerFactory")
-    public SchedulerFactoryBean schedulerFactoryBean() throws IOException {
+    public SchedulerFactoryBean schedulerFactoryBean() throws IOException{
         SchedulerFactoryBean factory = new SchedulerFactoryBean();
         factory.setAutoStartup(true);
         factory.setStartupDelay(10);//延时5秒启动
