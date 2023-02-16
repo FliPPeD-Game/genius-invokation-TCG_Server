@@ -15,6 +15,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class SysAttributeSyncServiceImpl extends
         ServiceImpl<SysAttributeSyncConfigMapper, SysAttributeSyncEntity> implements
-        SysAttributeSyncService  {
+        SysAttributeSyncService {
 
 }

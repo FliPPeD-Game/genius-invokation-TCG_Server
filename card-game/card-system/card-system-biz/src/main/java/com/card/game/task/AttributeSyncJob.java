@@ -23,6 +23,7 @@ import org.springframework.stereotype.Component;
  */
 @Slf4j
 public class AttributeSyncJob implements BaseJob {
+
     @Override
     public void execute(JobExecutionContext context) throws JobExecutionException {
         Scheduler scheduler = (Scheduler) context.getScheduler();
@@ -36,7 +37,7 @@ public class AttributeSyncJob implements BaseJob {
             List<SysAttributeSyncEntity> attributeSyncEntities = configService.list();
             attributeSyncEntities.forEach(attribute -> {
                 Class<?> mapper1 = null;
-                Class<?> mapper2=null;
+                Class<?> mapper2 = null;
                 try {
                     mapper1 = Class.forName(attribute.getMapper1());
                     mapper2 = Class.forName(attribute.getT2Attribute());
@@ -46,7 +47,7 @@ public class AttributeSyncJob implements BaseJob {
                             attribute.getMapper2()));
                 }
                 assert mapper1 != null;
-                IService service = (IService)appCtx.getBean(mapper1);
+                IService service = (IService) appCtx.getBean(mapper1);
 
                 System.out.println(service.list());
 
