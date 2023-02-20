@@ -1,9 +1,8 @@
 package com.card.game.cardstun.service;
 
 import com.card.game.cardstun.websocket.Connection;
-import com.card.game.common.redis.RedisCache;
 import com.card.game.common.redis.RedisIdWorker;
-import com.card.game.common.redis.constant.RedisPreKey;
+import com.card.game.common.redis.constants.RedisPreKey;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

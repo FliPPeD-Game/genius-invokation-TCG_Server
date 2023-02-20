@@ -1,4 +1,4 @@
-package com.card.game.common.redis.constant;
+package com.card.game.common.redis.constants;
 
 /**
  * redis key前缀

@@ -64,21 +64,6 @@ spring:
   quartz:
     job-store-type: jdbc
     wait-for-jobs-to-complete-on-shutdown: true
-    scheduler-name: SpringBootDemoScheduler
-    properties:
-      #表前缀配置JDBCJobStore
-        org.quartz.jobStore.tablePrefix: QRTZ_
-        org.quartz.threadPool.threadCount: 5
-        org.quartz.threadPool.threadPriority: 5
-        org.quartz.threadPool.threadsInheritContextClassLoaderOfInitializingThread: true
-        org.quartz.jobStore.misfireThreshold: 5000
-        org.quartz.jobStore.class: org.quartz.impl.jdbcjobstore.JobStoreTX
-        org.quartz.jobStore.driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate
-        org.quartz.dataSource.idsDataSource.driver: com.mysql.cj.jdbc.Driver
-        org.quartz.dataSource.idsDataSource.URL: jdbc:mysql://localhost:3306/card_game?useUnicode=true&characterEncoding=utf8
-        org.quartz.dataSource.idsDataSource.user: root
-        org.quartz.dataSource.idsDataSource.password: root
-        org.quartz.dataSource.idsDataSource.validationQuery: select 0 from dual
 
 
 

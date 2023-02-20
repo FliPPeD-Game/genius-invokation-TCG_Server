@@ -1,8 +1,8 @@
-package com.card.game.task.cardcommontask.service;
+package com.card.game.task.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.card.game.task.cardcommontask.domin.entity.JobAndTriggerEntity;
-import com.card.game.task.cardcommontask.domin.model.JobModel;
+import com.card.game.task.domain.entity.JobAndTriggerEntity;
+import com.card.game.task.domain.model.JobModel;
 import org.quartz.SchedulerException;
 
 /**

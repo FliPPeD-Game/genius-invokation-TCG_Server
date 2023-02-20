@@ -3,10 +3,8 @@ package com.card.game.cardstun.groovy.service
 import com.card.game.cardstun.service.RoomService
 import com.card.game.cardstun.websocket.Connection
 import com.card.game.common.redis.RedisIdWorker
-import com.card.game.common.redis.constant.RedisPreKey
+import com.card.game.common.redis.constants.RedisPreKey
 import org.junit.Assert
-import org.mockito.Mock
-import org.springframework.data.redis.core.DefaultValueOperations
 import org.springframework.data.redis.core.StringRedisTemplate
 import spock.lang.Specification
 

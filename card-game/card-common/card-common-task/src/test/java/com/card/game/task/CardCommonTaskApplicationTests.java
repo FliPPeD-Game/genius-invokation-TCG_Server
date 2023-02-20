@@ -1,4 +1,4 @@
-package com.card.game.task.cardcommontask;
+package com.card.game.task;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

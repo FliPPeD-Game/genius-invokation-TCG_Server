@@ -1,4 +1,4 @@
-package com.card.game.task.cardcommontask.domin.model;
+package com.card.game.task.domain.model;
 
 import javax.validation.constraints.NotBlank;
 import lombok.Data;
@@ -22,4 +22,10 @@ public class JobModel {
      */
     @NotBlank(message = "cron表达式不能为空")
     private String cronExpression;
+
+    /**
+     * 定时任务类型
+     */
+    @NotBlank(message = "定时任务类型不能为空")
+    private String taskType;
 }

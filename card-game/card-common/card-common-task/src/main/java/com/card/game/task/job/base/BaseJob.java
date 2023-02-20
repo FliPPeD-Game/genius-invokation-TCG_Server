@@ -1,4 +1,4 @@
-package com.card.game.task.cardcommontask.job.base;
+package com.card.game.task.job.base;
 
 import org.quartz.Job;
 

@@ -1,6 +1,6 @@
-package com.card.game.task.cardcommontask.Until;
+package com.card.game.task.Until;
 
-import com.card.game.task.cardcommontask.job.base.BaseJob;
+import com.card.game.task.job.base.BaseJob;
 
 /**
  * 反射工具类
