@@ -1,6 +1,7 @@
 package com.card.game.pojo.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
@@ -25,12 +26,15 @@ public class SysAttributeSyncEntity {
     private Long id;
 
     @ApiModelProperty("数据库名称")
+    @TableField(value = "source")
     private String source;
 
     @ApiModelProperty("对应mapper1路径")
+    @TableField(value = "table_1")
     private String table1;
 
     @ApiModelProperty("对应mapper2路径")
+    @TableField(value = "table_2")
     private String table2;
 
 
@@ -40,7 +44,12 @@ public class SysAttributeSyncEntity {
     @ApiModelProperty("表二属性")
     private String t2Attribute;
 
-    @ApiModelProperty("relationship_field")
-    private String relationshipField;
+    @ApiModelProperty("relationship_field_1")
+    @TableField(value = "relationship_field_1")
+    private String relationshipField1;
+
+    @ApiModelProperty("relationship_field_2")
+    @TableField(value = "relationship_field_2")
+    private String relationshipField2;
 
 }
