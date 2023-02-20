@@ -1,7 +1,5 @@
 package com.card.game.task;
 
-import cn.hutool.log.LogFactory;
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.card.game.pojo.entity.SysAttributeSyncEntity;
 import com.card.game.service.SysAttributeSyncService;
 import com.card.game.task.job.base.BaseJob;
@@ -12,7 +10,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.*;
