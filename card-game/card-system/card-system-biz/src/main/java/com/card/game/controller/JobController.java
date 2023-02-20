@@ -92,7 +92,7 @@ private final JobService jobService;
     /**
      * 修改定时任务，定时时间
      */
-    @PutMapping(params = "/cron")
+    @PostMapping(value = "/cron")
     public ResponseEntity<ApiResponse> cronJob(@Valid  @RequestBody JobModel jobModel) {
         try {
             jobService.cronJob(jobModel);

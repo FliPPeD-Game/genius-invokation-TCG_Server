@@ -116,6 +116,7 @@ public class AttributeSyncJob implements BaseJob {
                                 try {
                                     boolean execute = preparedStatement.execute(sql3.toString());
                                     log.info("是否更新成功：{}",execute);
+
                                 } catch (SQLException ex) {
                                     ex.printStackTrace();
                                 }
@@ -124,11 +125,17 @@ public class AttributeSyncJob implements BaseJob {
                             e.printStackTrace();
                         }
                     });
-
+                    if(resultField==null|| resultField.size()<=0){
+                        log.info("数据同步完，暂停定时任务");
+                            JobKey key = context.getJobDetail().getKey();
+                            scheduler.pauseJob(key);
+                    }
 
                 } catch (SQLException e) {
                     e.printStackTrace();
                     log.error("获取数据库链接失败");
+                } catch (SchedulerException e) {
+                    e.printStackTrace();
                 }
             });
 
@@ -137,6 +144,7 @@ public class AttributeSyncJob implements BaseJob {
             e1.printStackTrace();
         }
         log.info("-------->AttributeSyncJob end");
+
 
     }
 }
