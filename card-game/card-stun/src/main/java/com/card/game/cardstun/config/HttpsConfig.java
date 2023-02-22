@@ -12,7 +12,6 @@ import org.springframework.context.annotation.Configuration;
  * @ClassName: HttpsConfig
  * @Description: 将http请求，自动转换成https请求
  * @auther: cunzhiwang
- * @date: 2019/8/18 21:14
  */
 @Configuration
 public class HttpsConfig {

@@ -27,7 +27,6 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @ClassName: WebSocketServer
  * @Description: @ServerEndpoint不是单例模式
  * @auther: cunzhiwang
- * @date: 2019/8/15 11:13
  */
 @ServerEndpoint(value = "/websocket",configurator = ConfiguratorForClientIp.class)
 @Component

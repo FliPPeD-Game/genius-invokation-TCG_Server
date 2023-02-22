@@ -18,7 +18,6 @@ import java.util.concurrent.ConcurrentHashMap;
  * @ClassName: RoomService
  * @Description: websocket房间服务
  * @auther: cunzhiwang
- * @date: 2019/8/17 18:05
  */
 @Service
 @Slf4j

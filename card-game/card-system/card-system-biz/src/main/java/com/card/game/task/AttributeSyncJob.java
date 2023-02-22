@@ -1,7 +1,5 @@
 package com.card.game.task;
 
-import cn.hutool.log.LogFactory;
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.card.game.pojo.entity.SysAttributeSyncEntity;
 import com.card.game.service.SysAttributeSyncService;
 import com.card.game.task.job.base.BaseJob;
@@ -12,7 +10,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.*;
@@ -60,7 +57,7 @@ public class AttributeSyncJob implements BaseJob {
                     sql1.append(attribute.getT2Attribute());
                     sql1.append(" ");
                     sql1.append("is null");
-                    log.info("SQL1 is {}",sql1);
+                    log.info("SQL1 is {}", sql1);
                     PreparedStatement preparedStatement = connection.
                             prepareStatement(sql1.toString(), ResultSet.TYPE_SCROLL_INSENSITIVE,
                                     ResultSet.CONCUR_READ_ONLY);
@@ -69,7 +66,7 @@ public class AttributeSyncJob implements BaseJob {
                     while (result.next()) {
                         resultField.add(result.getString(1));
                     }
-                    log.info("sql result is: {}",resultField);
+                    log.info("sql result is: {}", resultField);
                     resultField.forEach(field -> {
                         // 表二目标数据
                         StringBuilder sql2 = new StringBuilder("select ");
@@ -86,14 +83,14 @@ public class AttributeSyncJob implements BaseJob {
                         sql2.append("'");
                         sql2.append(field);
                         sql2.append("'");
-                        log.info("sql2 is: {}",sql2);
+                        log.info("sql2 is: {}", sql2);
                         try {
                             ResultSet resultSet = preparedStatement.executeQuery(sql2.toString());
                             List<String> fieldList = new ArrayList<>();
                             while (resultSet.next()) {
                                 fieldList.add(resultSet.getString(1));
                             }
-                            log.info("sql2 result is:{}",fieldList);
+                            log.info("sql2 result is:{}", fieldList);
                             fieldList.forEach(e -> {
                                 // 执行更新
                                 StringBuilder sql3 = new StringBuilder("UPDATE ");
@@ -113,10 +110,10 @@ public class AttributeSyncJob implements BaseJob {
                                 sql3.append("'");
                                 sql3.append(field);
                                 sql3.append("'");
-                                log.info("sql3 is:{}",sql3);
+                                log.info("sql3 is:{}", sql3);
                                 try {
                                     boolean execute = preparedStatement.execute(sql3.toString());
-                                    log.info("是否更新成功：{}",execute);
+                                    log.info("是否更新成功：{}", execute);
                                 } catch (SQLException ex) {
                                     ex.printStackTrace();
                                 }
@@ -125,10 +122,10 @@ public class AttributeSyncJob implements BaseJob {
                             e.printStackTrace();
                         }
                     });
-                    if(resultField==null|| resultField.size()<=0){
+                    if (resultField == null || resultField.size() <= 0) {
                         log.info("数据同步完，暂停定时任务");
-                            JobKey key = context.getJobDetail().getKey();
-                            scheduler.pauseJob(key);
+                        JobKey key = context.getJobDetail().getKey();
+                        scheduler.pauseJob(key);
                     }
 
                 } catch (SQLException e) {

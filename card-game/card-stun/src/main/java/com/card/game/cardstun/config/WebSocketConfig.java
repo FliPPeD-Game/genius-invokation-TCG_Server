@@ -8,7 +8,6 @@ import org.springframework.web.socket.server.standard.ServerEndpointExporter;
  * @ClassName: WebSocketConfig
  * @Description: TODO
  * @auther: cunzhiwang
- * @date: 2019/8/15 11:11
  */
 
 @Configuration

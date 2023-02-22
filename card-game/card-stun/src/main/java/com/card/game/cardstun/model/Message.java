@@ -6,7 +6,6 @@ import lombok.Data;
  * @ClassName: Message
  * @Description: TODO
  * @auther: cunzhiwang
- * @date: 2019/8/17 18:57
  */
 @Data
 public class Message {
