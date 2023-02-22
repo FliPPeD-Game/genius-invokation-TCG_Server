@@ -1,5 +1,7 @@
 package com.card.game.task;
 
+import cn.hutool.log.LogFactory;
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.card.game.pojo.entity.SysAttributeSyncEntity;
 import com.card.game.service.SysAttributeSyncService;
 import com.card.game.task.job.base.BaseJob;
@@ -10,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import lombok.extern.slf4j.Slf4j;
 import org.quartz.*;
@@ -27,6 +30,7 @@ public class AttributeSyncJob implements BaseJob {
     public void execute(JobExecutionContext context) throws JobExecutionException {
         log.info("-------->AttributeSyncJob begin");
 
+        // TODO 后续优化，避免sql注入
         Scheduler scheduler = (Scheduler) context.getScheduler();
         //获取JobExecutionContext中的service对象
         try {
@@ -113,7 +117,6 @@ public class AttributeSyncJob implements BaseJob {
                                 try {
                                     boolean execute = preparedStatement.execute(sql3.toString());
                                     log.info("是否更新成功：{}",execute);
-
                                 } catch (SQLException ex) {
                                     ex.printStackTrace();
                                 }
@@ -141,7 +144,6 @@ public class AttributeSyncJob implements BaseJob {
             e1.printStackTrace();
         }
         log.info("-------->AttributeSyncJob end");
-
 
     }
 }
