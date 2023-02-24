@@ -18,7 +18,7 @@ public class Message {
     public static final String TYPE_COMMAND_OFFER = "offer";
     public static final String TYPE_COMMAND_ANSWER = "answer";
     public static final String TYPE_COMMAND_CANDIDATE = "candidate";
-    public static final String TYPE_COMMAND_CREATE="create";
+    public static final String TYPE_COMMAND_CREATE="creatRoom";
 
     private String command;
     private String userId;
