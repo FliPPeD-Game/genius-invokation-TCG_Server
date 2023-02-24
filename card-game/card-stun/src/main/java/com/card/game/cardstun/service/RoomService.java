@@ -56,7 +56,6 @@ public class RoomService {
      */
     public Message enterRoom(String roomId, Connection connection) {
         Message message = new Message();
-        Long key = redisIdWorker.nextId("key");
         String operate;
         Set<Connection> room = rooms.get(roomId);
         if(room.size()>2){
@@ -92,7 +91,7 @@ public class RoomService {
      * @return 返回房间id
      */
     public String createRoom(Connection connection, Message message) {
-        Long roomId = redisIdWorker.nextId(RedisPreKey.ROOM_ID);
+        Integer roomId = redisIdWorker.nextId(RedisPreKey.ROOM_ID);
         rooms.put(String.valueOf(roomId), new HashSet<>());
         Set<Connection> room = rooms.get(String.valueOf(roomId));
         connection.setPeerID(message.getPeerID());

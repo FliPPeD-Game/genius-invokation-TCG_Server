@@ -25,7 +25,7 @@ public class RedisIdWorker {
 
     private final StringRedisTemplate stringRedisTemplate;
 
-    public Long nextId(String keyPrefix) {
+    public Integer nextId(String keyPrefix) {
         //获取当前时间
         LocalDateTime now = LocalDateTime.now();
         //获取当前时间得秒数
@@ -37,19 +37,24 @@ public class RedisIdWorker {
         // 如果 key 不存在，那么 key 的值会先被初始化为 0 ，然后再执行 Incrby 命令。
         Long count = stringRedisTemplate.opsForValue().increment("icr:" + keyPrefix + ":" + format);
         Long id =time << COUNT_BITS | count;
-        String idStr=String.valueOf(id);
-        Random random=new Random();
-        int i=0;
-        while (true){
-           i = random.nextInt(idStr.length());
-            if(i+6<=idStr.length()){
-                break;
-            }
-        }
-        idStr=idStr.substring(i,i+6);
-        return Long.valueOf(idStr);
+        int idInt = RSHash(String.valueOf(id));
+        return idInt;
     }
      public static void main(String[] args) {
-         System.out.println(2<<2);
+         int i = RSHash("3442333344");
+         System.out.println(i);
      }
+
+    public static int RSHash(String key) {
+        int b = 378551;
+        int a = 63689;
+        int hash = 0;
+        int n = key.length();
+        for (int i = 0; i < n; i++) {
+            hash = hash * a + key.charAt(i);
+            a = a * b;
+        }
+        return (hash & 0x7FFFF);
+    }
+
 }
