@@ -8,7 +8,6 @@ import com.card.game.cardstun.model.Message;
 import com.card.game.cardstun.service.CommandService;
 import com.card.game.cardstun.service.ForwardMessageService;
 import com.card.game.cardstun.service.RoomService;
-import groovy.json.StringEscapeUtils;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -19,7 +18,6 @@ import org.springframework.stereotype.Component;
 
 
 import javax.websocket.*;
-
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicInteger;
