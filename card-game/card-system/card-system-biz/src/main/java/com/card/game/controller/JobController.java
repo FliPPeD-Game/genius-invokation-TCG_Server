@@ -9,6 +9,7 @@ import com.card.game.task.common.ApiResponse;
 import com.card.game.task.domain.entity.JobAndTriggerEntity;
 import com.card.game.task.domain.model.JobModel;
 import com.card.game.task.service.JobService;
+
 import javax.validation.Valid;
 
 import lombok.RequiredArgsConstructor;
@@ -30,13 +31,13 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class JobController {
 
-private final JobService jobService;
+    private final JobService jobService;
 
     /**
      * 保存定时任务
      */
     @PostMapping("/addJob")
-    public ResponseEntity<ApiResponse> addJob( @Valid@RequestBody JobModel jobModel) {
+    public ResponseEntity<ApiResponse> addJob(@Valid @RequestBody JobModel jobModel) {
         try {
             boolean exist = TaskType.isExist(jobModel.getTaskType());
             if (!exist) {
@@ -66,7 +67,7 @@ private final JobService jobService;
     /**
      * 暂停定时任务
      */
-   @RequestMapping(value = "/pause",method = RequestMethod.POST)
+    @RequestMapping(value = "/pause", method = RequestMethod.POST)
     public ResponseEntity<ApiResponse> pauseJob(@RequestBody JobModel jobModel) throws SchedulerException {
         if (StrUtil.hasBlank(jobModel.getJobGroupName(), jobModel.getJobClassName())) {
             return new ResponseEntity<>(ApiResponse.msg("参数不能为空"), HttpStatus.BAD_REQUEST);
@@ -79,8 +80,8 @@ private final JobService jobService;
     /**
      * 恢复定时任务
      */
-    @RequestMapping(value = "/resume",method = RequestMethod.POST)
-    public ResponseEntity<ApiResponse> resumeJob( @RequestBody JobModel jobModel) throws SchedulerException {
+    @RequestMapping(value = "/resume", method = RequestMethod.POST)
+    public ResponseEntity<ApiResponse> resumeJob(@RequestBody JobModel jobModel) throws SchedulerException {
         if (StrUtil.hasBlank(jobModel.getJobGroupName(), jobModel.getJobClassName())) {
             return new ResponseEntity<>(ApiResponse.msg("参数不能为空"), HttpStatus.BAD_REQUEST);
         }
@@ -93,7 +94,7 @@ private final JobService jobService;
      * 修改定时任务，定时时间
      */
     @PostMapping(value = "/cron")
-    public ResponseEntity<ApiResponse> cronJob(@Valid  @RequestBody JobModel jobModel) {
+    public ResponseEntity<ApiResponse> cronJob(@Valid @RequestBody JobModel jobModel) {
         try {
             jobService.cronJob(jobModel);
         } catch (Exception e) {
@@ -112,7 +113,7 @@ private final JobService jobService;
             pageSize = 10;
         }
         IPage<JobAndTriggerEntity> jobData = jobService.list(currentPage, pageSize);
-        return ResponseEntity.ok(ApiResponse.ok(Dict.create().set("total",jobData)));
+        return ResponseEntity.ok(ApiResponse.ok(Dict.create().set("total", jobData)));
     }
 
 }

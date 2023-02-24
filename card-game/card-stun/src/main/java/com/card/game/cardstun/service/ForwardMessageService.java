@@ -16,7 +16,6 @@ import java.io.IOException;
  * @ClassName: MessageService
  * @Description: 处理websocket消息
  * @auther: cunzhiwang
- * @date: 2019/8/17 18:31
  */
 @Slf4j
 @Service
