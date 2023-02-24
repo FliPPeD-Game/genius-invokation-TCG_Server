@@ -43,7 +43,8 @@ public class SecurityConfig  {
 
         //禁用掉session
         httpSecurity.sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .enableSessionUrlRewriting(true);
 
         //设置未认证处理器
         httpSecurity.exceptionHandling()

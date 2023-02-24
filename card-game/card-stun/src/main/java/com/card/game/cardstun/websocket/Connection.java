@@ -132,6 +132,7 @@ public class Connection {
                 break;
             case Message.TYPE_COMMAND_CREATE:
                 createRoom(message);
+                break;
             default:
                 pullRoomList(message);
         }
