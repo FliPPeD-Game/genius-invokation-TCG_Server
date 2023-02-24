@@ -3,6 +3,8 @@ package com.card.game.common.redis;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
+import java.util.Random;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -34,14 +36,20 @@ public class RedisIdWorker {
         // Redis Incrby 命令将 key 中储存的数字加上指定的增量值。
         // 如果 key 不存在，那么 key 的值会先被初始化为 0 ，然后再执行 Incrby 命令。
         Long count = stringRedisTemplate.opsForValue().increment("icr:" + keyPrefix + ":" + format);
-
-        return time << COUNT_BITS | count;
+        Long id =time << COUNT_BITS | count;
+        String idStr=String.valueOf(id);
+        Random random=new Random();
+        int i=0;
+        while (true){
+           i = random.nextInt(idStr.length());
+            if(i+6<=idStr.length()){
+                break;
+            }
+        }
+        idStr=idStr.substring(i,i+6);
+        return Long.valueOf(idStr);
     }
      public static void main(String[] args) {
-            LocalDateTime of = LocalDateTime.of(2022, 1, 1, 0, 0, 0);
-            long l = of.toEpochSecond(ZoneOffset.UTC);
-            // LocalTime类的toEpochSecond()方法用于
-            // 将此LocalTime转换为自1970-01-01T00：00：00Z以来的秒数
-            System.out.println(l);
+         System.out.println(2<<2);
      }
 }

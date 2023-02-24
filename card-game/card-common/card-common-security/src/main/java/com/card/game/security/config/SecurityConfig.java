@@ -18,7 +18,7 @@ import org.springframework.security.web.DefaultSecurityFilterChain;
  * @version v1.0 2023-01-07-12:07 PM
  */
 @Configuration
-@EnableWebSecurity(debug = true)
+@EnableWebSecurity(debug = false)
 @EnableConfigurationProperties({SecurityUrlProperties.class})
 @RequiredArgsConstructor
 public class SecurityConfig  {
