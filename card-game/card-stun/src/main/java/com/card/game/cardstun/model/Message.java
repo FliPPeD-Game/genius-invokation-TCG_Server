@@ -23,5 +23,6 @@ public class Message {
     private String userId;
     private String roomId;
     private String message;
+    private String peerID;
 
 }
