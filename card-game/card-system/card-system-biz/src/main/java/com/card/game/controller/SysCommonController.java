@@ -5,14 +5,12 @@ import com.card.game.pojo.dto.ImageInfoDTO;
 import com.card.game.pojo.entity.SysImageInfoEntity;
 import com.card.game.pojo.vo.ImageInfoVO;
 import com.card.game.service.SysImageInfoService;
+
 import java.util.List;
+
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.collections.CollectionUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 系统APi
@@ -55,6 +53,12 @@ public class SysCommonController {
         } else {
             return Result.success(profilePhotos);
         }
+    }
+
+    @GetMapping("/addRoleCardInfo")
+    public Result<Boolean> addRoleCardInfo(@RequestParam("url") String url) {
+
+        return Result.success(sysImageInfoService.addRoleCardInfo(url));
     }
 
 }

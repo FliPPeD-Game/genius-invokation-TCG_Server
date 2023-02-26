@@ -37,4 +37,9 @@ public interface SysImageInfoService extends IService<SysImageInfoEntity> {
      */
    SysImageInfoEntity getRandomAvatar();
 
+    /**
+     *
+     */
+    boolean addRoleCardInfo(String url);
+
 }
