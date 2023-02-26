@@ -6,11 +6,10 @@ import com.card.game.common.redis.constants.RedisPrefixConstant;
 import com.card.game.common.result.Result;
 import com.card.game.common.result.ResultCode;
 import com.card.game.common.web.utils.ServletUtils;
-import com.card.game.security.constant.SecurityConstants;
 import com.card.game.security.enums.SecurityLoginType;
 import com.card.game.security.support.userdetails.SecurityMailUserDetails;
 import com.card.game.security.utils.JwtUtil;
-import com.google.common.collect.Maps;
+import com.card.game.security.utils.SecurityContextUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
@@ -40,7 +39,7 @@ public class SecurityMailAuthenticationSuccessHandler implements AuthenticationS
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         SecurityMailUserDetails principal = (SecurityMailUserDetails) authentication.getPrincipal();
-        log.info("用户：{} 登录成功", principal.getUsername());
+        log.info("用户：{} 登录成功", principal.getSysUserDTO().getNickname());
         //生成token
         String token = JwtUtil.createJwt(principal, SecurityLoginType.MAIL);
 
@@ -48,11 +47,7 @@ public class SecurityMailAuthenticationSuccessHandler implements AuthenticationS
         redisCache.setCacheObject(RedisPrefixConstant.AUTHENTICATION_PREFIX + principal.getMailAccount(),
                 principal, 24, TimeUnit.HOURS);
 
-        Map<String, Object> result = Maps.newHashMap();
-        result.put(SecurityConstants.AUTHORIZATION, token);
-        //密码擦除
-        principal.clearPassword();
-        result.put(SecurityConstants.USER_INFO, principal.getSysUserDTO());
-        ServletUtils.writeToJson(response, Result.success(ResultCode.AUTHENTICATION_SUCCESS, result));
+        Map<String, Object> userMap = SecurityContextUtils.buildUserMailContext(principal, token);
+        ServletUtils.writeToJson(response, Result.success(ResultCode.AUTHENTICATION_SUCCESS, userMap));
     }
 }
