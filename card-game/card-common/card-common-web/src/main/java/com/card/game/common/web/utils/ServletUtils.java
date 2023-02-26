@@ -3,7 +3,7 @@ package com.card.game.common.web.utils;
 import cn.hutool.core.io.IoUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.extra.servlet.ServletUtil;
-import com.alibaba.fastjson2.JSON;
+import cn.hutool.json.JSONUtil;
 import org.springframework.http.MediaType;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -29,7 +29,7 @@ public class ServletUtils {
      * @param object   对象，会序列化成 JSON 字符串
      */
     public static void writeToJson(HttpServletResponse response, Object object) {
-        String content = JSON.toJSONString(object);
+        String content = JSONUtil.toJsonStr(object);
         ServletUtil.write(response, content, MediaType.APPLICATION_JSON_UTF8_VALUE);
     }
 
