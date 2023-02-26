@@ -13,9 +13,6 @@ public class RoleSkillInfoEntity {
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     private Long id;
 
-    @ApiModelProperty("属于")
-    private String belongs;
-
     @ApiModelProperty("技能类型")
     private String type;
 

@@ -17,7 +17,7 @@ public class RoleCardInfoEntity {
     private String belongs;
 
     @ApiModelProperty("元素类型")
-    private String elementType;
+    private Integer elementType;
 
     @ApiModelProperty("生命值")
     private Integer hp;
@@ -27,5 +27,9 @@ public class RoleCardInfoEntity {
 
     @ApiModelProperty("图片路径")
     private String resource;
+
+    @ApiModelProperty("武器")
+    private String weapon;
+
 
 }
