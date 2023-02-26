@@ -91,7 +91,7 @@ public class SysImageInfoServiceImpl extends ServiceImpl<SysImageInfoMapper, Sys
         if (!flag.get() && CollectionUtils.isNotEmpty(failImageInfos)) {
             return failImageInfos;
         } else {
-            return new ArrayList<SysImageInfoEntity>();
+            return new ArrayList<>();
         }
 
     }
@@ -142,7 +142,7 @@ public class SysImageInfoServiceImpl extends ServiceImpl<SysImageInfoMapper, Sys
      * }
      *
      * @param url url
-     * @return
+     * @return 是否保存成功
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -167,7 +167,7 @@ public class SysImageInfoServiceImpl extends ServiceImpl<SysImageInfoMapper, Sys
                 .body(body)
                 .execute();
         JSONObject responseJson = JSONUtil.parseObj(execute.body());
-        Map result = responseJson.get("data", Map.class);
+        Map<String,Object> result = responseJson.get("data", Map.class);
         JSONArray jsonArray = (JSONArray) result.get("role_card_infos");
         List<RoleCardInfoEntity> cardInfos = new ArrayList<>();
         List<RoleSkillInfoEntity> skillInfoList = new ArrayList<>();
@@ -196,7 +196,7 @@ public class SysImageInfoServiceImpl extends ServiceImpl<SysImageInfoMapper, Sys
                 JSONArray costs = skill.get("skill_costs", JSONArray.class);
                 for (int k = 0; k < costs.size(); k++) {
                     JSONObject costJson = costs.get(i, JSONObject.class);
-                    if(costJson!=null){
+                    if (costJson != null) {
                         SkillCostEntity cost = new SkillCostEntity();
                         cost.setCostNum(Integer.valueOf(costJson.get("cost_num", String.class)));
                         cost.setCostType(Integer.valueOf(costJson.get("cost_type", String.class)));
@@ -214,7 +214,7 @@ public class SysImageInfoServiceImpl extends ServiceImpl<SysImageInfoMapper, Sys
             if (isSave) {
                 isSave = skillCostService.saveOrUpdateBatch(costList);
             } else {
-                isSave = false;
+                isSave=false;
             }
         }
         return isSave;
