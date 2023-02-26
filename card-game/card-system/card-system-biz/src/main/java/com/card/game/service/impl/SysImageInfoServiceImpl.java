@@ -3,7 +3,6 @@ package com.card.game.service.impl;
 import cn.hutool.http.Header;
 import cn.hutool.http.HttpRequest;
 import cn.hutool.http.HttpResponse;
-import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
@@ -35,6 +34,7 @@ import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 图片操作服务类
@@ -145,6 +145,7 @@ public class SysImageInfoServiceImpl extends ServiceImpl<SysImageInfoMapper, Sys
      * @return
      */
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public boolean addRoleCardInfo(String url) {
         Map<String, Object> params = new HashMap<>();
         params.put("page", 1);
