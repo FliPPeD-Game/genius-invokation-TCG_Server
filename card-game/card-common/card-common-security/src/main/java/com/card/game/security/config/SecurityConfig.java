@@ -18,7 +18,7 @@ import org.springframework.security.web.DefaultSecurityFilterChain;
  * @version v1.0 2023-01-07-12:07 PM
  */
 @Configuration
-@EnableWebSecurity(debug = true)
+@EnableWebSecurity(debug = false)
 @EnableConfigurationProperties({SecurityUrlProperties.class})
 @RequiredArgsConstructor
 public class SecurityConfig  {
@@ -43,7 +43,8 @@ public class SecurityConfig  {
 
         //禁用掉session
         httpSecurity.sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .enableSessionUrlRewriting(true);
 
         //设置未认证处理器
         httpSecurity.exceptionHandling()

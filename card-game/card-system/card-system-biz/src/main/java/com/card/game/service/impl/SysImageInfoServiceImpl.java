@@ -1,5 +1,6 @@
 package com.card.game.service.impl;
 
+import cn.hutool.http.HttpUtil;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.card.game.common.redis.RedisCache;
@@ -11,11 +12,14 @@ import com.card.game.pojo.dto.ImageInfoDTO.BaseImage;
 import com.card.game.pojo.entity.SysImageInfoEntity;
 import com.card.game.pojo.vo.ImageInfoVO;
 import com.card.game.service.SysImageInfoService;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
+
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.stereotype.Service;
@@ -100,5 +104,44 @@ public class SysImageInfoServiceImpl extends ServiceImpl<SysImageInfoMapper, Sys
     @Override
     public SysImageInfoEntity getRandomAvatar() {
         return sysImageInfoMapper.getRandomAvatar();
+    }
+
+    /**
+     * {
+     *   "page": 1,
+     *   "page_size": 10,
+     *   "card_type": 0,
+     *   "role_search": {
+     *     "element_type": "",
+     *     "weapon": "",
+     *     "belong": ""
+     *   },
+     *   "action_search": {
+     *     "action_card_type": "",
+     *     "cost_num": "",
+     *     "is_other_cost": false
+     *   }
+     * }
+     * @param url url
+     * @return
+     */
+    @Override
+    public boolean addRoleCardInfo(String url) {
+        Map<String,Object> params = new HashMap<>();
+        params.put("page",1);
+        params.put("page_size",10);
+        params.put("card_type",0);
+        Map<String,Object> roleSearch = new HashMap<>();
+        roleSearch.put("element_type","");
+        roleSearch.put("weapon","");
+        roleSearch.put("belong","");
+        Map<String,Object> actionSearch = new HashMap<>();
+        actionSearch.put("action_card_type","");
+        actionSearch.put("cost_num","");
+        actionSearch.put("is_other_cost",false);
+        params.put("role_search",roleSearch);
+        params.put("action_search",actionSearch);
+        String post = HttpUtil.post(url, params);
+        return true;
     }
 }

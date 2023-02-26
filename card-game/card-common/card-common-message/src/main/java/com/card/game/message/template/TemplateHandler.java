@@ -49,7 +49,7 @@ public class TemplateHandler {
      */
     public void setRegisteredTemplateContext(Context context, Message message) {
         //随机生成6位验证码
-        String verityCode = RandomUtil.randomString(6).toUpperCase();
+        String verityCode = RandomUtil.randomNumbers(6).toUpperCase();
         //缓存的key
         String cacheKey = RedisPrefixConstant.MAIL_CODE_PREFIX + message.getTo();
         //设置context

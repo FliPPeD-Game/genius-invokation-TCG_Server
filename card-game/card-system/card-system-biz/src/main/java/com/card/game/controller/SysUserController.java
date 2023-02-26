@@ -1,5 +1,7 @@
 package com.card.game.controller;
 
+import com.card.game.pojo.dto.user.SysUserUpdateDTO;
+import com.card.game.api.user.vo.SysUserVO;
 import com.card.game.common.result.Result;
 import com.card.game.pojo.dto.EmailRegisterDTO;
 import com.card.game.security.support.userdetails.SecurityMailUserDetails;
@@ -28,8 +30,7 @@ public class SysUserController {
 
     @GetMapping("/getUserInfo")
     public Result<SecurityMailUserDetails> getUserInfo() {
-        SecurityMailUserDetails principal = (SecurityMailUserDetails) SecurityContextHolder.getContext()
-                .getAuthentication().getPrincipal();
+        SecurityMailUserDetails principal = (SecurityMailUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return Result.success(principal);
     }
 
@@ -46,4 +47,10 @@ public class SysUserController {
         return Result.success(flag);
     }
 
+
+    @PostMapping("/updateUserInfo")
+    public Result<SysUserVO> updateUSerInfo(@RequestBody @Validated SysUserUpdateDTO sysUserUpdateDTO) {
+        SysUserVO sysUserVO = sysUserService.updateUserInfo(sysUserUpdateDTO);
+        return Result.success(sysUserVO);
+    }
 }

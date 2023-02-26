@@ -4,9 +4,7 @@ import com.baomidou.mybatisplus.annotation.*;
 import com.card.game.common.web.utils.NameUtil;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -24,6 +22,8 @@ import java.time.LocalDateTime;
 @TableName("sys_user")
 @ApiModel(value = "SysUserEntity对象", description = "")
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class SysUserEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -44,7 +44,7 @@ public class SysUserEntity implements Serializable {
     @ApiModelProperty("性别((1:男;0:女,2:未知))")
     private Integer gender;
 
-    @ApiModelProperty("头像")
+    @ApiModelProperty("头像信息")
     private String avatar;
 
     @ApiModelProperty("城市")
@@ -79,6 +79,8 @@ public class SysUserEntity implements Serializable {
     @TableLogic
     private Integer delFlag;
 
+
+
     /**
      * 构建默认的用户信息
      *
@@ -88,9 +90,13 @@ public class SysUserEntity implements Serializable {
         String name = NameUtil.getNickName();
         return SysUserEntity.builder()
                 .nickname(name)
-                .avatar("")
                 .gender(2)
                 .lockFlag(false)
                 .build();
+    }
+
+    public void buildAvatarInfo(SysImageInfoEntity avatar) {
+        setAvatar(avatar.getSrc());
+        setCountry(avatar.getCountry());
     }
 }

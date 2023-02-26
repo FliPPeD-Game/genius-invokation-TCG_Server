@@ -13,7 +13,6 @@ import javax.servlet.http.HttpSession;
  *  但是通过监听ServletRequest并使用HttpSession和ServerEndpointConfig里面的Attributes传递信息，
  *  就可以实现直接在WebSocket类中获得客户端IP地址，弥补了WebSocket的一些先天不足。
  * @auther: cunzhiwang
- * @date: 2019/8/18 00:37
  */
 @WebListener
 public class ClientIpServletListener implements ServletRequestListener {

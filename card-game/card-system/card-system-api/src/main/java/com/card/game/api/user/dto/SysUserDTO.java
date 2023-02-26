@@ -41,6 +41,11 @@ public class SysUserDTO {
     private Integer gender;
 
     /**
+     * 具体信息(头像加城市)
+     */
+    private AvatarDTO avatarInfo;
+
+    /**
      * 用户头像
      */
     private String avatar;

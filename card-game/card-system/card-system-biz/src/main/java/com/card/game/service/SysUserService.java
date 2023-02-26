@@ -1,6 +1,8 @@
 package com.card.game.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.card.game.pojo.dto.user.SysUserUpdateDTO;
+import com.card.game.api.user.vo.SysUserVO;
 import com.card.game.pojo.dto.EmailRegisterDTO;
 import com.card.game.pojo.entity.SysUserEntity;
 
@@ -34,4 +36,11 @@ public interface SysUserService extends IService<SysUserEntity> {
     Boolean isUserRegisteredByMailAccount(String mailAccount);
 
 
+    /**
+     * 更新用户信息
+     *
+     * @param sysUserUpdateDTO 更新用户请求参数
+     * @return 更新后的用户信息
+     */
+    SysUserVO updateUserInfo(SysUserUpdateDTO sysUserUpdateDTO);
 }

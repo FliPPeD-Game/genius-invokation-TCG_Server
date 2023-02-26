@@ -2,6 +2,7 @@ package com.card.game.security.support.userdetails;
 
 import com.card.game.api.user.dto.SysUserDTO;
 import lombok.Getter;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -20,7 +21,8 @@ public class SecurityMailUserDetails implements UserDetails {
     public final SysUserDTO sysUserDTO;
 
     @Getter
-    private final String mailAccount;
+    @Setter
+    private String mailAccount;
 
     private Collection<? extends GrantedAuthority> authorities;
 
@@ -71,7 +73,7 @@ public class SecurityMailUserDetails implements UserDetails {
         return true;
     }
 
-    public void clearPassword(){
+    public void clearPassword() {
         this.getSysUserDTO().setPassword(null);
     }
 }

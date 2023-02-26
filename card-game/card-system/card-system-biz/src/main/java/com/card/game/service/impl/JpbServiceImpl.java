@@ -100,7 +100,7 @@ public class JpbServiceImpl implements JobService {
 
     @Override
     public IPage<JobAndTriggerEntity> list(Integer pageNum, Integer pageSize) {
-        IPage<JobAndTriggerEntity> page = new Page<>(pageNum,pageSize);
+        IPage<JobAndTriggerEntity> page = new Page<>(pageNum, pageSize);
         IPage<JobAndTriggerEntity> jobData = jobMapper.list(page);
         return jobData;
     }

@@ -8,17 +8,16 @@ import com.card.game.cardstun.model.Message;
 import com.card.game.cardstun.service.CommandService;
 import com.card.game.cardstun.service.ForwardMessageService;
 import com.card.game.cardstun.service.RoomService;
-import groovy.json.StringEscapeUtils;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 
 import javax.websocket.*;
-
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -27,7 +26,6 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @ClassName: WebSocketServer
  * @Description: @ServerEndpoint不是单例模式
  * @auther: cunzhiwang
- * @date: 2019/8/15 11:13
  */
 @ServerEndpoint(value = "/websocket",configurator = ConfiguratorForClientIp.class)
 @Component
@@ -42,6 +40,7 @@ public class Connection {
     private static volatile AtomicInteger onlineCount = new AtomicInteger(0);
 
     private static RoomService roomService;
+
     @Autowired
     public void setRoomService(RoomService roomService) {
         Connection.roomService = roomService;
@@ -73,6 +72,7 @@ public class Connection {
     //与某个客户端的连接会话，需要通过它来给客户端发送数据
     private Session session;
 
+    private String peerID;
 
     /**
      * 连接建立成功调用的方法
@@ -119,8 +119,8 @@ public class Connection {
                 this.userId = message.getUserId();
                 this.roomId = message.getRoomId();
                 enterRoom(message);
-                //服务器主动向所有在线的人推送房间列表
-                pushRoomList();
+//                //服务器主动向所有在线的人推送房间列表
+//                pushRoomList();
                 break;
             case Message.TYPE_COMMAND_DIALOGUE:
                 forwardMessageService.sendMessageForEveryInRoom(message);
@@ -133,13 +133,14 @@ public class Connection {
                 break;
             case Message.TYPE_COMMAND_CREATE:
                 createRoom(message);
+                break;
             default:
                 pullRoomList(message);
         }
     }
 
     private void  enterRoom(Message message) {
-        message.setMessage(roomService.enterRoom(roomId, this));
+         message = roomService.enterRoom(roomId, this);
         try {
             //返回给自己是加入房间还是创建房间
             session.getBasicRemote().sendText(JSON.toJSONString(message));
@@ -159,8 +160,14 @@ public class Connection {
     }
 
     private void createRoom(Message message){
-        message.setRoomId(roomService.createRoom(this));
-        message.setMessage("房间创建成功");
+        if(StringUtils.isBlank(message.getPeerID())){
+            message.setMessage("peerID不能为空");
+            message.setMessage("500");
+        }else {
+            message.setRoomId(roomService.createRoom(this,message));
+            message.setMessage("房间创建成功");
+            message.setCode("200");
+        }
         try {
             session.getBasicRemote().sendText(JSON.toJSONString(message));
         } catch (IOException e) {

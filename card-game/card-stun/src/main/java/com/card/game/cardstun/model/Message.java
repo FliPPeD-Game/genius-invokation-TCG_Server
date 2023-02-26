@@ -6,7 +6,6 @@ import lombok.Data;
  * @ClassName: Message
  * @Description: TODO
  * @auther: cunzhiwang
- * @date: 2019/8/17 18:57
  */
 @Data
 public class Message {
@@ -18,11 +17,13 @@ public class Message {
     public static final String TYPE_COMMAND_OFFER = "offer";
     public static final String TYPE_COMMAND_ANSWER = "answer";
     public static final String TYPE_COMMAND_CANDIDATE = "candidate";
-    public static final String TYPE_COMMAND_CREATE="create";
+    public static final String TYPE_COMMAND_CREATE="createRoom";
 
     private String command;
     private String userId;
     private String roomId;
     private String message;
+    private String peerID;
+    private String code;
 
 }
