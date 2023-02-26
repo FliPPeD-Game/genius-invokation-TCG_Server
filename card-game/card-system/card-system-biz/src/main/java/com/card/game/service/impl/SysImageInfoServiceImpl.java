@@ -170,7 +170,7 @@ public class SysImageInfoServiceImpl extends ServiceImpl<SysImageInfoMapper, Sys
         JSONArray jsonArray = (JSONArray) result.get("role_card_infos");
         List<RoleCardInfoEntity> cardInfos = new ArrayList<>();
         List<RoleSkillInfoEntity> skillInfoList = new ArrayList<>();
-        List<SkillCostEntity> costlist = new ArrayList<>();
+        List<SkillCostEntity> costList = new ArrayList<>();
         for (int i = 0; i < jsonArray.size(); i++) {
             JSONObject object = (JSONObject) jsonArray.get(i);
             RoleCardInfoEntity cardInfo = new RoleCardInfoEntity();
@@ -201,7 +201,7 @@ public class SysImageInfoServiceImpl extends ServiceImpl<SysImageInfoMapper, Sys
                         cost.setCostType(Integer.valueOf(costJson.get("cost_type", String.class)));
                         cost.setIcon(costJson.get("icon", String.class));
                         cost.setSkillId(skillId);
-                        costlist.add(cost);
+                        costList.add(cost);
                     }
                 }
                 skillInfoList.add(skillInfo);
@@ -211,7 +211,7 @@ public class SysImageInfoServiceImpl extends ServiceImpl<SysImageInfoMapper, Sys
         if (isSave) {
             isSave = roleSkillInfoService.saveOrUpdateBatch(skillInfoList);
             if (isSave) {
-                isSave = skillCostService.saveOrUpdateBatch(costlist);
+                isSave = skillCostService.saveOrUpdateBatch(costList);
             } else {
                 isSave = false;
             }
