@@ -9,6 +9,7 @@ import cn.hutool.json.JSONUtil;
 import com.card.game.pojo.entity.RoleCardInfoEntity;
 import com.card.game.pojo.entity.RoleSkillInfoEntity;
 import com.card.game.pojo.entity.SkillCostEntity;
+import com.card.game.pojo.vo.CardInfoVo;
 import com.card.game.service.CommonService;
 import com.card.game.service.RoleCardInfoService;
 import com.card.game.service.RoleSkillInfoService;
@@ -125,6 +126,12 @@ public class CommonServiceImpl implements CommonService {
             }
         }
         return isSave;
+    }
+
+    @Override
+    public List<CardInfoVo> getAllCardInfo() {
+        return null;
+
     }
 
 }
