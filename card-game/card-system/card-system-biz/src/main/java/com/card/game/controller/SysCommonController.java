@@ -4,6 +4,7 @@ import com.card.game.common.result.Result;
 import com.card.game.pojo.dto.ImageInfoDTO;
 import com.card.game.pojo.entity.SysImageInfoEntity;
 import com.card.game.pojo.vo.ImageInfoVO;
+import com.card.game.service.CommonService;
 import com.card.game.service.SysImageInfoService;
 
 import java.util.List;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.*;
 public class SysCommonController {
 
     private final SysImageInfoService sysImageInfoService;
+    private final CommonService commonService;
 
     /**
      * 保存或更新头像信息
@@ -57,8 +59,7 @@ public class SysCommonController {
 
     @GetMapping("/addRoleCardInfo")
     public Result<Boolean> addRoleCardInfo(@RequestParam("url") String url) {
-
-        return Result.success(sysImageInfoService.addRoleCardInfo(url));
+        return Result.success(commonService.addRoleCardInfo(url));
     }
 
 }
