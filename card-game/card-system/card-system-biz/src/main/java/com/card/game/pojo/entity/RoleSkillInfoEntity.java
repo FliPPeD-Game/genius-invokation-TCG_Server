@@ -8,7 +8,7 @@ import lombok.Data;
 
 @TableName("role_skill_infos")
 @Data
-public class RoleSkillInfoEntity {
+public class RoleSkillInfoEntity extends BaseEntity{
     @ApiModelProperty("主键ID")
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     private Long id;

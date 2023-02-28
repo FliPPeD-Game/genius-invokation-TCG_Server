@@ -17,7 +17,7 @@ import lombok.Data;
 @Data
 @TableName("sys_attribute_sync_config")
 @ApiModel(value = "SysAttributeSyncInfo对象", description = "")
-public class SysAttributeSyncEntity {
+public class SysAttributeSyncEntity extends BaseEntity{
 
     private static final long serialVersionUID = 1L;
 

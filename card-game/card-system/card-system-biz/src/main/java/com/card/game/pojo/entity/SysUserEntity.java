@@ -24,7 +24,7 @@ import java.time.LocalDateTime;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class SysUserEntity implements Serializable {
+public class SysUserEntity extends BaseEntity{
 
     private static final long serialVersionUID = 1L;
 
@@ -55,29 +55,9 @@ public class SysUserEntity implements Serializable {
 
     @ApiModelProperty("手机号")
     private String mobile;
-
-    @ApiModelProperty("创建时间")
-    @TableField(fill = FieldFill.INSERT_UPDATE)
-    private LocalDateTime createTime;
-
-    @ApiModelProperty("修改时间")
-    @TableField(fill = FieldFill.INSERT)
-    private LocalDateTime updateTime;
-
-    @ApiModelProperty("创建者")
-    @TableField(fill = FieldFill.INSERT_UPDATE)
-    private String createBy;
-
-    @ApiModelProperty("更新人")
-    @TableField(fill = FieldFill.INSERT)
-    private String updateBy;
-
     @ApiModelProperty("0-正常，1-锁定")
     private Boolean lockFlag;
 
-    @ApiModelProperty("0-正常，1-删除")
-    @TableLogic
-    private Integer delFlag;
 
 
 

@@ -18,7 +18,7 @@ import lombok.Setter;
 @Setter
 @TableName("sys_imageInfo")
 @ApiModel(value = "SysImageInfo对象", description = "")
-public class SysImageInfoEntity {
+public class SysImageInfoEntity extends BaseEntity{
 
     private static final long serialVersionUID = 1L;
 

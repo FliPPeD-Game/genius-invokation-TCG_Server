@@ -8,7 +8,7 @@ import lombok.Data;
 
 @Data
 @TableName("skill_costs")
-public class SkillCostEntity {
+public class SkillCostEntity extends BaseEntity {
     @ApiModelProperty("主键ID")
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     private Long id;
