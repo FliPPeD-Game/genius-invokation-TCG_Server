@@ -8,7 +8,7 @@ import java.util.List;
 public class CardInfoVo {
     private Long id;
     private String name;
-    private Integer element_type;
+    private Integer elementType;
     private Integer hp;
     private String belongs;
     private String resource;

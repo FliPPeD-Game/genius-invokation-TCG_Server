@@ -3,6 +3,7 @@ package com.card.game.controller;
 import com.card.game.common.result.Result;
 import com.card.game.pojo.dto.ImageInfoDTO;
 import com.card.game.pojo.entity.SysImageInfoEntity;
+import com.card.game.pojo.vo.CardInfoVo;
 import com.card.game.pojo.vo.ImageInfoVO;
 import com.card.game.service.CommonService;
 import com.card.game.service.SysImageInfoService;
@@ -62,5 +63,14 @@ public class SysCommonController {
         return Result.success(commonService.addRoleCardInfo(url));
     }
 
+    @GetMapping("/addActionCardInfo")
+    public Result<Boolean> addActionCardInfo(@RequestParam("url") String url) {
+        return Result.success(commonService.addActionCardInfo(url));
+    }
+
+    @GetMapping("/getAllRoleCardInfo")
+    public Result<List<CardInfoVo>> getAllRoleCardInfo() {
+        return Result.success(commonService.getAllRoleCardInfo());
+    }
 
 }

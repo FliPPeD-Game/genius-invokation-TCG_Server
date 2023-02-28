@@ -2,35 +2,32 @@ package com.card.game.common.base;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonInclude;
+import com.baomidou.mybatisplus.annotation.TableLogic;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-/**
- * @author tomyou
- * @version 1.0 created on 2022/8/10 15:56
- */
 @Data
 public class BaseEntity implements Serializable {
-
-    @TableField(fill = FieldFill.INSERT)
-    @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @ApiModelProperty("创建时间")
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime createTime;
 
+    @ApiModelProperty("修改时间")
     @TableField(fill = FieldFill.INSERT)
-    @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    private String createBy;
-
-    @TableField(fill = FieldFill.INSERT_UPDATE)
-    @JsonInclude(value = JsonInclude.Include.NON_NULL)
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime updateTime;
 
+    @ApiModelProperty("创建者")
     @TableField(fill = FieldFill.INSERT_UPDATE)
-    @JsonInclude(value = JsonInclude.Include.NON_NULL)
+    private String createBy;
+
+    @ApiModelProperty("更新人")
+    @TableField(fill = FieldFill.INSERT)
     private String updateBy;
+
+    @ApiModelProperty("0-正常，1-删除")
+    @TableLogic
+    private Integer delFlag;
 }

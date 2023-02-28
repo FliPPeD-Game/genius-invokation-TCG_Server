@@ -14,7 +14,15 @@ public interface CommonService {
     boolean addRoleCardInfo(String url);
 
     /**
+     * 添加动作卡牌
+     * @param url 链接
+     * @return 是否添加成功
+     */
+
+    boolean addActionCardInfo(String url);
+
+    /**
      * 返回所有卡牌信息
      */
-    public List<CardInfoVo> getAllCardInfo();
+    public List<CardInfoVo> getAllRoleCardInfo();
 }

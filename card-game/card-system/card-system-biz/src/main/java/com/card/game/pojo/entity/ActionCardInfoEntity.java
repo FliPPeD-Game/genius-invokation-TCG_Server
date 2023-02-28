@@ -3,6 +3,7 @@ package com.card.game.pojo.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.card.game.common.base.BaseEntity;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -36,7 +37,7 @@ public class ActionCardInfoEntity extends BaseEntity {
 
     @ApiModelProperty("")
     private String costType2Icon;
-    
+
     @ApiModelProperty("技能名称")
     private String name;
 

@@ -1,13 +1,11 @@
 package com.card.game.pojo.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
+import com.card.game.common.base.BaseEntity;
 import com.card.game.common.web.utils.NameUtil;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
-
-import java.io.Serializable;
-import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -24,7 +22,7 @@ import java.time.LocalDateTime;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class SysUserEntity extends BaseEntity{
+public class SysUserEntity extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
 

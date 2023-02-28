@@ -3,6 +3,7 @@ package com.card.game.pojo.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.card.game.common.base.BaseEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
@@ -18,7 +19,7 @@ import lombok.Setter;
 @Setter
 @TableName("sys_imageInfo")
 @ApiModel(value = "SysImageInfo对象", description = "")
-public class SysImageInfoEntity extends BaseEntity{
+public class SysImageInfoEntity extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
 
