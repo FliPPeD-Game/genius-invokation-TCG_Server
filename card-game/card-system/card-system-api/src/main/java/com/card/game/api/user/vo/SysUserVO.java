@@ -38,5 +38,4 @@ public class SysUserVO {
     private Boolean lockFlag;
 
 
-    private String Authorization;
 }

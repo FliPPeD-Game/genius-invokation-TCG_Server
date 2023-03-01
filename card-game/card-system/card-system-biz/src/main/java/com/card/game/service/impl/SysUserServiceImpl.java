@@ -29,7 +29,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Map;
-import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -124,29 +123,24 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUserEntity
         SecurityMailUserDetails currentUserInfo = SecurityContextUtils.getCurrentUserInfo();
         String currentMailAccount = currentUserInfo.getMailAccount();
         Long id = currentUserInfo.getSysUserDTO().getId();
-        //判断修改的邮箱是已经被注册了
-        if (isUserRegisteredByMailAccount(sysUserUpdateDTO.getEmail()) &&
-                !Objects.equals(currentMailAccount, sysUserUpdateDTO.getEmail())) {
-            throw new BizException(ResultCode.USER_IS_EXIST);
-        }
+
 
         //修改数据库
         SysUserEntity userEntity = sysUserMapper.selectById(id);
         BeanMapperUtils.copy(sysUserUpdateDTO, userEntity);
+        userEntity.buildAvatarInfo(sysUserUpdateDTO.getAvatarInfo());
         sysUserMapper.updateById(userEntity);
 
         log.info("userEntity is {}", userEntity);
         //更新redis里用户的信息
-        currentUserInfo.setMailAccount(sysUserUpdateDTO.getEmail());
         BeanMapperUtils.copy(sysUserUpdateDTO, currentUserInfo.sysUserDTO);
-        //删除原来缓存里的信息
+        //更新缓存里的信息
         redisCache.deleteObject(RedisPrefixConstant.AUTHENTICATION_PREFIX + currentMailAccount);
-        redisCache.setCacheObject(RedisPrefixConstant.AUTHENTICATION_PREFIX + currentUserInfo.getMailAccount(),
+        redisCache.setCacheObject(RedisPrefixConstant.AUTHENTICATION_PREFIX + currentMailAccount,
                 currentUserInfo, 24, TimeUnit.HOURS);
-        //生成token
-        String token = JwtUtil.createJwt(currentUserInfo.getMailAccount(), SecurityLoginType.MAIL);
+
         SysUserVO sysUserVO = BeanMapperUtils.map(userEntity, SysUserVO.class);
-        sysUserVO.setAuthorization(token);
+
         sysUserVO.setAvatarInfo(
                 AvatarDTO.builder()
                         .url(userEntity.getAvatar())
