@@ -14,6 +14,9 @@ public class RoleSkillInfoEntity extends BaseEntity {
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     private Long id;
 
+    @ApiModelProperty("角色id")
+    private Long roleId;
+
     @ApiModelProperty("技能类型")
     private String type;
 

@@ -16,6 +16,7 @@ import com.card.game.pojo.vo.CardInfoVo;
 import com.card.game.pojo.vo.RoleSkillInfoVo;
 import com.card.game.pojo.vo.SkillCostVo;
 import com.card.game.service.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
@@ -95,6 +96,7 @@ public class CommonServiceImpl implements CommonService {
                 skillInfo.setResource(skill.get("resource", String.class));
                 skillInfo.setSkillText(skill.get("skill_text", String.class));
                 skillInfo.setType(skill.get("type", JSONArray.class).toString());
+                skillInfo.setRoleId(cardInfo.getId());
                 JSONArray costs = skill.get("skill_costs", JSONArray.class);
                 for (int k = 0; k < costs.size(); k++) {
                     JSONObject costJson = costs.get(i, JSONObject.class);
@@ -161,23 +163,21 @@ public class CommonServiceImpl implements CommonService {
         List<RoleCardInfoEntity> cardInfos = roleCardInfoService.list();
         List<CardInfoVo> cardInfoVos=BeanMapperUtils.mapList(cardInfos,CardInfoVo.class);
         cardInfoVos.forEach(cardInfo -> {
-            QueryWrapper queryWrapper = new QueryWrapper<>(RoleSkillInfoEntity.class);
-            queryWrapper.eq("id", cardInfo.getId());
+            QueryWrapper<RoleSkillInfoEntity> queryWrapper = new QueryWrapper<>();
+            queryWrapper.eq("role_id",cardInfo.getId());
             List<RoleSkillInfoEntity> roleSkillInfos = roleSkillInfoService.list(queryWrapper);
             List<RoleSkillInfoVo> roleSkillInfoVos = BeanMapperUtils.mapList(roleSkillInfos, RoleSkillInfoVo.class);
             cardInfo.setSkillInfoVos(roleSkillInfoVos);
-            if (roleSkillInfoVos != null) {
-                roleSkillInfoVos.forEach(roleSkill -> {
-                    QueryWrapper wrapper = new QueryWrapper<>(SkillCostEntity.class);
-                    wrapper.eq("skill_id", roleSkill.getId());
-                    List<SkillCostEntity> skillCosts = skillCostService.list(wrapper);
-                    val skillCostVos = BeanMapperUtils.mapList(skillCosts, SkillCostVo.class);
-                    roleSkill.setCosts(skillCostVos);
-                });
-            }
+            roleSkillInfoVos.forEach(roleSkill -> {
+                QueryWrapper<SkillCostEntity> wrapper = new QueryWrapper<>();
+                wrapper.eq("skill_id", roleSkill.getId());
+                List<SkillCostEntity> skillCosts = skillCostService.list(wrapper);
+                val skillCostVos = BeanMapperUtils.mapList(skillCosts, SkillCostVo.class);
+                roleSkill.setCosts(skillCostVos);
+            });
 
         });
-        return null;
+        return cardInfoVos;
 
     }
 

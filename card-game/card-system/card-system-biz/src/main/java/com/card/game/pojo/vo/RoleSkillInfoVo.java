@@ -9,7 +9,7 @@ public class RoleSkillInfoVo {
     private Long id;
     private String name;
     private String resource;
-    private String skill_text;
+    private String skillText;
     private String type;
     private List<SkillCostVo> costs;
 }
