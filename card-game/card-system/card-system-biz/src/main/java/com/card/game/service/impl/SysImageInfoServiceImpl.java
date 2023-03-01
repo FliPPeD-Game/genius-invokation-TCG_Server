@@ -33,6 +33,7 @@ import java.util.stream.Collectors;
 
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -101,7 +102,7 @@ public class SysImageInfoServiceImpl extends ServiceImpl<SysImageInfoMapper, Sys
             imageInfoEntities = this.list();
             redisCache.setCacheList(RedisPrefixConstant.IMAGE_INFO_PREFIX + "ProfilePhotos", imageInfoEntities);
         }
-        Map<String, List<SysImageInfoEntity>> imageMap = imageInfoEntities.stream()
+        Map<String, List<SysImageInfoEntity>> imageMap = imageInfoEntities.stream().filter(imag-> StringUtils.isNotBlank(imag.getCountry()))
                 .collect(Collectors.groupingBy(SysImageInfoEntity::getCountry));
         List<ImageInfoVO> imageInfoVOS = new ArrayList<>();
         imageMap.forEach((key, value) -> {
