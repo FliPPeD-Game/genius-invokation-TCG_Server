@@ -51,6 +51,8 @@ public class SysImageInfoServiceImpl extends ServiceImpl<SysImageInfoMapper, Sys
     private final RedisCache redisCache;
 
     private final SysImageInfoMapper sysImageInfoMapper;
+    // 一天
+    private final Long day= Long.valueOf(1000*60*60*24);
 
 
     @Override
@@ -101,6 +103,7 @@ public class SysImageInfoServiceImpl extends ServiceImpl<SysImageInfoMapper, Sys
         } else {
             imageInfoEntities = this.list();
             redisCache.setCacheList(RedisPrefixConstant.IMAGE_INFO_PREFIX + "ProfilePhotos", imageInfoEntities);
+            redisCache.expire(RedisPrefixConstant.IMAGE_INFO_PREFIX + "ProfilePhotos",day);
         }
         Map<String, List<SysImageInfoEntity>> imageMap = imageInfoEntities.stream().filter(imag-> StringUtils.isNotBlank(imag.getCountry()))
                 .collect(Collectors.groupingBy(SysImageInfoEntity::getCountry));
