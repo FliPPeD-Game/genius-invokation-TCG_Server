@@ -1,6 +1,7 @@
 package com.card.game.controller;
 
 import com.card.game.common.result.Result;
+import com.card.game.pojo.vo.ActionCardInfoVO;
 import com.card.game.pojo.vo.CardInfoVO;
 import com.card.game.pojo.vo.RoleCardInfoVO;
 import com.card.game.service.ActionCardInfoService;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 
 @RestController
@@ -35,7 +38,17 @@ public class CardInfoController {
     }
 
     @GetMapping("/getAllRoleCardInfo")
-    public Result<CardInfoVO> getAllRoleCardInfo() {
+    public Result<List<RoleCardInfoVO>> getAllRoleCardInfo() {
+        return Result.success(roleCardInfoService.getAllRoleCardInfo());
+    }
+
+    @GetMapping("/getActionRoleCardInfo")
+    public Result<List<ActionCardInfoVO>> getAllActionCardInfo() {
+        return Result.success(actionCardInfoService.getAllActionCardInfo());
+    }
+
+    @GetMapping("/getAllRoleCardInfo")
+    public Result<CardInfoVO> getAllCardInfo() {
         return Result.success(cardService.getAllCardInfo());
     }
 
