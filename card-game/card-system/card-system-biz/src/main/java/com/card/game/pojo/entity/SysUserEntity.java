@@ -2,6 +2,7 @@ package com.card.game.pojo.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import com.card.game.common.base.BaseEntity;
+import com.card.game.api.user.dto.AvatarDTO;
 import com.card.game.common.web.utils.NameUtil;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -75,6 +76,11 @@ public class SysUserEntity extends BaseEntity {
 
     public void buildAvatarInfo(SysImageInfoEntity avatar) {
         setAvatar(avatar.getSrc());
+        setCountry(avatar.getCountry());
+    }
+
+    public void buildAvatarInfo(AvatarDTO avatar) {
+        setAvatar(avatar.getUrl());
         setCountry(avatar.getCountry());
     }
 }
