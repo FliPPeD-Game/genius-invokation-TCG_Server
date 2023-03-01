@@ -16,8 +16,6 @@ public class SysUserUpdateDTO {
 
     private Integer gender;
 
-    @NotBlank(message = "密码不能为空")
-    @Length(min = 6, max = 16)
     private String password;
 
     private String rePassword;
