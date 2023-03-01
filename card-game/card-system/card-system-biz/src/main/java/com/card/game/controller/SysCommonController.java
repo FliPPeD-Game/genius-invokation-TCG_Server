@@ -28,10 +28,6 @@ import org.springframework.web.bind.annotation.*;
 public class SysCommonController {
 
     private final SysImageInfoService sysImageInfoService;
-//    private final CommonService commonService;
-    private final RoleCardInfoService roleCardInfoService;
-
-    private final ActionCardInfoService actionCardInfoService;
 
     /**
      * 保存或更新头像信息
@@ -61,21 +57,6 @@ public class SysCommonController {
         } else {
             return Result.success(profilePhotos);
         }
-    }
-
-    @GetMapping("/addRoleCardInfo")
-    public Result<Boolean> addRoleCardInfo(@RequestParam("url") String url) {
-        return Result.success(roleCardInfoService.addRoleCardInfo(url));
-    }
-
-    @GetMapping("/addActionCardInfo")
-    public Result<Boolean> addActionCardInfo(@RequestParam("url") String url) {
-        return Result.success(actionCardInfoService.addActionCardInfo(url));
-    }
-
-    @GetMapping("/getAllRoleCardInfo")
-    public Result<List<RoleCardInfoVO>> getAllRoleCardInfo() {
-        return Result.success(roleCardInfoService.getAllRoleCardInfo());
     }
 
 }

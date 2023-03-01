@@ -1,7 +1,5 @@
 package com.card.game.service.impl;
 
-import cn.hutool.http.Header;
-import cn.hutool.http.HttpRequest;
 import cn.hutool.http.HttpResponse;
 import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONObject;
@@ -10,14 +8,12 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.card.game.common.web.utils.BeanMapperUtils;
 import com.card.game.mapper.RoleCardInfoMapper;
-import com.card.game.pojo.entity.ActionCardInfoEntity;
 import com.card.game.pojo.entity.RoleCardInfoEntity;
 import com.card.game.pojo.entity.RoleSkillInfoEntity;
 import com.card.game.pojo.entity.SkillCostEntity;
 import com.card.game.pojo.vo.RoleCardInfoVO;
 import com.card.game.pojo.vo.RoleSkillInfoVO;
 import com.card.game.pojo.vo.SkillCostVO;
-import com.card.game.service.ActionCardInfoService;
 import com.card.game.service.RoleCardInfoService;
 import com.card.game.service.RoleSkillInfoService;
 import com.card.game.service.SkillCostService;
@@ -46,9 +42,6 @@ public class RoleCardInfoServiceImpl extends ServiceImpl<RoleCardInfoMapper, Rol
 
     private final SkillCostService skillCostService;
 
-    private final ActionCardInfoService actionCardInfoService;
-
-    private final RoleCardInfoService roleCardInfoService;
 
     /**
      * {
@@ -120,7 +113,7 @@ public class RoleCardInfoServiceImpl extends ServiceImpl<RoleCardInfoMapper, Rol
                 skillInfoList.add(skillInfo);
             }
         }
-        boolean isSave = roleCardInfoService.saveOrUpdateBatch(cardInfos);
+        boolean isSave = this.saveOrUpdateBatch(cardInfos);
         if (isSave) {
             isSave = roleSkillInfoService.saveOrUpdateBatch(skillInfoList);
             if (isSave) {
@@ -135,7 +128,7 @@ public class RoleCardInfoServiceImpl extends ServiceImpl<RoleCardInfoMapper, Rol
 
     @Override
     public List<RoleCardInfoVO> getAllRoleCardInfo() {
-        List<RoleCardInfoEntity> cardInfos = roleCardInfoService.list();
+        List<RoleCardInfoEntity> cardInfos = this.list();
         List<RoleCardInfoVO> cardInfoVos = BeanMapperUtils.mapList(cardInfos, RoleCardInfoVO.class);
         cardInfoVos.forEach(cardInfo -> {
             QueryWrapper<RoleSkillInfoEntity> queryWrapper = new QueryWrapper<>();

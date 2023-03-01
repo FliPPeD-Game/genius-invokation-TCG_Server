@@ -23,6 +23,6 @@ public class CardServiceImpl implements CardService {
         CardInfoVO cardInfoVO = new CardInfoVO();
         cardInfoVO.setActionCardInfos(allActionCardInfo);
         cardInfoVO.setRoleCardInfos(allRoleCardInfo);
-        return null;
+        return cardInfoVO;
     }
 }
