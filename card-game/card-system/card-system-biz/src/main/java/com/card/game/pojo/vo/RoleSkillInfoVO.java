@@ -5,11 +5,11 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class RoleSkillInfoVo {
+public class RoleSkillInfoVO {
     private Long id;
     private String name;
     private String resource;
     private String skillText;
     private String type;
-    private List<SkillCostVo> costs;
+    private List<SkillCostVO> costs;
 }

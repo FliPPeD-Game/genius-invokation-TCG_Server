@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class CardInfoVo {
+public class RoleCardInfoVO {
     private Long id;
     private String name;
     private Integer elementType;
@@ -13,6 +13,6 @@ public class CardInfoVo {
     private String belongs;
     private String resource;
     private String weapon;
-    List<RoleSkillInfoVo> skillInfoVos;
+    List<RoleSkillInfoVO> skillInfoVos;
 
 }
