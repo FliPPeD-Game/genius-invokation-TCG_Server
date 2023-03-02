@@ -35,7 +35,7 @@ public class SecurityContextRepositoryImpl extends SecurityContextRepositoryAdap
 
     private final SecurityContextManager securityContextManager;
 
-    private  final String websocketUrl="/websocket";
+    private final String websocketUrl = "/websocket";
 
     @Override
     public Supplier<SecurityContext> loadContext(HttpServletRequest request) {
@@ -47,9 +47,9 @@ public class SecurityContextRepositoryImpl extends SecurityContextRepositoryAdap
         log.info("processing authentication for [{}]", request.getRequestURI());
         //获取token
         String token;
-        if(websocketUrl.matches(request.getRequestURI())){
-            token=request.getHeader("Sec-WebSocket-Protocol");
-        }else {
+        if (websocketUrl.matches(request.getRequestURI())) {
+            token = request.getHeader("Sec-WebSocket-Protocol");
+        } else {
             token = request.getHeader(SecurityConstants.AUTHORIZATION);
         }
 
@@ -62,6 +62,7 @@ public class SecurityContextRepositoryImpl extends SecurityContextRepositoryAdap
 
         Claims claims;
         try {
+            token = token.replace(SecurityConstants.AUTHORIZATION_PREFIX, SecurityConstants.EMPTY_STR);
             claims = JwtUtil.parseJWT(token);
         } catch (SignatureException e) {
             log.error(e.getMessage());
@@ -72,11 +73,11 @@ public class SecurityContextRepositoryImpl extends SecurityContextRepositoryAdap
             exceptionThreadLocal.setResultCode(ResultCode.EXPIRED_TOKEN);
             return emptyContext;
         } catch (Exception e) {
-            exceptionThreadLocal.setResultCode(ResultCode.ERROR);
             log.error(e.getMessage());
+            exceptionThreadLocal.setResultCode(ResultCode.ERROR);
             return emptyContext;
         }
 
-        return securityContextManager.handleContext(emptyContext,claims);
+        return securityContextManager.handleContext(emptyContext, claims);
     }
 }

@@ -21,4 +21,8 @@ public interface SecurityConstants {
     String ACCOUNT_EXPIRED = "该账号已过期";
 
     String USER_NOT_EXIST = "用户不存在";
+
+    String AUTHORIZATION_PREFIX = "Bearer ";
+
+    String EMPTY_STR = "";
 }

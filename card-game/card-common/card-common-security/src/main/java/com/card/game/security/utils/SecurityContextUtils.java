@@ -8,6 +8,7 @@ import com.card.game.security.constant.SecurityConstants;
 import com.card.game.security.support.email.MailAuthenticationToken;
 import com.card.game.security.support.userdetails.SecurityMailUserDetails;
 import com.google.common.collect.Maps;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 
@@ -17,6 +18,7 @@ import java.util.Map;
  * @author tomyou
  * @version v1.0 2023/2/26 16:41
  **/
+@Slf4j
 public class SecurityContextUtils {
 
     public static Map<String, Object> buildUserMailContext(SecurityMailUserDetails principal, String token) {
@@ -37,9 +39,15 @@ public class SecurityContextUtils {
     }
 
     public static SecurityMailUserDetails getCurrentUserInfo() {
-        SecurityContext context = SecurityContextHolder.getContext();
-        MailAuthenticationToken authentication = (MailAuthenticationToken) context.getAuthentication();
-        return (SecurityMailUserDetails) authentication.getPrincipal();
+        SecurityMailUserDetails securityMailUserDetails = null;
+        try {
+            SecurityContext context = SecurityContextHolder.getContext();
+            MailAuthenticationToken authentication = (MailAuthenticationToken) context.getAuthentication();
+            securityMailUserDetails = (SecurityMailUserDetails) authentication.getPrincipal();
+        } catch (Exception e) {
+            log.error("getCurrentUserInfo has error:", e);
+        }
+        return securityMailUserDetails;
     }
 
 }

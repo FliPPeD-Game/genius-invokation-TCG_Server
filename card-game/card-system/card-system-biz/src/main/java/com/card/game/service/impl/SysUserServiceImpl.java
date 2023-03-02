@@ -29,6 +29,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -121,6 +122,9 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUserEntity
 
         //当前登陆用户信息
         SecurityMailUserDetails currentUserInfo = SecurityContextUtils.getCurrentUserInfo();
+        if (Objects.isNull(currentUserInfo)) {
+            throw new BizException(ResultCode.ERROR);
+        }
         String currentMailAccount = currentUserInfo.getMailAccount();
         Long id = currentUserInfo.getSysUserDTO().getId();
 
