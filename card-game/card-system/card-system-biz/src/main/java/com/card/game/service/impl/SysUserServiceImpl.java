@@ -24,6 +24,7 @@ import com.card.game.service.SysImageInfoService;
 import com.card.game.service.SysUserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -118,7 +119,9 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUserEntity
             throw new BizException(ResultCode.RE_PASSWORD_CHECK_ERROR);
         }
         //密码加密
-        sysUserUpdateDTO.setPassword(passwordEncoder.encode(sysUserUpdateDTO.getPassword()));
+        if (StringUtils.isNotBlank(sysUserUpdateDTO.getPassword())){
+            sysUserUpdateDTO.setPassword(passwordEncoder.encode(sysUserUpdateDTO.getPassword()));
+        }
 
         //当前登陆用户信息
         SecurityMailUserDetails currentUserInfo = SecurityContextUtils.getCurrentUserInfo();
@@ -151,5 +154,11 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUserEntity
                         .country(userEntity.getCountry())
                         .build());
         return sysUserVO;
+    }
+
+
+    public static void main(String[] args) {
+        PasswordEncoder passwordEncoder1 = new BCryptPasswordEncoder();
+        System.out.println(passwordEncoder1.encode("123123"));
     }
 }
