@@ -47,7 +47,7 @@ public class CardInfoController {
         return Result.success(actionCardInfoService.getAllActionCardInfo());
     }
 
-    @GetMapping("/getAllRoleCardInfo")
+    @GetMapping("/getAllCardInfo")
     public Result<CardInfoVO> getAllCardInfo() {
         return Result.success(cardService.getAllCardInfo());
     }
