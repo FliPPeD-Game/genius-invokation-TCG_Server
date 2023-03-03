@@ -7,7 +7,12 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.card.game.common.base.BaseEntity;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * 表格数据同步配置
@@ -15,7 +20,11 @@ import lombok.Data;
  * @author cunzhiwang
  * @Date 2023/2/15 15:31
  */
-@Data
+@Getter
+@Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @TableName("sys_attribute_sync_config")
 @ApiModel(value = "SysAttributeSyncInfo对象", description = "")
 public class SysAttributeSyncEntity extends BaseEntity {
