@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.card.game.common.base.BaseEntity;
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,19 +12,18 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * 图片信息实体
+ * 用户卡牌配置
  *
  * @author cunzhiwang
- * @Date 2023/1/17 10:41
+ * @Date 2023/3/2 17:19
  */
 @Getter
 @Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName("sys_imageInfo")
-@ApiModel(value = "SysImageInfo对象", description = "")
-public class SysImageInfoEntity extends BaseEntity {
+@TableName("user_card_info_config")
+public class UserCardInfoConfigEntity extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
 
@@ -33,12 +31,13 @@ public class SysImageInfoEntity extends BaseEntity {
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     private Long id;
 
-    @ApiModelProperty("图片名称")
-    private String name;
+    private Long userId;
 
-    @ApiModelProperty("图片路径")
-    private String src;
+    private String roleId;
 
-    @ApiModelProperty("城市")
-    private String country;
+    private String actionId;
+
+    private Integer flag;
+
+    private Integer isDefault;
 }

@@ -102,3 +102,8 @@ INSERT INTO card_game.user_action_card
 (id, action_id, user_id, create_time, update_time, create_by, update_by, del_flag, is_default)
 VALUES(30, 333001, '0', NULL, NULL, NULL, NULL, 0, 0);
 
+// 数据配置
+INSERT INTO card_game.user_card_info_config
+(id, user_id, role_id, action_id, flag, is_default, create_time, update_time, create_by, update_by, del_flag)
+VALUES(1, 0, '1, 2, 3', '1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30', 1, 1, NULL, NULL, NULL, NULL, 0);
+
