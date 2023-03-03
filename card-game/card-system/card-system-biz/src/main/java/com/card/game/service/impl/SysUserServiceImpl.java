@@ -1,5 +1,7 @@
 package com.card.game.service.impl;
 
+import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.bean.copier.CopyOptions;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -133,13 +135,16 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUserEntity
 
         //修改数据库
         SysUserEntity userEntity = sysUserMapper.selectById(id);
-        BeanMapperUtils.copy(sysUserUpdateDTO, userEntity);
+        BeanUtil.copyProperties(sysUserUpdateDTO, userEntity, CopyOptions.create().ignoreNullValue());
         userEntity.buildAvatarInfo(sysUserUpdateDTO.getAvatarInfo());
         sysUserMapper.updateById(userEntity);
 
         log.info("userEntity is {}", userEntity);
         //更新redis里用户的信息
         BeanMapperUtils.copy(sysUserUpdateDTO, currentUserInfo.sysUserDTO);
+        //当前拿到的密码已经被清空了
+        currentUserInfo.sysUserDTO.setPassword(userEntity.getPassword());
+        BeanUtil.copyProperties(sysUserUpdateDTO, currentUserInfo.sysUserDTO, CopyOptions.create().ignoreNullValue());
         //更新缓存里的信息
         redisCache.deleteObject(RedisPrefixConstant.AUTHENTICATION_PREFIX + currentMailAccount);
         redisCache.setCacheObject(RedisPrefixConstant.AUTHENTICATION_PREFIX + currentMailAccount,
