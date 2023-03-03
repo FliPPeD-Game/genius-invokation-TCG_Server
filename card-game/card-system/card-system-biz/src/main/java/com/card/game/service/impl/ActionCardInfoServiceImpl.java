@@ -12,7 +12,6 @@ import com.card.game.pojo.vo.ActionCardInfoVO;
 import com.card.game.service.ActionCardInfoService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import lombok.val;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +25,8 @@ import static com.card.game.utils.HttpUtil.getParams;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class ActionCardInfoServiceImpl extends ServiceImpl<ActionCardInfoMapper, ActionCardInfoEntity> implements ActionCardInfoService {
+public class ActionCardInfoServiceImpl extends ServiceImpl<ActionCardInfoMapper, ActionCardInfoEntity> implements
+        ActionCardInfoService {
 
     @Override
     public boolean addActionCardInfo(String url) {
@@ -41,8 +41,8 @@ public class ActionCardInfoServiceImpl extends ServiceImpl<ActionCardInfoMapper,
         log.info(JSONUtil.toJsonStr(result));
         JSONArray jsonArray = (JSONArray) result.get("action_card_infos");
         List<ActionCardInfoEntity> cardInfoList = new ArrayList<>();
-        for (int i = 0; i < jsonArray.size(); i++) {
-            JSONObject action = (JSONObject) jsonArray.get(i);
+        for (Object o : jsonArray) {
+            JSONObject action = (JSONObject) o;
             ActionCardInfoEntity actionCardInfo = new ActionCardInfoEntity();
             actionCardInfo.setId(action.get("id", Long.class));
             actionCardInfo.setActionCardTags(action.get("action_card_tags", JSONArray.class).toString());
@@ -61,9 +61,9 @@ public class ActionCardInfoServiceImpl extends ServiceImpl<ActionCardInfoMapper,
     }
 
     @Override
-    public List<ActionCardInfoVO> getAllActionCardInfo() {
-        val actionCardInfoVOS = BeanMapperUtils.mapList(this.list(), ActionCardInfoVO.class);
-        return actionCardInfoVOS;
+    public List<ActionCardInfoVO> getActionCardInfos(List<Long> ids) {
+        return BeanMapperUtils.mapList(this.list(), ActionCardInfoVO.class);
+
     }
 
 }

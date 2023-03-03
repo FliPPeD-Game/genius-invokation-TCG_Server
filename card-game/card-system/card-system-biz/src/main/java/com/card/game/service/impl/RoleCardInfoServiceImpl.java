@@ -42,6 +42,8 @@ public class RoleCardInfoServiceImpl extends ServiceImpl<RoleCardInfoMapper, Rol
 
     private final SkillCostService skillCostService;
 
+    private final RoleCardInfoMapper cardInfoMapper;
+
 
     /**
      * {
@@ -127,8 +129,9 @@ public class RoleCardInfoServiceImpl extends ServiceImpl<RoleCardInfoMapper, Rol
 
 
     @Override
-    public List<RoleCardInfoVO> getAllRoleCardInfo() {
-        List<RoleCardInfoEntity> cardInfos = this.list();
+    public List<RoleCardInfoVO> getRoleCardInfos(List<Long> ids) {
+        // 返回所有角色卡牌
+        List<RoleCardInfoEntity> cardInfos = cardInfoMapper.getRoleCardInfos(null);
         List<RoleCardInfoVO> cardInfoVos = BeanMapperUtils.mapList(cardInfos, RoleCardInfoVO.class);
         cardInfoVos.forEach(cardInfo -> {
             QueryWrapper<RoleSkillInfoEntity> queryWrapper = new QueryWrapper<>();

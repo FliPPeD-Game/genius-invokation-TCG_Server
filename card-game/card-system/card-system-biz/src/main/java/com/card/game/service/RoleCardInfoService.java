@@ -11,7 +11,7 @@ public interface RoleCardInfoService extends IService<RoleCardInfoEntity> {
     /**
      * 返回所有角色卡牌信息
      */
-    List<RoleCardInfoVO> getAllRoleCardInfo();
+    List<RoleCardInfoVO> getRoleCardInfos(List<Long> ids);
 
     /**
      * 添加对应角色卡牌信息

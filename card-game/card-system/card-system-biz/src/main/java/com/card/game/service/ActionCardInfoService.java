@@ -16,5 +16,10 @@ public interface ActionCardInfoService extends IService<ActionCardInfoEntity> {
 
     boolean addActionCardInfo(String url);
 
-    List<ActionCardInfoVO> getAllActionCardInfo();
+    /**
+     * 根据集合id返回行为卡牌
+     * @param ids 为null表示返回全部信息
+     * @return 行为卡牌信息
+     */
+    List<ActionCardInfoVO> getActionCardInfos(List<Long> ids);
 }

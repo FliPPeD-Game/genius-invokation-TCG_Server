@@ -4,6 +4,7 @@ import com.card.game.common.result.Result;
 import com.card.game.pojo.vo.ActionCardInfoVO;
 import com.card.game.pojo.vo.CardInfoVO;
 import com.card.game.pojo.vo.RoleCardInfoVO;
+import com.card.game.pojo.vo.UserCarInfoConfigVO;
 import com.card.game.service.ActionCardInfoService;
 import com.card.game.service.CardService;
 import com.card.game.service.RoleCardInfoService;
@@ -39,12 +40,12 @@ public class CardInfoController {
 
     @GetMapping("/getAllRoleCardInfo")
     public Result<List<RoleCardInfoVO>> getAllRoleCardInfo() {
-        return Result.success(roleCardInfoService.getAllRoleCardInfo());
+        return Result.success(roleCardInfoService.getRoleCardInfos(null));
     }
 
-    @GetMapping("/getActionRoleCardInfo")
+    @GetMapping("/getAllActionCardInfo")
     public Result<List<ActionCardInfoVO>> getAllActionCardInfo() {
-        return Result.success(actionCardInfoService.getAllActionCardInfo());
+        return Result.success(actionCardInfoService.getActionCardInfos(null));
     }
 
     @GetMapping("/getAllCardInfo")
@@ -52,4 +53,8 @@ public class CardInfoController {
         return Result.success(cardService.getAllCardInfo());
     }
 
+    @GetMapping("/getUserCardInfoConfig")
+    public Result<UserCarInfoConfigVO> getUserCardInfoConfig() {
+        return Result.success(cardService.getUserCardConfigInfo());
+    }
 }

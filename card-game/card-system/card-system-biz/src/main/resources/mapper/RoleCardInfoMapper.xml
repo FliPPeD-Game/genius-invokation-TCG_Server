@@ -1,12 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.card.game.mapper.RoleCardInfoMapper">
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.card.game.pojo.entity.RoleCardInfoEntity">
-        <id column="id" property="id" />
+        <id column="id" property="id"/>
     </resultMap>
-
-
-
+    <select id="getRoleCardInfos"
+            resultType="com.card.game.pojo.entity.RoleCardInfoEntity">
+        SELECT * FROM card_game.role_card_infos
+        <if test="ids !=null">
+            <where>
+                <foreach item="item" index="index" collection="ids"
+                        open="ID in (" separator="," close=")" nullable="true">
+                    #{item}
+                </foreach>
+            </where>
+        </if>
+    </select>
 </mapper>

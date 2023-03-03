@@ -1,11 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.card.game.mapper.ActionCardInfoMapper">
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.card.game.pojo.entity.ActionCardInfoEntity">
-        <id column="id" property="id" />
+        <id column="id" property="id"/>
     </resultMap>
+    <select id="getActionCardInfos"
+            resultType="com.card.game.pojo.entity.ActionCardInfoEntity">
+        SELECT * FROM card_game.action_card_info
+        <if test="ids !=null">
+            <where>
+                <foreach item="item" index="index" collection="ids"
+                        open="ID in (" separator="," close=")" nullable="true">
+                    #{item}
+                </foreach>
+            </where>
+        </if>
+    </select>
 
 
 </mapper>
