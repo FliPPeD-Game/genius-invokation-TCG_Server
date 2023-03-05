@@ -18,7 +18,7 @@ import org.springframework.security.web.DefaultSecurityFilterChain;
  * @version v1.0 2023-01-07-12:07 PM
  */
 @Configuration
-@EnableWebSecurity(debug = false)
+@EnableWebSecurity(debug = true)
 @EnableConfigurationProperties({SecurityUrlProperties.class})
 @RequiredArgsConstructor
 public class SecurityConfig  {
@@ -55,7 +55,7 @@ public class SecurityConfig  {
         //拦截请求设置
         httpSecurity.authorizeRequests()
                 .antMatchers(securityUrlProperties.getUrls().toArray(new String[0])).permitAll()
-                .anyRequest().permitAll();
+                .anyRequest().authenticated();
 
         //适配邮箱登陆
         httpSecurity.apply(mailAuthenticationConfigurer);
