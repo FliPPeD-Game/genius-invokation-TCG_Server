@@ -129,7 +129,7 @@ public class RoleCardInfoServiceImpl extends ServiceImpl<RoleCardInfoMapper, Rol
 
 
     @Override
-    public List<RoleCardInfoVO> getRoleCardInfos(List<Long> ids) {
+    public List<RoleCardInfoVO> getRoleCardInfos(List<Long> roleCardIds) {
         // 返回所有角色卡牌
         List<RoleCardInfoEntity> cardInfos = cardInfoMapper.getRoleCardInfos(null);
         List<RoleCardInfoVO> cardInfoVos = BeanMapperUtils.mapList(cardInfos, RoleCardInfoVO.class);
