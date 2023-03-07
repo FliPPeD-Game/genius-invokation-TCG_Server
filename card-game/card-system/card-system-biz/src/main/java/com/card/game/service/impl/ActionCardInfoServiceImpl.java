@@ -32,10 +32,10 @@ public class ActionCardInfoServiceImpl extends ServiceImpl<ActionCardInfoMapper,
     @Override
     public boolean addActionCardInfo(String url) {
         Map<String, Object> params = getParams();
-        params.put("page_size", 30);
+        params.put("page_size", 300);
         params.put("card_type", 1);
         Map<String, Object> actionSearch = (Map<String, Object>) params.get("action_search");
-        actionSearch.put("action_card_type", 5);
+//        actionSearch.put("action_card_type", 5);
         HttpResponse execute = getHttpResponse(params, url, HttpMethod.POST);
         JSONObject responseJson = JSONUtil.parseObj(execute.body());
         Map<String, Object> result = responseJson.get("data", Map.class);
