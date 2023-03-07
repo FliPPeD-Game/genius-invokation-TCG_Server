@@ -27,6 +27,7 @@ import static com.card.game.utils.HttpUtil.getParams;
 @Slf4j
 public class ActionCardInfoServiceImpl extends ServiceImpl<ActionCardInfoMapper, ActionCardInfoEntity> implements
         ActionCardInfoService {
+    private final ActionCardInfoMapper actionCardInfoMapper;
 
     @Override
     public boolean addActionCardInfo(String url) {
@@ -62,7 +63,7 @@ public class ActionCardInfoServiceImpl extends ServiceImpl<ActionCardInfoMapper,
 
     @Override
     public List<ActionCardInfoVO> getActionCardInfos(List<Long> ids) {
-        return BeanMapperUtils.mapList(this.list(), ActionCardInfoVO.class);
+        return BeanMapperUtils.mapList(actionCardInfoMapper.getActionCardInfos(ids), ActionCardInfoVO.class);
 
     }
 
