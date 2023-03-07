@@ -6,7 +6,6 @@ import org.springframework.web.socket.server.standard.ServerEndpointExporter;
 
 /**
  * @ClassName: WebSocketConfig
- * @Description: TODO
  * @auther: cunzhiwang
  */
 

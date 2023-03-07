@@ -1,6 +1,6 @@
 package com.card.game.cardstun.service;
 
-import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson2.JSON;
 import com.card.game.cardstun.model.Message;
 import com.card.game.cardstun.websocket.Connection;
 import java.util.Collection;

@@ -1,13 +1,13 @@
 package com.card.game.cardstun.websocket;
 
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.serializer.SerializerFeature;
+import com.alibaba.fastjson2.JSON;
 import com.card.game.cardstun.config.ConfiguratorForClientIp;
 import com.card.game.cardstun.model.Message;
 import com.card.game.cardstun.service.CommandService;
 import com.card.game.cardstun.service.ForwardMessageService;
 import com.card.game.cardstun.service.RoomService;
+import com.card.game.common.constants.CommandType;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -114,49 +114,48 @@ public class Connection {
     public void onMessage(Session session, String stringMessage) {
         Message message = JSON.parseObject(stringMessage, Message.class);
         log.info("收到来自"+ip+"的信息:"+message);
-        switch (message.getCommand()) {
-            case Message.TYPE_COMMAND_ROOM_ENTER:
+        if(CommandType.isExist(message.getCommand())){
+            CommandType command = CommandType.getCommand(message.getCommand());
+            switch (command) {
+            case TYPE_COMMAND_ROOM_ENTER:
                 this.userId = message.getUserId();
                 this.roomId = message.getRoomId();
                 enterRoom(message);
 //                //服务器主动向所有在线的人推送房间列表
 //                pushRoomList();
                 break;
-            case Message.TYPE_COMMAND_DIALOGUE:
+            case TYPE_COMMAND_DIALOGUE:
                 forwardMessageService.sendMessageForEveryInRoom(message);
                 break;//前端从服务器拉取房间列表
-            case Message.TYPE_COMMAND_READY:
-            case Message.TYPE_COMMAND_OFFER:
-            case Message.TYPE_COMMAND_ANSWER:
-            case Message.TYPE_COMMAND_CANDIDATE:
+            case TYPE_COMMAND_READY:
+            case TYPE_COMMAND_OFFER:
+            case TYPE_COMMAND_ANSWER:
+            case TYPE_COMMAND_CANDIDATE:
                 forwardMessageService.sendMessageForEveryExcludeSelfInRoom(message);
                 break;
-            case Message.TYPE_COMMAND_CREATE:
+            case TYPE_COMMAND_CREATE:
                 createRoom(message);
                 break;
             default:
                 pullRoomList(message);
         }
+        }else {
+            message.setRoomId(null);
+            message.setCode("500");
+            message.setMessage("命令输入错误");
+            sentMessage(message);
+        }
     }
 
     private void  enterRoom(Message message) {
          message = roomService.enterRoom(roomId, this);
-        try {
-            //返回给自己是加入房间还是创建房间
-            session.getBasicRemote().sendText(JSON.toJSONString(message));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        //返回给自己是加入房间还是创建房间
+        sentMessage(message);
     }
 
     private void pullRoomList(Message message) {
-        message.setMessage(JSON.toJSONString(roomService.queryAllRoomName(),SerializerFeature.WriteNullListAsEmpty));
-        try {
-            session.getBasicRemote().sendText(JSON.toJSONString(message));
-        } catch (IOException e) {
-            log.error("error");
-            e.printStackTrace();
-        }
+        message.setMessage(JSON.toJSONString(roomService.queryAllRoomName()));
+        sentMessage(message);
     }
 
     private void createRoom(Message message){
@@ -168,19 +167,28 @@ public class Connection {
             message.setMessage("房间创建成功");
             message.setCode("200");
         }
+        sentMessage(message);
+    }
+
+    private void sentMessage(Message message) {
         try {
             session.getBasicRemote().sendText(JSON.toJSONString(message));
         } catch (IOException e) {
-            log.error("error");
-            e.printStackTrace();
+           log.info("发送失败");
+        } finally {
+            try {
+                session.close();
+            } catch (IOException e) {
+              log.info("关闭失败");
+            }
         }
     }
 
     private void pushRoomList() {
         //告诉每个终端更新房间列表
         Message roomListMessage = new Message();
-        roomListMessage.setCommand(Message.TYPE_COMMAND_ROOM_LIST);
-        roomListMessage.setMessage(JSON.toJSONString(roomService.queryAllRoomName(),SerializerFeature.WriteNullListAsEmpty));
+        roomListMessage.setCommand(CommandType.TYPE_COMMAND_ROOM_LIST.getType());
+        roomListMessage.setMessage(JSON.toJSONString(roomService.queryAllRoomName()));
         forwardMessageService.sendMessageForAllOnline(roomListMessage);
     }
 }
