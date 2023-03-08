@@ -13,7 +13,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
-      url: jdbc:mysql://124.221.112.135:3306/card_game?useUnicode=true&amp&characterEncoding=utf8
+      url: jdbc:mysql://127.0.0.1:3306/card_game?useUnicode=true&amp&characterEncoding=utf8
       username: root
       password: root
       # 初始连接数
@@ -50,7 +50,7 @@ spring:
       matching-strategy: ant_path_matcher
 
   redis:
-    host: 124.221.112.135
+    host: 127.0.0.1
     port: 6379
     password: 123456
   #配置邮件发送
