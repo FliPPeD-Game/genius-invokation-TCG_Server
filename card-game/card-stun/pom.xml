@@ -9,7 +9,7 @@
         <version>${revision}</version>
     </parent>
     <artifactId>card-stun</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0-snapshot</version>
     <name>card-stun</name>
     <description>card-stun</description>
     <packaging>jar</packaging>
@@ -76,14 +76,4 @@
             <version>${groovy.version}</version>
         </dependency>
     </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
-
 </project>
