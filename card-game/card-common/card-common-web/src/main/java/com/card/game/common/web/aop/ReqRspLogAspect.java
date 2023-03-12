@@ -5,6 +5,7 @@ import cn.hutool.core.util.URLUtil;
 import cn.hutool.json.JSONUtil;
 
 import com.card.game.common.base.ReqRspLog;
+import com.card.game.common.web.utils.AopUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
@@ -66,7 +67,7 @@ public class ReqRspLogAspect {
         webLog.setBasePath(StrUtil.removeSuffix(urlStr, URLUtil.url(urlStr).getPath()));
         webLog.setIp(request.getRemoteUser());
         webLog.setMethod(request.getMethod());
-        webLog.setParameter(getParameter(method, joinPoint.getArgs()));
+        webLog.setParameter(AopUtils.getParameter(method, joinPoint.getArgs()));
         webLog.setResult(result);
         webLog.setSpendTime((int) (endTime - startTime));
         webLog.setStartTime(startTime);
@@ -74,38 +75,5 @@ public class ReqRspLogAspect {
         webLog.setUrl(request.getRequestURL().toString());
         log.info("{}", JSONUtil.parse(webLog));
         return result;
-    }
-
-    /**
-     * 根据方法和传入的参数获取请求参数
-     */
-    private Object getParameter(Method method, Object[] args) {
-        List<Object> argList = new ArrayList<>();
-        Parameter[] parameters = method.getParameters();
-        for (int i = 0; i < parameters.length; i++) {
-            // 将RequestBody注解修饰的参数作为请求参数
-            RequestBody requestBody = parameters[i].getAnnotation(RequestBody.class);
-            if (requestBody != null) {
-                argList.add(args[i]);
-            }
-            // 将RequestParam注解修饰的参数作为请求参数
-            RequestParam requestParam = parameters[i].getAnnotation(RequestParam.class);
-            if (requestParam != null) {
-                Map<String, Object> map = new HashMap<>(8);
-                String key = parameters[i].getName();
-                if (!StringUtils.hasLength(requestParam.value())) {
-                    key = requestParam.value();
-                }
-                map.put(key, args[i]);
-                argList.add(map);
-            }
-        }
-        if (argList.size() == 0) {
-            return null;
-        } else if (argList.size() == 1) {
-            return argList.get(0);
-        } else {
-            return argList;
-        }
     }
 }
