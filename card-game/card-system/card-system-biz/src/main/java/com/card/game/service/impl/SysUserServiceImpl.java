@@ -5,6 +5,7 @@ import cn.hutool.core.bean.copier.CopyOptions;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.card.game.aop.AopResult;
 import com.card.game.api.user.dto.AvatarDTO;
 import com.card.game.api.user.dto.SysUserDTO;
 import com.card.game.api.user.vo.SysUserVO;
@@ -56,6 +57,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUserEntity
     private final SysImageInfoService sysImageInfoService;
 
     @Override
+    @AopResult
     public Map<String, Object> registerUser(EmailRegisterDTO emailRegisterDTO) {
         //判断用户是否已经注册
         if (isUserRegisteredByMailAccount(emailRegisterDTO.getEmail())) {
@@ -105,6 +107,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUserEntity
     }
 
     @Override
+    @AopResult
     public Boolean isUserRegisteredByMailAccount(String mailAccount) {
         Long count = sysUserMapper
                 .selectCount(Wrappers.<SysUserEntity>lambdaQuery()
@@ -113,6 +116,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUserEntity
     }
 
     @Override
+    @AopResult
     @Transactional(rollbackFor = Exception.class)
     public SysUserVO updateUserInfo(SysUserUpdateDTO sysUserUpdateDTO) {
         //校验两次密码是否一致

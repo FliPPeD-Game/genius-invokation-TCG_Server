@@ -6,6 +6,7 @@ import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.card.game.aop.AopResult;
 import com.card.game.common.web.utils.BeanMapperUtils;
 import com.card.game.mapper.RoleCardInfoMapper;
 import com.card.game.pojo.entity.RoleCardInfoEntity;
@@ -67,6 +68,7 @@ public class RoleCardInfoServiceImpl extends ServiceImpl<RoleCardInfoMapper, Rol
      */
     @Override
     @Transactional(rollbackFor = Exception.class)
+    @AopResult
     public boolean addRoleCardInfo(String url) {
         Map<String, Object> params = getParams();
         params.put("page_size", 28);
@@ -129,6 +131,7 @@ public class RoleCardInfoServiceImpl extends ServiceImpl<RoleCardInfoMapper, Rol
 
 
     @Override
+    @AopResult
     public List<RoleCardInfoVO> getRoleCardInfos(List<Long> roleCardIds) {
         // 返回所有角色卡牌
         List<RoleCardInfoEntity> cardInfos = cardInfoMapper.getRoleCardInfos(roleCardIds);

@@ -1,6 +1,7 @@
 package com.card.game.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.card.game.aop.AopResult;
 import com.card.game.api.user.dto.SysUserDTO;
 import com.card.game.mapper.UserCardInfoConfigMapper;
 import com.card.game.pojo.dto.UserCardInfoConfigDTO;
@@ -39,6 +40,7 @@ public class UserCardConfigServiceImpl extends
 
 
     @Override
+    @AopResult
     public UserCarInfoConfigVO getUserAllCardInfo() {
         SecurityMailUserDetails currentUserInfo = SecurityContextUtils.getCurrentUserInfo();
         SysUserDTO userDTO = currentUserInfo.getSysUserDTO();

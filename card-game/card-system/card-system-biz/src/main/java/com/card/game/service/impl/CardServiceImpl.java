@@ -1,5 +1,6 @@
 package com.card.game.service.impl;
 
+import com.card.game.aop.AopResult;
 import com.card.game.pojo.vo.CardInfoVO;
 import com.card.game.pojo.vo.UserCarInfoConfigVO;
 import com.card.game.service.ActionCardInfoService;
@@ -21,6 +22,7 @@ public class CardServiceImpl implements CardService {
 
     private final UserCardConfigService userCardConfigService;
     @Override
+    @AopResult
     public CardInfoVO getAllCardInfo() {
         val allRoleCardInfo = roleCardInfoService.getRoleCardInfos(null);
         val allActionCardInfo = actionCardInfoService.getActionCardInfos(null);
@@ -31,6 +33,7 @@ public class CardServiceImpl implements CardService {
     }
 
     @Override
+    @AopResult
     public UserCarInfoConfigVO getUserCardConfigInfo() {
         return userCardConfigService.getUserAllCardInfo();
     }

@@ -8,6 +8,7 @@ import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.card.game.aop.AopResult;
 import com.card.game.common.redis.RedisCache;
 import com.card.game.common.redis.constants.RedisPrefixConstant;
 import com.card.game.common.web.utils.BeanMapperUtils;
@@ -56,6 +57,7 @@ public class SysImageInfoServiceImpl extends ServiceImpl<SysImageInfoMapper, Sys
 
 
     @Override
+    @AopResult
     public List<SysImageInfoEntity> saveImages(List<ImageInfoDTO> imageInfoList) {
         List<SysImageInfoEntity> imageInfoEntities = new ArrayList<>();
         imageInfoList.forEach(imageInfo -> {
@@ -95,6 +97,7 @@ public class SysImageInfoServiceImpl extends ServiceImpl<SysImageInfoMapper, Sys
     }
 
     @Override
+    @AopResult
     public List<ImageInfoVO> getProfilePhotos() {
         List<Object> cacheList = redisCache.getCacheList(RedisPrefixConstant.IMAGE_INFO_PREFIX + "ProfilePhotos");
         List<SysImageInfoEntity> imageInfoEntities;
@@ -119,6 +122,7 @@ public class SysImageInfoServiceImpl extends ServiceImpl<SysImageInfoMapper, Sys
     }
 
     @Override
+    @AopResult
     public SysImageInfoEntity getRandomAvatar() {
         return sysImageInfoMapper.getRandomAvatar();
     }

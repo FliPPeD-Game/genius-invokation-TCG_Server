@@ -5,6 +5,7 @@ import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.card.game.aop.AopResult;
 import com.card.game.common.web.utils.BeanMapperUtils;
 import com.card.game.mapper.ActionCardInfoMapper;
 import com.card.game.pojo.entity.ActionCardInfoEntity;
@@ -30,6 +31,7 @@ public class ActionCardInfoServiceImpl extends ServiceImpl<ActionCardInfoMapper,
     private final ActionCardInfoMapper actionCardInfoMapper;
 
     @Override
+    @AopResult
     public boolean addActionCardInfo(String url) {
         Map<String, Object> params = getParams();
         params.put("page_size", 300);
@@ -62,6 +64,7 @@ public class ActionCardInfoServiceImpl extends ServiceImpl<ActionCardInfoMapper,
     }
 
     @Override
+    @AopResult
     public List<ActionCardInfoVO> getActionCardInfos(List<Long> ids) {
         return BeanMapperUtils.mapList(actionCardInfoMapper.getActionCardInfos(ids), ActionCardInfoVO.class);
 

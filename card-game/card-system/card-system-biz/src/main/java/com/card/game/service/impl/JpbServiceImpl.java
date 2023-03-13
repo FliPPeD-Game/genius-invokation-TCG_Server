@@ -2,6 +2,7 @@ package com.card.game.service.impl;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.card.game.aop.AopResult;
 import com.card.game.mapper.SysJobMapper;
 import com.card.game.task.Until.JobUtil;
 import com.card.game.task.domain.entity.JobAndTriggerEntity;
@@ -74,11 +75,13 @@ public class JpbServiceImpl implements JobService {
     }
 
     @Override
+    @AopResult
     public void resumeJob(JobModel jobModel) throws SchedulerException {
         scheduler.resumeJob(JobKey.jobKey(jobModel.getJobClassName(), jobModel.getJobGroupName()));
     }
 
     @Override
+    @AopResult
     public void cronJob(JobModel jobModel) throws Exception {
         try {
             TriggerKey triggerKey = TriggerKey.triggerKey(jobModel.getJobClassName(), jobModel.getJobGroupName());
@@ -99,6 +102,7 @@ public class JpbServiceImpl implements JobService {
     }
 
     @Override
+    @AopResult
     public IPage<JobAndTriggerEntity> list(Integer pageNum, Integer pageSize) {
         IPage<JobAndTriggerEntity> page = new Page<>(pageNum, pageSize);
         IPage<JobAndTriggerEntity> jobData = jobMapper.list(page);
