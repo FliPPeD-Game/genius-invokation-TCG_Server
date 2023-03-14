@@ -14,6 +14,7 @@
         <module>card-generate</module>
         <module>card-system</module>
         <module>card-stun</module>
+        <module>card-robot</module>
     </modules>
 
     <properties>
