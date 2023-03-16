@@ -160,7 +160,7 @@ public class Connection {
     }
 
     private void createRoom(Message message){
-        if(StringUtils.isBlank(message.getPeerID())){
+        if(StringUtils.isBlank(message.getPeerId())){
             message.setMessage("peerID不能为空");
             message.setCode(HttpStatus.BAD_REQUEST.value());
         }else {

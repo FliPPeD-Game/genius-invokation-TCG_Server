@@ -75,7 +75,7 @@ public class RoomService {
             String peerID = room.stream().
                     filter(e -> StringUtils.isNotBlank(e.getPeerID()))
                     .collect(Collectors.toList()).get(0).getPeerID();
-            message.setPeerID(peerID);
+            message.setPeerId(peerID);
             operate = "房间加入成功";
             message.setCode(HttpStatus.OK.value());
         }
@@ -95,7 +95,7 @@ public class RoomService {
         Integer roomId = redisIdWorker.nextId(RedisPreKey.ROOM_ID);
         rooms.put(String.valueOf(roomId), new HashSet<>());
         Set<Connection> room = rooms.get(String.valueOf(roomId));
-        connection.setPeerID(message.getPeerID());
+        connection.setPeerID(message.getPeerId());
         room.add(connection);
         return String.valueOf(roomId);
     }
