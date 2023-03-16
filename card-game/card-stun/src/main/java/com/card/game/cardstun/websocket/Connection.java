@@ -14,6 +14,7 @@ import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
 
@@ -141,7 +142,7 @@ public class Connection {
         }
         }else {
             message.setRoomId(null);
-            message.setCode("500");
+            message.setCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
             message.setMessage("命令输入错误");
             sentMessage(message);
         }
@@ -161,11 +162,11 @@ public class Connection {
     private void createRoom(Message message){
         if(StringUtils.isBlank(message.getPeerID())){
             message.setMessage("peerID不能为空");
-            message.setMessage("500");
+            message.setCode(HttpStatus.BAD_REQUEST.value());
         }else {
             message.setRoomId(roomService.createRoom(this,message));
             message.setMessage("房间创建成功");
-            message.setCode("200");
+            message.setCode(HttpStatus.OK.value());
         }
         sentMessage(message);
     }
