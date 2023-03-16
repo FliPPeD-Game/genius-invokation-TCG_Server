@@ -7,6 +7,7 @@ import com.card.game.common.redis.constants.RedisPreKey;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -60,7 +61,7 @@ public class RoomService {
         Set<Connection> room = rooms.get(roomId);
         if(room.size()>2){
             message.setMessage("房间人数已满，请另寻他路");
-            message.setCode("500");
+            message.setCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
             return message;
         }
         if (room == null) {
@@ -68,7 +69,7 @@ public class RoomService {
 //            room =rooms.get(roomId);
 //            room.add(connection);
             operate = "房间不存在";
-            message.setCode("500");
+            message.setCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
         } else {
             room.add(connection);
             String peerID = room.stream().
@@ -76,7 +77,7 @@ public class RoomService {
                     .collect(Collectors.toList()).get(0).getPeerID();
             message.setPeerID(peerID);
             operate = "房间加入成功";
-            message.setCode("200");
+            message.setCode(HttpStatus.OK.value());
         }
         //离开大厅
         leaveLobby(connection);
