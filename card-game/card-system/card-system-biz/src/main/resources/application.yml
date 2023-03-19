@@ -96,6 +96,6 @@ mybatis-plus:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 jwt:
-  ttl: 3600000 #1个小时
+  ttl: 86400000 #1天
   key: jwt@@
   iss-user: tomYou
