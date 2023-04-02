@@ -7,7 +7,7 @@ import com.card.game.cardstun.model.Message;
 import com.card.game.cardstun.service.CommandService;
 import com.card.game.cardstun.service.ForwardMessageService;
 import com.card.game.cardstun.service.RoomService;
-import com.card.game.common.constants.CommandType;
+import com.card.game.cardstun.constants.CommandType;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
