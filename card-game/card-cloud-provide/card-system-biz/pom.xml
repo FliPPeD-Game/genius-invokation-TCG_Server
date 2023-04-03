@@ -28,11 +28,6 @@
         </dependency>
         <dependency>
             <groupId>com.card.game</groupId>
-            <artifactId>card-robot</artifactId>
-            <version>1.0.0-snapshot</version>
-        </dependency>
-        <dependency>
-            <groupId>com.card.game</groupId>
             <artifactId>card-stun</artifactId>
         </dependency>
         <!-- Spock必须的 -->

@@ -18,7 +18,8 @@
         <mybatis.plus.version>3.5.2</mybatis.plus.version>
         <mybatis.plus.generator.version>3.5.2</mybatis.plus.generator.version>
         <velocity.version>1.7</velocity.version>
-
+        <!--SpringCloud版本 -->
+        <spring-cloud.version>2021.0.1</spring-cloud.version>
         <!--bean转换版本-->
         <mysql.version>8.0.29</mysql.version>
 
@@ -42,7 +43,13 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-
+                <dependency>
+                    <groupId>org.springframework.cloud</groupId>
+                    <artifactId>spring-cloud-dependencies</artifactId>
+                    <version>${spring-cloud.version}</version>
+                    <type>pom</type>
+                    <scope>import</scope>
+                </dependency>
             <dependency>
                 <groupId>com.github.xiaoymin</groupId>
                 <artifactId>knife4j-spring-boot-starter</artifactId>

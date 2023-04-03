@@ -12,9 +12,9 @@
         <module>card-dependence</module>
         <module>card-common</module>
         <module>card-generate</module>
-        <module>card-system</module>
+        <module>card-cloud-provide</module>
         <module>card-stun</module>
-        <module>card-robot</module>
+        <module>card-cloud-eureka</module>
     </modules>
 
     <properties>
