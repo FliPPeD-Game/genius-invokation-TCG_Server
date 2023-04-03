@@ -1,33 +1,64 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
-    <title>注册邮件</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .bg-gradient-blue{
+            background:
+                    radial-gradient(61.04% 89.69% at 100% 100%,rgba(200,250,255,.08) 0%,rgba(28,210,229,.08) 40.63%,rgba(28,210,229,0) 100%),
+                    radial-gradient(43.78% 64.34% at 60.31% 100%,rgba(23,74,228,.08) 0%,rgba(23,74,228,0) 100%),
+                    linear-gradient(31deg,rgba(23,74,228,0) 29.44%,rgba(23,74,228,.06) 100%),
+                    linear-gradient(90deg,#f3f3f7 0%,#ebf0f9 100%)
+        }
+        .container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .content {
+            width: 100%;
+            max-width: 40rem;
+            margin: 0 2rem;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            justify-content: center;
+            border: 1px solid rgba(0,0,0,.1);
+            border-radius: 12px;
+            padding: 20px;
+        }
+        .box {
+            background: rgba(255,255,255,.6);
+            border: 1px solid rgba(0,0,0,.1);
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 0;
+            margin: 20px 0;
+        }
+    </style>
 </head>
 <body>
-<div class="container">
-    <div class="title">欢迎您注册该游戏,注册验证码为:</div>
-    <div class="content">[[${code}]]</div>
-</div>
+<main class="bg-gradient-blue container">
+    <div class="bg-gradient-blue content">
+        <h2>注册七圣召唤账号</h2>
+            <p></p>
+            <div class="box">
+                <h1>[[${code}]]</h1>
+            </div>
+    </div>
+</main>
 </body>
-
-<style type="text/css">
-    .container {
-        display: flex;
-        justify-content: center;
-        font-family:宋体;
-        font-weight:400;
-        margin-top: 50px;
-    }
-
-    .title {
-
-    }
-
-    .content {
-        padding-left: 10px;
-        justify-content: center;
-        color: black;
-    }
-</style>
 </html>
