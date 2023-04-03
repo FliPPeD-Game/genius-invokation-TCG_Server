@@ -15,6 +15,7 @@
         <module>card-cloud-provide</module>
         <module>card-stun</module>
         <module>card-cloud-eureka</module>
+        <module>card-cloud-oauth</module>
     </modules>
 
     <properties>
