@@ -1,10 +1,12 @@
 package com.card.game.cardstun.flyweight;
 
 import com.card.game.cardstun.model.ConnectionEntity;
+import java.util.HashSet;
+import java.util.Set;
 
 // 抽象享元角色
 public interface IFlyweight {
-
+    Set<ConnectionEntity> room=new HashSet<>();
     /**
      * 加入房间
      *

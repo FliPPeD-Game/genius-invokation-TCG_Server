@@ -10,7 +10,7 @@ import com.card.game.cardstun.service.CommandService;
 import com.card.game.cardstun.service.ForwardMessageService;
 import com.card.game.cardstun.service.RoomService;
 import com.card.game.cardstun.strategy.Context;
-import java.io.IOException;
+import com.card.game.cardstun.util.MessageUtil;
 import java.util.concurrent.atomic.AtomicInteger;
 import javax.websocket.OnClose;
 import javax.websocket.OnError;
@@ -22,7 +22,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
@@ -129,10 +128,13 @@ public class Connection {
             message.setRoomId(null);
             message.setCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
             message.setMessage("命令输入错误");
+            MessageUtil.sentMessage(message, session);
+            return;
         }
         CommandType command = CommandType.getCommand(message.getCommand());
         Context context = new Context(command.getType().newInstance());
         context.operate(message, connectionEntity);
+        MessageUtil.sentMessage(message, session);
     }
 
 

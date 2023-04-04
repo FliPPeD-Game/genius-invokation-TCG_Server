@@ -12,9 +12,10 @@ import lombok.RequiredArgsConstructor;
  */
 @RequiredArgsConstructor
 public class Context {
+
     private final OperateStrategy operateStrategy;
 
-  public   void operate(Message message, ConnectionEntity connection) {
+    public void operate(Message message, ConnectionEntity connection) {
         operateStrategy.operate(message, connection);
     }
 }

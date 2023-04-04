@@ -9,7 +9,7 @@ import java.io.IOException;
 
 @Slf4j
 public class MessageUtil {
-    public void sentMessage(Message message, Session session) {
+    public static void sentMessage(Message message, Session session) {
         try {
             session.getBasicRemote().sendText(JSON.toJSONString(message));
         } catch (IOException e) {

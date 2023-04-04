@@ -7,7 +7,7 @@ import com.card.game.cardstun.model.Message;
 import com.card.game.cardstun.strategy.OperateStrategy;
 import org.springframework.http.HttpStatus;
 
-public class EnterRoomImpl implements OperateStrategy {
+public class EnterRoomStrategy implements OperateStrategy {
 
     @Override
     public void operate(Message message, ConnectionEntity connection) {

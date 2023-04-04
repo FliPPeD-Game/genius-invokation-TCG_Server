@@ -1,7 +1,7 @@
 package com.card.game.cardstun.constants;
 
 import com.card.game.cardstun.strategy.OperateStrategy;
-import com.card.game.cardstun.strategy.impl.EnterRoomImpl;
+import com.card.game.cardstun.strategy.impl.EnterRoomStrategy;
 import java.util.Arrays;
 import lombok.Getter;
 
@@ -13,7 +13,7 @@ import lombok.Getter;
  */
 @Getter
 public enum CommandType {
-    TYPE_COMMAND_ROOM_ENTER("enterRoom", EnterRoomImpl.class),
+    TYPE_COMMAND_ROOM_ENTER("enterRoom", EnterRoomStrategy.class),
     TYPE_COMMAND_ROOM_LIST("roomList", null),
     TYPE_COMMAND_DIALOGUE("dialogue", null),
     TYPE_COMMAND_READY("ready", null),
