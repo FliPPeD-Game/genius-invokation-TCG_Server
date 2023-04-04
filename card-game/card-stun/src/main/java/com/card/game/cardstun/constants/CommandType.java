@@ -1,9 +1,8 @@
 package com.card.game.cardstun.constants;
 
+import com.card.game.cardstun.strategy.OperateStrategy;
+import com.card.game.cardstun.strategy.impl.EnterRoomImpl;
 import java.util.Arrays;
-
-import com.card.game.cardstun.model.Message;
-import com.card.game.cardstun.websocket.Connection;
 import lombok.Getter;
 
 /**
@@ -14,65 +13,27 @@ import lombok.Getter;
  */
 @Getter
 public enum CommandType {
-    TYPE_COMMAND_ROOM_ENTER("enterRoom"){
-        @Override
-        public Message operate(Message message, Connection connection) {
-            return null;
-        }
-    },
-    TYPE_COMMAND_ROOM_LIST("roomList") {
-        @Override
-        public Message operate(Message message, Connection connection) {
-            return null;
-        }
-    },
-    TYPE_COMMAND_DIALOGUE("dialogue") {
-        @Override
-        public Message operate(Message message, Connection connection) {
-            return null;
-        }
-    },
-    TYPE_COMMAND_READY("ready") {
-        @Override
-        public Message operate(Message message, Connection connection) {
-            return null;
-        }
-    },
-    TYPE_COMMAND_OFFER("offer") {
-        @Override
-        public Message operate(Message message, Connection connection) {
-            return null;
-        }
-    },
-    TYPE_COMMAND_ANSWER("answer") {
-        @Override
-        public Message operate(Message message, Connection connection) {
-            return null;
-        }
-    },
-    TYPE_COMMAND_CANDIDATE("candidate") {
-        @Override
-        public Message operate(Message message, Connection connection) {
-            return null;
-        }
-    },
-    TYPE_COMMAND_CREATE("createRoom") {
-        @Override
-        public Message operate(Message message, Connection connection) {
-            return null;
-        }
-    };
-    private final String type;
+    TYPE_COMMAND_ROOM_ENTER("enterRoom", EnterRoomImpl.class),
+    TYPE_COMMAND_ROOM_LIST("roomList", null),
+    TYPE_COMMAND_DIALOGUE("dialogue", null),
+    TYPE_COMMAND_READY("ready", null),
+    TYPE_COMMAND_OFFER("offer", null),
+    TYPE_COMMAND_ANSWER("answer", null),
+    TYPE_COMMAND_CANDIDATE("candidate", null),
+    TYPE_COMMAND_CREATE("createRoom", null);
+    private final String command;
+    private final Class<? extends OperateStrategy> type;
 
-    CommandType(String type) {
+    CommandType(String command, Class<? extends OperateStrategy> type) {
+        this.command = command;
         this.type = type;
     }
-public abstract Message operate(Message message, Connection connection);
-    public static boolean isExist(String type) {
-        return Arrays.stream(CommandType.values()).anyMatch(e -> e.getType().equals(type));
+
+    public static boolean isExist(String command) {
+        return Arrays.stream(CommandType.values()).anyMatch(e -> e.getCommand().equals(command));
     }
 
-    public static CommandType getCommand(String type) {
-        return Arrays.stream(CommandType.values()).filter(e -> e.getType().equals(type)).findFirst().get();
+    public static CommandType getCommand(String command) {
+        return Arrays.stream(CommandType.values()).filter(e -> e.getCommand().equals(command)).findFirst().get();
     }
 }

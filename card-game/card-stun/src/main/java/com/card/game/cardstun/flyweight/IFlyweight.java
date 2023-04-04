@@ -1,16 +1,16 @@
 package com.card.game.cardstun.flyweight;
 
-import com.card.game.cardstun.websocket.Connection;
+import com.card.game.cardstun.model.ConnectionEntity;
 
 // 抽象享元角色
 public interface IFlyweight {
+
     /**
-     * 创建
+     * 加入房间
      *
-     * @paramconnection 链接
-     * @return 标识
+     * @param connection 链接
      */
-    void create(Connection connection);
+    void join(ConnectionEntity connection);
 
     /**
      * 删除
@@ -18,7 +18,7 @@ public interface IFlyweight {
      * @param connection 链接
      * @return 是否删除成功
      */
-    boolean delete(Connection connection);
+    boolean delete(ConnectionEntity connection);
 
     /**
      * 查询

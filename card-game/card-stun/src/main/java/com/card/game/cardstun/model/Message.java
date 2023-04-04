@@ -1,5 +1,6 @@
 package com.card.game.cardstun.model;
 
+import javax.websocket.Session;
 import lombok.Data;
 
 /**

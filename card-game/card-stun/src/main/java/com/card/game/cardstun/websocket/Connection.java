@@ -3,11 +3,21 @@ package com.card.game.cardstun.websocket;
 
 import com.alibaba.fastjson2.JSON;
 import com.card.game.cardstun.config.ConfiguratorForClientIp;
+import com.card.game.cardstun.constants.CommandType;
+import com.card.game.cardstun.model.ConnectionEntity;
 import com.card.game.cardstun.model.Message;
 import com.card.game.cardstun.service.CommandService;
 import com.card.game.cardstun.service.ForwardMessageService;
 import com.card.game.cardstun.service.RoomService;
-import com.card.game.cardstun.constants.CommandType;
+import com.card.game.cardstun.strategy.Context;
+import java.io.IOException;
+import java.util.concurrent.atomic.AtomicInteger;
+import javax.websocket.OnClose;
+import javax.websocket.OnError;
+import javax.websocket.OnMessage;
+import javax.websocket.OnOpen;
+import javax.websocket.Session;
+import javax.websocket.server.ServerEndpoint;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -17,18 +27,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 
-
-import javax.websocket.*;
-import javax.websocket.server.ServerEndpoint;
-import java.io.IOException;
-import java.util.concurrent.atomic.AtomicInteger;
-
 /**
  * @ClassName: WebSocketServer
  * @Description: @ServerEndpoint不是单例模式
  * @auther: cunzhiwang
  */
-@ServerEndpoint(value = "/websocket",configurator = ConfiguratorForClientIp.class)
+@ServerEndpoint(value = "/websocket", configurator = ConfiguratorForClientIp.class)
 @Component
 @Slf4j
 //@Data 由于@Data重写了hashCode()和equals()方法，会导致Set<Connection> remove元素时，找不到正确的元素，应用@Setter @Getter @ToString替换
@@ -49,6 +53,7 @@ public class Connection {
 
 
     private static ForwardMessageService forwardMessageService;
+
     @Autowired
     public void setDialogueService(ForwardMessageService forwardMessageService) {
         Connection.forwardMessageService = forwardMessageService;
@@ -56,6 +61,7 @@ public class Connection {
 
 
     private static CommandService commandService;
+
     @Autowired
     public void setCommandService(CommandService commandService) {
         Connection.commandService = commandService;
@@ -73,7 +79,6 @@ public class Connection {
     //与某个客户端的连接会话，需要通过它来给客户端发送数据
     private Session session;
 
-    private String peerID;
 
     /**
      * 连接建立成功调用的方法
@@ -84,8 +89,9 @@ public class Connection {
         ip = (String) session.getUserProperties().get("clientIp");
         //未进任何房间时，将本次连接放到大厅里面
         roomService.enterLobby(this);
-        log.info("用户:"+ip+"连接到服务器,当前在线人数为" + onlineCount.incrementAndGet());
+        log.info("用户:" + ip + "连接到服务器,当前在线人数为" + onlineCount.incrementAndGet());
     }
+
     /**
      * 连接关闭调用的方法
      */
@@ -96,7 +102,7 @@ public class Connection {
         //即使连接错误，回调了onError方法，最终也会回调onClose方法，所有退出房间写在这里比较合适
         roomService.leaveRoom(roomId, this);
         //在线数减1
-        log.info("用户:"+ip+"关闭连接，退出房间"+roomId+"当前在线人数为" + onlineCount.addAndGet(-1));
+        log.info("用户:" + ip + "关闭连接，退出房间" + roomId + "当前在线人数为" + onlineCount.addAndGet(-1));
     }
 
     /**
@@ -110,46 +116,28 @@ public class Connection {
 
     /**
      * 收到客户端消息后调用的方法
-     * @param stringMessage 客户端发送过来的消息*/
+     *
+     * @param stringMessage 客户端发送过来的消息
+     */
     @OnMessage
-    public void onMessage(Session session, String stringMessage) {
+    public void onMessage(Session session, String stringMessage) throws InstantiationException, IllegalAccessException {
         Message message = JSON.parseObject(stringMessage, Message.class);
-        log.info("收到来自"+ip+"的信息:"+message);
-        if(CommandType.isExist(message.getCommand())){
-            CommandType command = CommandType.getCommand(message.getCommand());
-            switch (command) {
-            case TYPE_COMMAND_ROOM_ENTER:
-                this.userId = message.getUserId();
-                this.roomId = message.getRoomId();
-                enterRoom(message);
-//                //服务器主动向所有在线的人推送房间列表
-//                pushRoomList();
-                break;
-            case TYPE_COMMAND_DIALOGUE:
-                forwardMessageService.sendMessageForEveryInRoom(message);
-                break;//前端从服务器拉取房间列表
-            case TYPE_COMMAND_READY:
-            case TYPE_COMMAND_OFFER:
-            case TYPE_COMMAND_ANSWER:
-            case TYPE_COMMAND_CANDIDATE:
-                forwardMessageService.sendMessageForEveryExcludeSelfInRoom(message);
-                break;
-            case TYPE_COMMAND_CREATE:
-                createRoom(message);
-                break;
-            default:
-                pullRoomList(message);
-        }
-        }else {
+        ConnectionEntity connectionEntity = new ConnectionEntity();
+        connectionEntity.setIp(ip);
+        connectionEntity.setSession(session);
+        if (!CommandType.isExist(message.getCommand())) {
             message.setRoomId(null);
             message.setCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
             message.setMessage("命令输入错误");
             sentMessage(message);
         }
+        CommandType command = CommandType.getCommand(message.getCommand());
+        Context context = new Context(command.getType().newInstance());
+        context.operate(message, connectionEntity);
     }
 
-    private void  enterRoom(Message message) {
-         message = roomService.enterRoom(roomId, this);
+    private void enterRoom(Message message) {
+        message = roomService.enterRoom(roomId, this);
         //返回给自己是加入房间还是创建房间
         sentMessage(message);
     }
@@ -159,12 +147,12 @@ public class Connection {
         sentMessage(message);
     }
 
-    private void createRoom(Message message){
-        if(StringUtils.isBlank(message.getPeerId())){
+    private void createRoom(Message message) {
+        if (StringUtils.isBlank(message.getPeerId())) {
             message.setMessage("peerID不能为空");
             message.setCode(HttpStatus.BAD_REQUEST.value());
-        }else {
-            message.setRoomId(roomService.createRoom(this,message));
+        } else {
+            message.setRoomId(roomService.createRoom(this, message));
             message.setMessage("房间创建成功");
             message.setCode(HttpStatus.OK.value());
         }
@@ -175,12 +163,12 @@ public class Connection {
         try {
             session.getBasicRemote().sendText(JSON.toJSONString(message));
         } catch (IOException e) {
-           log.info("发送失败");
+            log.info("发送失败");
         } finally {
             try {
                 session.close();
             } catch (IOException e) {
-              log.info("关闭失败");
+                log.info("关闭失败");
             }
         }
     }
@@ -188,7 +176,7 @@ public class Connection {
     private void pushRoomList() {
         //告诉每个终端更新房间列表
         Message roomListMessage = new Message();
-        roomListMessage.setCommand(CommandType.TYPE_COMMAND_ROOM_LIST.getType());
+        roomListMessage.setCommand(CommandType.TYPE_COMMAND_ROOM_LIST.getCommand());
         roomListMessage.setMessage(JSON.toJSONString(roomService.queryAllRoomName()));
         forwardMessageService.sendMessageForAllOnline(roomListMessage);
     }
