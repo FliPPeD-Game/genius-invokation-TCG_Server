@@ -129,55 +129,11 @@ public class Connection {
             message.setRoomId(null);
             message.setCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
             message.setMessage("命令输入错误");
-            sentMessage(message);
         }
         CommandType command = CommandType.getCommand(message.getCommand());
         Context context = new Context(command.getType().newInstance());
         context.operate(message, connectionEntity);
     }
 
-    private void enterRoom(Message message) {
-        message = roomService.enterRoom(roomId, this);
-        //返回给自己是加入房间还是创建房间
-        sentMessage(message);
-    }
 
-    private void pullRoomList(Message message) {
-        message.setMessage(JSON.toJSONString(roomService.queryAllRoomName()));
-        sentMessage(message);
-    }
-
-    private void createRoom(Message message) {
-        if (StringUtils.isBlank(message.getPeerId())) {
-            message.setMessage("peerID不能为空");
-            message.setCode(HttpStatus.BAD_REQUEST.value());
-        } else {
-            message.setRoomId(roomService.createRoom(this, message));
-            message.setMessage("房间创建成功");
-            message.setCode(HttpStatus.OK.value());
-        }
-        sentMessage(message);
-    }
-
-    private void sentMessage(Message message) {
-        try {
-            session.getBasicRemote().sendText(JSON.toJSONString(message));
-        } catch (IOException e) {
-            log.info("发送失败");
-        } finally {
-            try {
-                session.close();
-            } catch (IOException e) {
-                log.info("关闭失败");
-            }
-        }
-    }
-
-    private void pushRoomList() {
-        //告诉每个终端更新房间列表
-        Message roomListMessage = new Message();
-        roomListMessage.setCommand(CommandType.TYPE_COMMAND_ROOM_LIST.getCommand());
-        roomListMessage.setMessage(JSON.toJSONString(roomService.queryAllRoomName()));
-        forwardMessageService.sendMessageForAllOnline(roomListMessage);
-    }
 }
