@@ -28,4 +28,6 @@ public interface IFlyweight {
      * @return 房间人数
      */
     Integer query();
+
+    Set<ConnectionEntity> queryAll();
 }

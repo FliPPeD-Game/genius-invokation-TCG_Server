@@ -2,6 +2,8 @@ package com.card.game.cardstun.flyweight;
 
 import com.card.game.cardstun.model.ConnectionEntity;
 
+import java.util.Set;
+
 public class ConnectionFlyweight implements IFlyweight {
 
     @Override
@@ -17,5 +19,10 @@ public class ConnectionFlyweight implements IFlyweight {
     @Override
     public Integer query() {
         return room.size();
+    }
+
+    @Override
+    public Set<ConnectionEntity> queryAll() {
+        return room;
     }
 }
