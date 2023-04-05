@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: card-cloud-gateway
+  cloud:
+    nacos:
+      username: nacos
+      password: nacos
+      server-addr: 127.0.0.1:8848
+      config:
+        namespace: d9134ab5-743d-48a3-98f0-0db5ab132f80
+        file-extension: yaml
+        prefix: card-cloud-gateway
+      discovery:
+        namespace: d9134ab5-743d-48a3-98f0-0db5ab132f80
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true

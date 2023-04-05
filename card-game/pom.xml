@@ -14,8 +14,9 @@
         <module>card-generate</module>
         <module>card-cloud-provide</module>
         <module>card-stun-provide</module>
-        <module>card-cloud-eureka</module>
         <module>card-cloud-oauth</module>
+        <module>card-cloud-gateway</module>
+        <module>card-cloud-register</module>
     </modules>
 
     <properties>

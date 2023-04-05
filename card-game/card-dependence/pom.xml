@@ -20,6 +20,8 @@
         <velocity.version>1.7</velocity.version>
         <!--SpringCloud版本 -->
         <spring-cloud.version>2021.0.1</spring-cloud.version>
+        <!--SpringCloudAlibaba版本-->
+        <spring.cloud.alibaba.version>2021.0.1.0</spring.cloud.alibaba.version>
         <!--bean转换版本-->
         <mysql.version>8.0.29</mysql.version>
 
@@ -33,9 +35,26 @@
     </properties>
 
 
-
     <dependencyManagement>
         <dependencies>
+            <!--spring-Cloud-alibaba依赖-->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${spring.cloud.alibaba.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!--spring-Cloud依赖-->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
@@ -43,13 +62,7 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-                <dependency>
-                    <groupId>org.springframework.cloud</groupId>
-                    <artifactId>spring-cloud-dependencies</artifactId>
-                    <version>${spring-cloud.version}</version>
-                    <type>pom</type>
-                    <scope>import</scope>
-                </dependency>
+
             <dependency>
                 <groupId>com.github.xiaoymin</groupId>
                 <artifactId>knife4j-spring-boot-starter</artifactId>
@@ -188,7 +201,6 @@
                 <artifactId>jjwt</artifactId>
                 <version>${jwt.version}</version>
             </dependency>
-
         </dependencies>
     </dependencyManagement>
 

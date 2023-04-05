@@ -1,6 +1,6 @@
 package com.card.game.controller;
 
-import com.card.game.cardstun.constants.service.RoomService;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +21,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class ExtraController {
 
-    private final RoomService roomService;
+//    private final RoomService roomService;
 
 
     //拿到本机在wifi中的局域网ip
@@ -72,7 +72,7 @@ public class ExtraController {
     @GetMapping("/queryCountInRoom")
     public Map<String, String> queryCountInRoom(String roomId) {
         Map<String, String> result = new HashMap<>();
-        result.put("count", String.valueOf(roomService.queryCountInRoom(roomId)));
+        //result.put("count", String.valueOf(roomService.queryCountInRoom(roomId)));
         return result;
     }
 }

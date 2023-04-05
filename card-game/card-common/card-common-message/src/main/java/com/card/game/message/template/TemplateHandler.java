@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit;
  */
 @Component
 @RequiredArgsConstructor
-public class TemplateHandler {
+public class TemplateHandler{
     private final TemplateEngine templateEngine;
 
     private final RedisCache redisCache;
