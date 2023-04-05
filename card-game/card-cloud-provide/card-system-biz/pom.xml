@@ -26,10 +26,6 @@
             <groupId>com.card.game</groupId>
             <artifactId>card-common-security</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.card.game</groupId>
-            <artifactId>card-stun</artifactId>
-        </dependency>
         <!-- Spock必须的 -->
         <dependency>
             <groupId>org.spockframework</groupId>

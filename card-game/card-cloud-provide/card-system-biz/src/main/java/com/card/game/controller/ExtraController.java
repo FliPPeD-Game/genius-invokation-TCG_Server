@@ -1,6 +1,6 @@
 package com.card.game.controller;
 
-import com.card.game.cardstun.service.RoomService;
+import com.card.game.cardstun.constants.service.RoomService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;

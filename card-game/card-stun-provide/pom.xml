@@ -8,10 +8,10 @@
         <groupId>com.card.game</groupId>
         <version>${revision}</version>
     </parent>
-    <artifactId>card-stun</artifactId>
+    <artifactId>card-stun-provide</artifactId>
     <version>1.0.0-snapshot</version>
-    <name>card-stun</name>
-    <description>card-stun</description>
+    <name>card-stun-provide</name>
+    <description>card-stun-provide</description>
     <packaging>jar</packaging>
     <properties>
         <java.version>1.8</java.version>

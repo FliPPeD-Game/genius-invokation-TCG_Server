@@ -5,7 +5,7 @@ import com.alibaba.fastjson2.JSON;
 import com.card.game.cardstun.config.ConfiguratorForClientIp;
 import com.card.game.cardstun.constants.CommandType;
 import com.card.game.cardstun.model.ConnectionEntity;
-import com.card.game.cardstun.model.Message;
+import com.card.game.cardstun.model.MessageEntity;
 import com.card.game.cardstun.service.CommandService;
 import com.card.game.cardstun.service.ForwardMessageService;
 import com.card.game.cardstun.service.RoomService;
@@ -120,7 +120,7 @@ public class Connection {
      */
     @OnMessage
     public void onMessage(Session session, String stringMessage) throws InstantiationException, IllegalAccessException {
-        Message message = JSON.parseObject(stringMessage, Message.class);
+        MessageEntity message = JSON.parseObject(stringMessage, MessageEntity.class);
         ConnectionEntity connectionEntity = new ConnectionEntity();
         connectionEntity.setIp(ip);
         connectionEntity.setSession(session);

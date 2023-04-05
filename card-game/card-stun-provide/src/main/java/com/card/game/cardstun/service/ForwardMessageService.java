@@ -1,7 +1,7 @@
 package com.card.game.cardstun.service;
 
 import com.alibaba.fastjson2.JSON;
-import com.card.game.cardstun.model.Message;
+import com.card.game.cardstun.model.MessageEntity;
 import com.card.game.cardstun.websocket.Connection;
 import java.util.Collection;
 import java.util.Set;
@@ -28,7 +28,7 @@ public class ForwardMessageService {
      * 给房间内的所有人发送消息（包括自己）
      */
 
-    public void sendMessageForEveryInRoom(Message message) {
+    public void sendMessageForEveryInRoom(MessageEntity message) {
         Set<Connection> room = roomService.queryRoomById(message.getRoomId());
         for (Connection connection : room) {
             try {
@@ -45,7 +45,7 @@ public class ForwardMessageService {
     /**
      * 给房间除自己之外的所有人发送消息
      */
-    public void sendMessageForEveryExcludeSelfInRoom(Message message) {
+    public void sendMessageForEveryExcludeSelfInRoom(MessageEntity message) {
         Set<Connection> room = roomService.queryRoomById(message.getRoomId());
         for (Connection connection : room) {
             try {
@@ -63,7 +63,7 @@ public class ForwardMessageService {
     /**
      * 给在线的所有人发送消息（包括自己）
      */
-    public void sendMessageForAllOnline(Message message) {
+    public void sendMessageForAllOnline(MessageEntity message) {
         Collection<Set<Connection>> rooms = roomService.queryAllRoom();
         for (Set<Connection> room : rooms) {
             for (Connection connection : room) {

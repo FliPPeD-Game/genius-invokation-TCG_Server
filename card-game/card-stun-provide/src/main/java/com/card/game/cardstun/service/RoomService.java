@@ -1,18 +1,16 @@
 package com.card.game.cardstun.service;
 
-import com.card.game.cardstun.model.Message;
+import com.card.game.cardstun.model.MessageEntity;
 import com.card.game.cardstun.websocket.Connection;
 import com.card.game.common.redis.RedisIdWorker;
 import com.card.game.common.redis.constants.RedisPreKey;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.stream.Collectors;
 
 
 /**
@@ -55,8 +53,8 @@ public class RoomService {
     /**
      * 加入指定的房间
      */
-    public Message enterRoom(String roomId, Connection connection) {
-        Message message = new Message();
+    public MessageEntity enterRoom(String roomId, Connection connection) {
+        MessageEntity message = new MessageEntity();
         String operate;
         Set<Connection> room = rooms.get(roomId);
         if(room.size()>2){
@@ -87,7 +85,7 @@ public class RoomService {
      * @param connection 连接
      * @return 返回房间id
      */
-    public String createRoom(Connection connection, Message message) {
+    public String createRoom(Connection connection, MessageEntity message) {
         Integer roomId = redisIdWorker.nextId(RedisPreKey.ROOM_ID);
         rooms.put(String.valueOf(roomId), new HashSet<>());
         Set<Connection> room = rooms.get(String.valueOf(roomId));

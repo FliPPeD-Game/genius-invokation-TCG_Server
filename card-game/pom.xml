@@ -13,7 +13,7 @@
         <module>card-common</module>
         <module>card-generate</module>
         <module>card-cloud-provide</module>
-        <module>card-stun</module>
+        <module>card-stun-provide</module>
         <module>card-cloud-eureka</module>
         <module>card-cloud-oauth</module>
     </modules>

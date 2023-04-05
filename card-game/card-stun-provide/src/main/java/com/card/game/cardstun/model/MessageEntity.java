@@ -1,6 +1,5 @@
 package com.card.game.cardstun.model;
 
-import javax.websocket.Session;
 import lombok.Data;
 
 /**
@@ -9,7 +8,7 @@ import lombok.Data;
  * @auther: cunzhiwang
  */
 @Data
-public class Message {
+public class MessageEntity {
     private String command;
     private String userId;
     private String roomId;

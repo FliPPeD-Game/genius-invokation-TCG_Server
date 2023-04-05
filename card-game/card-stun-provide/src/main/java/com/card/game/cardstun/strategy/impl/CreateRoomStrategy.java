@@ -4,7 +4,7 @@ import com.card.game.cardstun.flyweight.ConnectionFactory;
 import com.card.game.cardstun.flyweight.ConnectionFlyweight;
 import com.card.game.cardstun.flyweight.IFlyweight;
 import com.card.game.cardstun.model.ConnectionEntity;
-import com.card.game.cardstun.model.Message;
+import com.card.game.cardstun.model.MessageEntity;
 import com.card.game.cardstun.strategy.OperateStrategy;
 import com.card.game.common.redis.RedisIdWorker;
 import com.card.game.common.redis.constants.RedisPreKey;
@@ -26,7 +26,7 @@ public class CreateRoomStrategy implements OperateStrategy {
     private final RedisIdWorker redisIdWorker;
 
     @Override
-    public void operate(Message message, ConnectionEntity connection) {
+    public void operate(MessageEntity message, ConnectionEntity connection) {
         if (StringUtils.isBlank(message.getPeerId())) {
             message.setMessage("peerID不能为空");
             message.setCode(HttpStatus.BAD_REQUEST.value());

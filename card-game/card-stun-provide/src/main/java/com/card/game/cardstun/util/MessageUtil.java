@@ -1,7 +1,7 @@
 package com.card.game.cardstun.util;
 
 import com.alibaba.fastjson2.JSON;
-import com.card.game.cardstun.model.Message;
+import com.card.game.cardstun.model.MessageEntity;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.websocket.Session;
@@ -9,7 +9,7 @@ import java.io.IOException;
 
 @Slf4j
 public class MessageUtil {
-    public static void sentMessage(Message message, Session session) {
+    public static void sentMessage(MessageEntity message, Session session) {
         try {
             session.getBasicRemote().sendText(JSON.toJSONString(message));
         } catch (IOException e) {

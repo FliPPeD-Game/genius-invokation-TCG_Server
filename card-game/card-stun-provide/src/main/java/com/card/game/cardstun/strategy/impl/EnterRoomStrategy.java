@@ -3,14 +3,14 @@ package com.card.game.cardstun.strategy.impl;
 import com.card.game.cardstun.flyweight.ConnectionFactory;
 import com.card.game.cardstun.flyweight.IFlyweight;
 import com.card.game.cardstun.model.ConnectionEntity;
-import com.card.game.cardstun.model.Message;
+import com.card.game.cardstun.model.MessageEntity;
 import com.card.game.cardstun.strategy.OperateStrategy;
 import org.springframework.http.HttpStatus;
 
 public class EnterRoomStrategy implements OperateStrategy {
 
     @Override
-    public void operate(Message message, ConnectionEntity connection) {
+    public void operate(MessageEntity message, ConnectionEntity connection) {
         IFlyweight room = ConnectionFactory.getRoom(message.getRoomId());
         if (room == null) {
             message.setMessage("房间不存在");

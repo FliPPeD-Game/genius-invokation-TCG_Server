@@ -1,7 +1,7 @@
 package com.card.game.cardstun.strategy;
 
 import com.card.game.cardstun.model.ConnectionEntity;
-import com.card.game.cardstun.model.Message;
+import com.card.game.cardstun.model.MessageEntity;
 import lombok.RequiredArgsConstructor;
 
 /**
@@ -15,7 +15,7 @@ public class Context {
 
     private final OperateStrategy operateStrategy;
 
-    public void operate(Message message, ConnectionEntity connection) {
+    public void operate(MessageEntity message, ConnectionEntity connection) {
         operateStrategy.operate(message, connection);
     }
 }
