@@ -21,7 +21,7 @@
         <!--SpringCloud版本 -->
         <spring-cloud.version>2021.0.1</spring-cloud.version>
         <!--SpringCloudAlibaba版本-->
-        <spring.cloud.alibaba.version>2021.0.1.0</spring.cloud.alibaba.version>
+        <spring.cloud.alibaba.version>2021.0.5.0</spring.cloud.alibaba.version>
         <!--bean转换版本-->
         <mysql.version>8.0.29</mysql.version>
 
@@ -147,12 +147,6 @@
                 <artifactId>card-common-security</artifactId>
                 <version>${revision}</version>
             </dependency>
-            <dependency>
-                <groupId>com.card.game</groupId>
-                <artifactId>card-stun</artifactId>
-                <version>${revision}</version>
-            </dependency>
-
             <dependency>
                 <groupId>com.card.game</groupId>
                 <artifactId>card-system-api</artifactId>
