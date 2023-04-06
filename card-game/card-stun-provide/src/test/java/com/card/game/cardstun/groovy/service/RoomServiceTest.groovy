@@ -1,7 +1,7 @@
 package com.card.game.cardstun.groovy.service
 
-import com.card.game.cardstun.service.RoomService
-import com.card.game.cardstun.websocket.Connection
+import com.card.game.service.RoomService
+import com.card.game.websocket.Connection
 import com.card.game.common.redis.RedisIdWorker
 import com.card.game.common.redis.constants.RedisPreKey
 import org.junit.Assert

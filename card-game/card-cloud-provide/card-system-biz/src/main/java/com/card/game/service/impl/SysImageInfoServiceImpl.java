@@ -1,11 +1,6 @@
 package com.card.game.service.impl;
 
-import cn.hutool.http.Header;
-import cn.hutool.http.HttpRequest;
-import cn.hutool.http.HttpResponse;
-import cn.hutool.json.JSONArray;
-import cn.hutool.json.JSONObject;
-import cn.hutool.json.JSONUtil;
+
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.card.game.aop.AopResult;
@@ -15,28 +10,18 @@ import com.card.game.common.web.utils.BeanMapperUtils;
 import com.card.game.mapper.SysImageInfoMapper;
 import com.card.game.pojo.dto.ImageInfoDTO;
 import com.card.game.pojo.dto.ImageInfoDTO.BaseImage;
-import com.card.game.pojo.entity.RoleCardInfoEntity;
-import com.card.game.pojo.entity.RoleSkillInfoEntity;
-import com.card.game.pojo.entity.SkillCostEntity;
 import com.card.game.pojo.entity.SysImageInfoEntity;
 import com.card.game.pojo.vo.ImageInfoVO;
-import com.card.game.service.RoleCardInfoService;
-import com.card.game.service.RoleSkillInfoService;
-import com.card.game.service.SkillCostService;
 import com.card.game.service.SysImageInfoService;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
-
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 图片操作服务类
@@ -53,7 +38,7 @@ public class SysImageInfoServiceImpl extends ServiceImpl<SysImageInfoMapper, Sys
 
     private final SysImageInfoMapper sysImageInfoMapper;
     // 一天
-    private final Long day= Long.valueOf(1000*60*60*24);
+    private final Long day = Long.valueOf(1000 * 60 * 60 * 24);
 
 
     @Override
@@ -106,9 +91,10 @@ public class SysImageInfoServiceImpl extends ServiceImpl<SysImageInfoMapper, Sys
         } else {
             imageInfoEntities = this.list();
             redisCache.setCacheList(RedisPrefixConstant.IMAGE_INFO_PREFIX + "ProfilePhotos", imageInfoEntities);
-            redisCache.expire(RedisPrefixConstant.IMAGE_INFO_PREFIX + "ProfilePhotos",day);
+            redisCache.expire(RedisPrefixConstant.IMAGE_INFO_PREFIX + "ProfilePhotos", day);
         }
-        Map<String, List<SysImageInfoEntity>> imageMap = imageInfoEntities.stream().filter(imag-> StringUtils.isNotBlank(imag.getCountry()))
+        Map<String, List<SysImageInfoEntity>> imageMap = imageInfoEntities.stream()
+                .filter(imag -> StringUtils.isNotBlank(imag.getCountry()))
                 .collect(Collectors.groupingBy(SysImageInfoEntity::getCountry));
         List<ImageInfoVO> imageInfoVOS = new ArrayList<>();
         imageMap.forEach((key, value) -> {

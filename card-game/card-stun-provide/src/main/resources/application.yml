@@ -1,19 +1,3 @@
-server:
-  port: 8888
-  ssl:
-    enabled: false
-    keyStore: server.keystore
-    keyAlias: tomcat
-    keyStorePassword: 1518290
-    keyStoreType: JKS
 spring:
-  application:
-    name: card-stun
-  redis:
-    host: 127.0.0.1
-    port: 6379
-    password: 123456
-  cloud:
-    nacos:
-      discovery:
-        server-addr: 127.0.0.1:8848
+  profiles:
+    active: dev

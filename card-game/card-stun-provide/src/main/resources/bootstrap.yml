@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: card-stun-server
+  cloud:
+    nacos:
+      username: nacos
+      password: nacos
+      server-addr: 127.0.0.1:8848
+      discovery:
+        namespace: d9134ab5-743d-48a3-98f0-0db5ab132f80
+      config:
+        file-extension: yaml
+        namespace: d9134ab5-743d-48a3-98f0-0db5ab132f80
