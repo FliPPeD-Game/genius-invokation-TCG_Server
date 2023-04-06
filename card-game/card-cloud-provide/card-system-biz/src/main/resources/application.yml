@@ -13,7 +13,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
-      url: jdbc:mysql://127.0.0.1:3306/card_game?useUnicode=true&amp&characterEncoding=utf8
+      url: jdbc:mysql://9.135.92.198:3306/card_game?useUnicode=true&amp&characterEncoding=utf8
       username: root
       password: root
       # 初始连接数
@@ -50,8 +50,8 @@ spring:
       matching-strategy: ant_path_matcher
 
   redis:
-    host: 127.0.0.1
-    port: 6379
+    host: 9.135.92.198
+    port: 6382
     password: 123456
   #配置邮件发送
   mail:
@@ -64,6 +64,20 @@ spring:
   quartz:
     job-store-type: jdbc
     wait-for-jobs-to-complete-on-shutdown: true
+  cloud:
+    nacos:
+      username: nacos
+      password: nacos
+      discovery:
+        server-addr: 127.0.0.1:8848
+      config:
+        group: DEFAULT_GROUP
+        server-addr: 127.0.0.1:8848
+        extension-configs:
+          - data-id: 123
+            group: DEFAULT_GROUP
+        namespace: dev
+
 
 
 

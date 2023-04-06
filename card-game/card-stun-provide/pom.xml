@@ -17,12 +17,18 @@
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <oshi.version>3.9.1</oshi.version>
+        <oshi.version>6.4.0</oshi.version>
         <spock.version>1.3-groovy-2.4</spock.version>
         <groovy.version>2.4.6</groovy.version>
         <spock-spring.version>1.3-RC1-groovy-2.4</spock-spring.version>
+        <fast-json>2.0.25</fast-json>
     </properties>
     <dependencies>
+        <!--服务发现-->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.card.game</groupId>
             <artifactId>card-common-web</artifactId>
@@ -30,6 +36,10 @@
         <dependency>
             <groupId>com.card.game</groupId>
             <artifactId>card-common-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.card.game</groupId>
+            <artifactId>card-common-redis</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -49,7 +59,7 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>1.2.45</version>
+            <version>${fast-json}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

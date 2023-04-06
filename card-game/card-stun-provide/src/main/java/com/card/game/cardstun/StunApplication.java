@@ -7,6 +7,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
 import org.springframework.boot.web.servlet.ServletComponentScan;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -15,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SpringBootApplication
-@ServletComponentScan(basePackages = "com.card.game.cardstun.*")
+@EnableDiscoveryClient
 public class StunApplication {
     public static void main(String[] args) {
         SpringApplication.run(StunApplication.class, args);

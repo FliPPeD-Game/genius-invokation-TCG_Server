@@ -25,8 +25,6 @@ public class RoomService {
 
     private Map<String, Set<Connection>> rooms = new ConcurrentHashMap<>();
 
-    private final RedisIdWorker redisIdWorker;
-
     /**
      * 加入到大厅
      */
@@ -85,14 +83,7 @@ public class RoomService {
      * @param connection 连接
      * @return 返回房间id
      */
-    public String createRoom(Connection connection, MessageEntity message) {
-        Integer roomId = redisIdWorker.nextId(RedisPreKey.ROOM_ID);
-        rooms.put(String.valueOf(roomId), new HashSet<>());
-        Set<Connection> room = rooms.get(String.valueOf(roomId));
-//        connection.setPeerID(message.getPeerId());
-        room.add(connection);
-        return String.valueOf(roomId);
-    }
+
 
     /**
      * 离开指定的房间
