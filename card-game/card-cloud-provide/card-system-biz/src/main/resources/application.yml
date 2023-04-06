@@ -9,6 +9,9 @@ server:
 spring:
   application:
     name: card-game
+  config:
+    activate:
+      on-profile: dev
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     type: com.alibaba.druid.pool.DruidDataSource
@@ -70,13 +73,6 @@ spring:
       password: nacos
       discovery:
         server-addr: 127.0.0.1:8848
-      config:
-        group: DEFAULT_GROUP
-        server-addr: 127.0.0.1:8848
-        extension-configs:
-          - data-id: 123
-            group: DEFAULT_GROUP
-        namespace: dev
 
 
 
