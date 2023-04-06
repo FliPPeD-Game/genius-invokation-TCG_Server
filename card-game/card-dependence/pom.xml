@@ -18,6 +18,8 @@
         <mybatis.plus.version>3.5.2</mybatis.plus.version>
         <mybatis.plus.generator.version>3.5.2</mybatis.plus.generator.version>
         <velocity.version>1.7</velocity.version>
+        <!--SpringCloud版本 -->
+        <spring-cloud.version>2021.0.1</spring-cloud.version>
         <!--SpringCloudAlibaba版本-->
         <spring.cloud.alibaba.version>2021.0.5.0</spring.cloud.alibaba.version>
         <!--bean转换版本-->
@@ -40,6 +42,14 @@
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-alibaba-dependencies</artifactId>
                 <version>${spring.cloud.alibaba.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!--spring-Cloud依赖-->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
