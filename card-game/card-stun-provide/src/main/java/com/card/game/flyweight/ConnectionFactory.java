@@ -39,7 +39,7 @@ public class ConnectionFactory {
      * @param roomId 房间ID
      * @return 房间
      */
-    public static IFlyweight getRoom(String roomId) {
+    public static IFlyweight getRoom(Integer roomId) {
         return rooms.get(roomId);
     }
 }

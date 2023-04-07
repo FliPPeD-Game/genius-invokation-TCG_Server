@@ -11,7 +11,7 @@ public class EnterRoomStrategy implements OperateStrategy {
 
     @Override
     public void operate(MessageEntity message, ConnectionEntity connection) {
-        IFlyweight room = ConnectionFactory.getRoom(message.getRoomId());
+        IFlyweight room = ConnectionFactory.getRoom(Integer.valueOf(message.getRoomId()));
         if (room == null) {
             message.setMessage("房间不存在");
             message.setCode(HttpStatus.INTERNAL_SERVER_ERROR.value());

@@ -15,7 +15,7 @@ import java.io.IOException;
 public class DialogueStrategy implements OperateStrategy {
     @Override
     public void operate(MessageEntity message, ConnectionEntity connection) {
-        val room = ConnectionFactory.getRoom(message.getRoomId());
+        val room = ConnectionFactory.getRoom(Integer.valueOf(message.getRoomId()));
         val connections = room.queryAll();
         connections.forEach(con->{
             try {
