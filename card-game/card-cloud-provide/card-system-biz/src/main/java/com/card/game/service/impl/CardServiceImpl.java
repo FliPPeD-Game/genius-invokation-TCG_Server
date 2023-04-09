@@ -1,8 +1,8 @@
 package com.card.game.service.impl;
 
 import com.card.game.aop.AopResult;
-import com.card.game.pojo.vo.CardInfoVO;
-import com.card.game.pojo.vo.UserCarInfoConfigVO;
+import com.card.game.common.base.vo.CardInfoVO;
+import com.card.game.common.base.vo.UserCarInfoConfigVO;
 import com.card.game.service.ActionCardInfoService;
 import com.card.game.service.CardService;
 import com.card.game.service.RoleCardInfoService;

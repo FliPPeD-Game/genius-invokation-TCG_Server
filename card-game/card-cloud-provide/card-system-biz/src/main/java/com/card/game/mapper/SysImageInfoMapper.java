@@ -1,7 +1,7 @@
 package com.card.game.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.card.game.pojo.entity.SysImageInfoEntity;
+import com.card.game.common.base.entity.SysImageInfoEntity;
 
 /**
  * SysImageInfoMapper

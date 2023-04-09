@@ -1,9 +1,8 @@
 package com.card.game.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.card.game.pojo.vo.UserCarInfoConfigVO;
-import com.card.game.pojo.entity.UserCardInfoConfigEntity;
-import java.util.List;
+import com.card.game.common.base.vo.UserCarInfoConfigVO;
+import com.card.game.common.base.entity.UserCardInfoConfigEntity;
 
 /**
  *

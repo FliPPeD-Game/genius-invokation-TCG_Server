@@ -1,8 +1,8 @@
 package com.card.game.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.card.game.pojo.dto.UserCardInfoConfigDTO;
-import com.card.game.pojo.entity.UserCardInfoConfigEntity;
+import com.card.game.common.base.dto.UserCardInfoConfigDTO;
+import com.card.game.common.base.entity.UserCardInfoConfigEntity;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

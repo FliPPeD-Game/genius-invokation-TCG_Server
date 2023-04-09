@@ -1,9 +1,12 @@
 package com.card.game.controller;
 
-import com.card.game.pojo.dto.user.SysUserUpdateDTO;
+import com.card.game.api.user.SysUserApi;
+import com.card.game.api.user.SysUserApiImpl;
+import com.card.game.api.user.dto.SysUserDTO;
+import com.card.game.common.base.dto.user.SysUserUpdateDTO;
 import com.card.game.api.user.vo.SysUserVO;
 import com.card.game.common.result.Result;
-import com.card.game.pojo.dto.EmailRegisterDTO;
+import com.card.game.common.base.dto.EmailRegisterDTO;
 import com.card.game.security.support.userdetails.SecurityMailUserDetails;
 import com.card.game.service.SysUserService;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +30,7 @@ import java.util.Map;
 public class SysUserController {
 
     private final SysUserService sysUserService;
+    private final SysUserApiImpl sysUserApi;
 
     @GetMapping("/getUserInfo")
     public Result<SecurityMailUserDetails> getUserInfo() {
@@ -34,6 +38,10 @@ public class SysUserController {
         return Result.success(principal);
     }
 
+    @GetMapping("/getUserByMailAccount")
+    public Result<SysUserDTO> getUserByMailAccount(@RequestParam("account") String account){
+       return Result.success(sysUserApi.getUserByMailAccount(account));
+    }
 
     @PostMapping("/mail/registerUser")
     public Result<Map<String, Object>> registerUser(@RequestBody @Validated EmailRegisterDTO emailRegisterDTO) {

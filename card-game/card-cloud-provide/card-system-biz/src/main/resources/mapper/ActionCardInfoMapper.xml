@@ -4,11 +4,11 @@
 <mapper namespace="com.card.game.mapper.ActionCardInfoMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.card.game.pojo.entity.ActionCardInfoEntity">
+    <resultMap id="BaseResultMap" type="com.card.game.common.base.entity.ActionCardInfoEntity">
         <id column="id" property="id"/>
     </resultMap>
     <select id="getActionCardInfos"
-            resultType="com.card.game.pojo.entity.ActionCardInfoEntity">
+            resultType="com.card.game.common.base.entity.ActionCardInfoEntity">
         SELECT * FROM card_game.action_card_info
         <if test="ids !=null">
             <where>

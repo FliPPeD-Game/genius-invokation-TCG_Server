@@ -1,9 +1,9 @@
 package com.card.game.controller;
 
 import com.card.game.common.result.Result;
-import com.card.game.pojo.dto.ImageInfoDTO;
-import com.card.game.pojo.entity.SysImageInfoEntity;
-import com.card.game.pojo.vo.ImageInfoVO;
+import com.card.game.common.base.dto.ImageInfoDTO;
+import com.card.game.common.base.entity.SysImageInfoEntity;
+import com.card.game.common.base.vo.ImageInfoVO;
 import com.card.game.service.SysImageInfoService;
 
 import java.util.List;

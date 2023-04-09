@@ -3,7 +3,7 @@
 <mapper namespace="com.card.game.mapper.SkillCostMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.card.game.pojo.entity.SkillCostEntity">
+    <resultMap id="BaseResultMap" type="com.card.game.common.base.entity.SkillCostEntity">
         <id column="id" property="id" />
     </resultMap>
 

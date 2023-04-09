@@ -1,7 +1,7 @@
 package com.card.game.groovy.controller
 
 import com.card.game.common.result.Result
-import com.card.game.pojo.vo.ImageInfoVO
+import com.card.game.common.base.vo.ImageInfoVO
 import com.card.game.service.SysImageInfoService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient
@@ -14,10 +14,7 @@ import org.springframework.test.web.reactive.server.WebTestClient
 import spock.lang.Specification
 import spock.lang.Unroll
 
-import static org.mockito.Mockito.when;
-
-import javax.annotation.Resource
-
+import static org.mockito.Mockito.when
 
 /**
  * 系统通用接口单元测试
