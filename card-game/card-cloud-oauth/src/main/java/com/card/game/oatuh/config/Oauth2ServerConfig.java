@@ -1,7 +1,7 @@
 package com.card.game.oatuh.config;
 
 import com.card.game.oatuh.component.JwtTokenEnhancer;
-import com.card.game.oatuh.service.UserServiceImpl;
+import com.card.game.oatuh.support.userdetails.SecurityMailUserDetailsServiceImpl;
 import java.security.KeyPair;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +31,7 @@ import org.springframework.security.rsa.crypto.KeyStoreKeyFactory;
 public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
 
     private final PasswordEncoder passwordEncoder;
-    private final UserServiceImpl userDetailsService;
+    private final SecurityMailUserDetailsServiceImpl userDetailsService;
     private final AuthenticationManager authenticationManager;
     private final JwtTokenEnhancer jwtTokenEnhancer;
 

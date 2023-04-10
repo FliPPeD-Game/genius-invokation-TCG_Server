@@ -1,6 +1,6 @@
 package com.card.game.oatuh.controller;
 
-import com.card.game.oatuh.api.CommonResult;
+import com.card.game.common.result.Result;
 import com.card.game.oatuh.domain.Oauth2TokenDto;
 import java.security.Principal;
 import java.util.Map;
@@ -28,14 +28,16 @@ public class AuthController {
      * Oauth2登录认证
      */
     @RequestMapping(value = "/token", method = RequestMethod.POST)
-    public CommonResult<Oauth2TokenDto> postAccessToken(Principal principal, @RequestParam Map<String, String> parameters) throws HttpRequestMethodNotSupportedException {
+    public Result<Oauth2TokenDto> postAccessToken(Principal principal, @RequestParam Map<String, String> parameters)
+            throws HttpRequestMethodNotSupportedException {
         OAuth2AccessToken oAuth2AccessToken = tokenEndpoint.postAccessToken(principal, parameters).getBody();
+        assert oAuth2AccessToken != null;
         Oauth2TokenDto oauth2TokenDto = Oauth2TokenDto.builder()
                 .token(oAuth2AccessToken.getValue())
                 .refreshToken(oAuth2AccessToken.getRefreshToken().getValue())
                 .expiresIn(oAuth2AccessToken.getExpiresIn())
                 .tokenHead("Bearer ").build();
 
-        return CommonResult.success(oauth2TokenDto);
+        return Result.success(oauth2TokenDto);
     }
 }
