@@ -2,6 +2,7 @@ package com.card.game.gateway.filter;
 
 
 import com.nimbusds.jose.JWSObject;
+import java.text.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
@@ -13,15 +14,13 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
-import java.text.ParseException;
-
 /**
  * 将登录用户的JWT转化成用户信息的全局过滤器
  */
 @Component
 public class AuthGlobalFilter implements GlobalFilter, Ordered {
 
-    private static Logger LOGGER = LoggerFactory.getLogger(AuthGlobalFilter.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(AuthGlobalFilter.class);
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
@@ -34,7 +33,7 @@ public class AuthGlobalFilter implements GlobalFilter, Ordered {
             String realToken = token.replace("Bearer ", "");
             JWSObject jwsObject = JWSObject.parse(realToken);
             String userStr = jwsObject.getPayload().toString();
-            LOGGER.info("AuthGlobalFilter.filter() user:{}",userStr);
+            LOGGER.info("AuthGlobalFilter.filter() user:{}", userStr);
             ServerHttpRequest request = exchange.getRequest().mutate().header("user", userStr).build();
             exchange = exchange.mutate().request(request).build();
         } catch (ParseException e) {
