@@ -8,10 +8,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.web.DefaultSecurityFilterChain;
 
 /**
  * @author tomyou
@@ -21,7 +20,7 @@ import org.springframework.security.web.DefaultSecurityFilterChain;
 @EnableWebSecurity(debug = true)
 @EnableConfigurationProperties({SecurityUrlProperties.class})
 @RequiredArgsConstructor
-public class SecurityConfig  {
+public class SecurityConfig {
 
     private final MailAuthenticationConfigurer mailAuthenticationConfigurer;
 
@@ -33,39 +32,44 @@ public class SecurityConfig  {
 
     private final SecurityAuthenticationEntryPoint securityAuthenticationEntryPoint;
 
+    //    @Bean
+//    public DefaultSecurityFilterChain defaultSecurityFilterChain(HttpSecurity httpSecurity) throws Exception {
+//        //关闭csrf
+//        httpSecurity.csrf().disable();
+//
+//        //关闭表单登录
+//        httpSecurity.formLogin().disable();
+//
+//        //禁用掉session
+//        httpSecurity.sessionManagement()
+//                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+//                .enableSessionUrlRewriting(true);
+//
+//        //设置未认证处理器
+//        httpSecurity.exceptionHandling()
+//                .authenticationEntryPoint(securityAuthenticationEntryPoint)
+//                .accessDeniedHandler(securityAccessDeniedHandler);
+//
+//
+//        //拦截请求设置
+//        httpSecurity.authorizeRequests()
+//                .antMatchers(securityUrlProperties.getUrls().toArray(new String[0])).permitAll()
+//                .anyRequest().authenticated();
+//
+//        //适配邮箱登陆
+//        httpSecurity.apply(mailAuthenticationConfigurer);
+//
+//        // securityContext持久化配置
+//        httpSecurity.securityContext((securityContext -> {
+//            securityContext.requireExplicitSave(true);
+//            securityContext.securityContextRepository(securityContextRepository);
+//        }));
+//
+//        return httpSecurity.build();
+//    }
     @Bean
-    public DefaultSecurityFilterChain defaultSecurityFilterChain(HttpSecurity httpSecurity) throws Exception {
-        //关闭csrf
-        httpSecurity.csrf().disable();
-
-        //关闭表单登录
-        httpSecurity.formLogin().disable();
-
-        //禁用掉session
-        httpSecurity.sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .enableSessionUrlRewriting(true);
-
-        //设置未认证处理器
-        httpSecurity.exceptionHandling()
-                .authenticationEntryPoint(securityAuthenticationEntryPoint)
-                .accessDeniedHandler(securityAccessDeniedHandler);
-
-
-        //拦截请求设置
-        httpSecurity.authorizeRequests()
-                .antMatchers(securityUrlProperties.getUrls().toArray(new String[0])).permitAll()
-                .anyRequest().authenticated();
-
-        //适配邮箱登陆
-        httpSecurity.apply(mailAuthenticationConfigurer);
-
-        // securityContext持久化配置
-        httpSecurity.securityContext((securityContext -> {
-            securityContext.requireExplicitSave(true);
-            securityContext.securityContextRepository(securityContextRepository);
-        }));
-
-        return httpSecurity.build();
+    public AuthenticationManager authenticationManager(
+            AuthenticationConfiguration authenticationConfiguration) throws Exception {
+        return authenticationConfiguration.getAuthenticationManager();
     }
 }

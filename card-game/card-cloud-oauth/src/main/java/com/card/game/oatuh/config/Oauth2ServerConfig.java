@@ -2,14 +2,18 @@ package com.card.game.oatuh.config;
 
 import com.card.game.oatuh.component.JwtTokenEnhancer;
 import com.card.game.oatuh.support.userdetails.SecurityMailUserDetailsServiceImpl;
+
 import java.security.KeyPair;
 import java.util.ArrayList;
 import java.util.List;
+
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
@@ -23,7 +27,6 @@ import org.springframework.security.rsa.crypto.KeyStoreKeyFactory;
 
 /**
  * 认证服务器配置
- *
  */
 @AllArgsConstructor
 @Configuration
@@ -64,6 +67,10 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
         security.allowFormAuthenticationForClients();
     }
 
+
+    /**
+     * 使用非对称加密算法来对Token进行签名
+     */
     @Bean
     public JwtAccessTokenConverter accessTokenConverter() {
         JwtAccessTokenConverter jwtAccessTokenConverter = new JwtAccessTokenConverter();

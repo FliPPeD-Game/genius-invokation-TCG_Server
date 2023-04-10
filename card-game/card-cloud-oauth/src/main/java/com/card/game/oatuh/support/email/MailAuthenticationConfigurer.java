@@ -51,5 +51,7 @@ public class MailAuthenticationConfigurer extends SecurityConfigurerAdapter<Defa
         //设置认证处理器
         builder.authenticationProvider(mailAuthenticationProvider)
                 .addFilterAfter(mailAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+
     }
-}
+
+    }
