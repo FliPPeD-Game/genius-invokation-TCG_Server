@@ -14,7 +14,7 @@ import java.util.List;
 @Component
 public class SecurityContextProviderManager implements SecurityContextManager {
 
-    private List<SecurityContextProvider> providers;
+    private final List<SecurityContextProvider> providers;
 
     public SecurityContextProviderManager(List<SecurityContextProvider> providers) {
         this.providers = providers;

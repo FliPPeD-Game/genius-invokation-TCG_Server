@@ -35,8 +35,6 @@ public class SecurityContextRepositoryImpl extends SecurityContextRepositoryAdap
 
     private final SecurityContextManager securityContextManager;
 
-    private final String websocketUrl = "/websocket";
-
     @Override
     public Supplier<SecurityContext> loadContext(HttpServletRequest request) {
         return () -> getSecurityContext(request);
@@ -47,6 +45,7 @@ public class SecurityContextRepositoryImpl extends SecurityContextRepositoryAdap
         log.info("processing authentication for [{}]", request.getRequestURI());
         //获取token
         String token;
+        String websocketUrl = "/websocket";
         if (websocketUrl.matches(request.getRequestURI())) {
             token = request.getHeader("Sec-WebSocket-Protocol");
         } else {
