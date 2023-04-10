@@ -12,7 +12,3 @@ spring:
     port: 6379
     # Redis服务器连接密码（默认为空）
     password: 123456
-
-forest:
-  # 关闭 forest 请求日志打印
-  log-enabled: false

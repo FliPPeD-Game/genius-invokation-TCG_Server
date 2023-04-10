@@ -1,0 +1,19 @@
+server:
+  port: 9501
+spring:
+  profiles:
+    active: dev
+  application:
+    name: micro-oauth2-api
+  cloud:
+    nacos:
+      username: nacos
+      password: nacos
+      server-addr: 127.0.0.1:8848
+      discovery:
+        namespace: d9134ab5-743d-48a3-98f0-0db5ab132f80
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

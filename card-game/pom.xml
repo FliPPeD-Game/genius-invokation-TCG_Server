@@ -17,6 +17,7 @@
         <module>card-cloud-oauth</module>
         <module>card-cloud-gateway</module>
         <module>card-cloud-register</module>
+        <module>card-game-oauth-api</module>
     </modules>
 
     <properties>
