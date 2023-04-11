@@ -1,15 +1,15 @@
 <p align='center'>
-  <img src='assets/tcg_logo.png' alt='' width='200'/>
+  <img src='.github/image/tcg_logo.png' alt='' width='200'/>
 <p>
 
 <p align='center'>
-  <img src='assets/element/anemo.png' alt='' width='50'/>
-  <img src='assets/element/cryo.png' alt='' width='50'/>
-  <img src='assets/element/dendro.png' alt='' width='50'/>
-  <img src='assets/element/electro.png' alt='' width='50'/>
-  <img src='assets/element/geo.png' alt='' width='50'/>
-  <img src='assets/element/hydro.png' alt='' width='50'/>
-  <img src='assets/element/pyro.png' alt='' width='50'/>
+  <img src='.github/image/element/anemo.png' alt='' width='50'/>
+  <img src='.github/image/element/cryo.png' alt='' width='50'/>
+  <img src='.github/image/element/dendro.png' alt='' width='50'/>
+  <img src='.github/image/element/electro.png' alt='' width='50'/>
+  <img src='.github/image/element/geo.png' alt='' width='50'/>
+  <img src='.github/image/element/hydro.png' alt='' width='50'/>
+  <img src='.github/image/element/pyro.png' alt='' width='50'/>
 </p>
 
 ## Getting Started
