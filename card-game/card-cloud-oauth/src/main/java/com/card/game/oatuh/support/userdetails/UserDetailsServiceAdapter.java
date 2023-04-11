@@ -12,7 +12,7 @@ public abstract class UserDetailsServiceAdapter implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return null;
+        return loadUserByMailAccount(username);
     }
 
     /**

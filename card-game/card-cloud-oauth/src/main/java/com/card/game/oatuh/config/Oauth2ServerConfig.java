@@ -2,18 +2,14 @@ package com.card.game.oatuh.config;
 
 import com.card.game.oatuh.component.JwtTokenEnhancer;
 import com.card.game.oatuh.support.userdetails.SecurityMailUserDetailsServiceImpl;
-
 import java.security.KeyPair;
 import java.util.ArrayList;
 import java.util.List;
-
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
@@ -38,14 +34,11 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
     private final AuthenticationManager authenticationManager;
     private final JwtTokenEnhancer jwtTokenEnhancer;
 
+    // TODO 目前只有一个客户端,先写死
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.inMemory()
-                .withClient("client-app")
-                .secret(passwordEncoder.encode("123456"))
-                .scopes("all")
-                .authorizedGrantTypes("password", "refresh_token")
-                .accessTokenValiditySeconds(3600)
+        clients.inMemory().withClient("client-app").secret(passwordEncoder.encode("123456")).scopes("all")
+                .authorizedGrantTypes("password", "refresh_token").accessTokenValiditySeconds(3600)
                 .refreshTokenValiditySeconds(86400);
     }
 
@@ -56,10 +49,8 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
         delegates.add(jwtTokenEnhancer);
         delegates.add(accessTokenConverter());
         enhancerChain.setTokenEnhancers(delegates); //配置JWT的内容增强器
-        endpoints.authenticationManager(authenticationManager)
-                .userDetailsService(userDetailsService) //配置加载用户信息的服务
-                .accessTokenConverter(accessTokenConverter())
-                .tokenEnhancer(enhancerChain);
+        endpoints.authenticationManager(authenticationManager).userDetailsService(userDetailsService) //配置加载用户信息的服务
+                .accessTokenConverter(accessTokenConverter()).tokenEnhancer(enhancerChain);
     }
 
     @Override
@@ -81,7 +72,8 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
     @Bean
     public KeyPair keyPair() {
         //从classpath下的证书中获取秘钥对
-        KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(new ClassPathResource("jwt.jks"), "123456".toCharArray());
+        KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(new ClassPathResource("jwt.jks"),
+                "123456".toCharArray());
         return keyStoreKeyFactory.getKeyPair("jwt", "123456".toCharArray());
     }
 

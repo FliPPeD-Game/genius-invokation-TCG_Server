@@ -20,7 +20,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 @EnableWebSecurity(debug = true)
 @EnableConfigurationProperties({SecurityUrlProperties.class})
 @RequiredArgsConstructor
-public class SecurityConfig {
+public class SecurityConfig  {
 
     private final MailAuthenticationConfigurer mailAuthenticationConfigurer;
 
@@ -32,7 +32,7 @@ public class SecurityConfig {
 
     private final SecurityAuthenticationEntryPoint securityAuthenticationEntryPoint;
 
-    //    @Bean
+//    @Bean
 //    public DefaultSecurityFilterChain defaultSecurityFilterChain(HttpSecurity httpSecurity) throws Exception {
 //        //关闭csrf
 //        httpSecurity.csrf().disable();
