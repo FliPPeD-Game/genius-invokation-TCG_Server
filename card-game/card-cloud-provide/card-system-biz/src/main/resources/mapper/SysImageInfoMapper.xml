@@ -3,7 +3,7 @@
 <mapper namespace="com.card.game.mapper.SysImageInfoMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.card.game.pojo.entity.SysImageInfoEntity">
+    <resultMap id="BaseResultMap" type="com.card.game.common.base.entity.SysImageInfoEntity">
         <id column="id" property="id" />
         <result column="name" property="name" />
         <result column="src" property="src" />
@@ -14,7 +14,7 @@
     <sql id="Base_Column_List">
         id, name, src,country
     </sql>
-    <select id="getRandomAvatar" resultType="com.card.game.pojo.entity.SysImageInfoEntity">
+    <select id="getRandomAvatar" resultType="com.card.game.common.base.entity.SysImageInfoEntity">
         SELECT *
         FROM sys_imageInfo sii
         ORDER BY rand()

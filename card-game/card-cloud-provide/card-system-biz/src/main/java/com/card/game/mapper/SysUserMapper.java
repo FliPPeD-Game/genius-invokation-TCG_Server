@@ -1,6 +1,6 @@
 package com.card.game.mapper;
 
-import com.card.game.pojo.entity.SysUserEntity;
+import com.card.game.common.base.entity.SysUserEntity;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

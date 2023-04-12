@@ -3,7 +3,7 @@
 <mapper namespace="com.card.game.mapper.SysUserMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.card.game.pojo.entity.SysUserEntity">
+    <resultMap id="BaseResultMap" type="com.card.game.common.base.entity.SysUserEntity">
         <id column="id" property="id" />
         <result column="username" property="username" />
         <result column="nickname" property="nickname" />

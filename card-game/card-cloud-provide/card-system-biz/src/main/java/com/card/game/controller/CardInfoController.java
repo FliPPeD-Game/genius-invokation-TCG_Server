@@ -1,10 +1,10 @@
 package com.card.game.controller;
 
 import com.card.game.common.result.Result;
-import com.card.game.pojo.vo.ActionCardInfoVO;
-import com.card.game.pojo.vo.CardInfoVO;
-import com.card.game.pojo.vo.RoleCardInfoVO;
-import com.card.game.pojo.vo.UserCarInfoConfigVO;
+import com.card.game.common.base.vo.ActionCardInfoVO;
+import com.card.game.common.base.vo.CardInfoVO;
+import com.card.game.common.base.vo.RoleCardInfoVO;
+import com.card.game.common.base.vo.UserCarInfoConfigVO;
 import com.card.game.service.ActionCardInfoService;
 import com.card.game.service.CardService;
 import com.card.game.service.RoleCardInfoService;

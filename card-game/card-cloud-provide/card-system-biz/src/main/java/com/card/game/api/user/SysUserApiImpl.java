@@ -3,7 +3,7 @@ package com.card.game.api.user;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.card.game.api.user.dto.SysUserDTO;
 import com.card.game.common.web.utils.BeanMapperUtils;
-import com.card.game.pojo.entity.SysUserEntity;
+import com.card.game.common.base.entity.SysUserEntity;
 import com.card.game.service.SysUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

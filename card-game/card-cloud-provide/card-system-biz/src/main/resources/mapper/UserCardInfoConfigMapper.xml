@@ -4,10 +4,10 @@
 <mapper namespace="com.card.game.mapper.UserCardInfoConfigMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.card.game.pojo.entity.UserCardInfoConfigEntity">
+    <resultMap id="BaseResultMap" type="com.card.game.common.base.entity.UserCardInfoConfigEntity">
         <id column="id" property="id"/>
     </resultMap>
-    <select id="getUserCardConfigs" resultType="com.card.game.pojo.dto.UserCardInfoConfigDTO">
+    <select id="getUserCardConfigs" resultType="com.card.game.common.base.dto.UserCardInfoConfigDTO">
         SELECT user_id, role_id, action_id, flag, is_default FROM card_game.user_card_info_config
         WHERE user_id=#{userID} OR user_id=0 ORDER by flag DESC;
     </select>

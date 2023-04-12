@@ -1,8 +1,8 @@
 package com.card.game.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.card.game.pojo.entity.RoleCardInfoEntity;
-import com.card.game.pojo.vo.RoleCardInfoVO;
+import com.card.game.common.base.entity.RoleCardInfoEntity;
+import com.card.game.common.base.vo.RoleCardInfoVO;
 
 import java.util.List;
 

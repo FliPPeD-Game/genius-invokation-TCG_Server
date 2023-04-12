@@ -1,6 +1,6 @@
 package com.card.game.task;
 
-import com.card.game.pojo.entity.SysAttributeSyncEntity;
+import com.card.game.common.base.entity.SysAttributeSyncEntity;
 import com.card.game.service.SysAttributeSyncService;
 import com.card.game.task.job.base.BaseJob;
 

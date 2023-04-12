@@ -1,10 +1,10 @@
 package com.card.game.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.card.game.pojo.dto.user.SysUserUpdateDTO;
+import com.card.game.common.base.dto.user.SysUserUpdateDTO;
 import com.card.game.api.user.vo.SysUserVO;
-import com.card.game.pojo.dto.EmailRegisterDTO;
-import com.card.game.pojo.entity.SysUserEntity;
+import com.card.game.common.base.dto.EmailRegisterDTO;
+import com.card.game.common.base.entity.SysUserEntity;
 
 import java.util.Map;
 

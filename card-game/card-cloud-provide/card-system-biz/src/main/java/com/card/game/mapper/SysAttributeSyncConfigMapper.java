@@ -1,7 +1,7 @@
 package com.card.game.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.card.game.pojo.entity.SysAttributeSyncEntity;
+import com.card.game.common.base.entity.SysAttributeSyncEntity;
 
 /**
  * 表格数据同步

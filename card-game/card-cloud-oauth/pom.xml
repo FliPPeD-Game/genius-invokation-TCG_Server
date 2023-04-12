@@ -16,6 +16,7 @@
         <maven.compiler.target>8</maven.compiler.target>
         <jwt-version>9.30.2</jwt-version>
         <oauth2>2.2.5.RELEASE</oauth2>
+        <hutool-version>5.8.15</hutool-version>
     </properties>
     <dependencies>
 
@@ -33,12 +34,15 @@
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
         </dependency>
-
         <!-- Spring Cloud Security-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-security</artifactId>
             <version>${oauth2}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bootstrap</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -57,12 +61,64 @@
         <dependency>
             <groupId>com.card.game</groupId>
             <artifactId>card-common-web</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <!--负载均衡-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-loadbalancer</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.card.game</groupId>
-            <artifactId>card-system-api</artifactId>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.cloud</groupId>
+                    <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>${hutool-version}</version>
         </dependency>
 
     </dependencies>
-
+<build>
+    <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <excludes>
+                    <exclude>**/*.jks</exclude>
+                </excludes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>false</filtering>
+                <includes>
+                    <include>**/*.jks</include>
+                </includes>
+            </resource>
+    </resources>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-resources-plugin</artifactId>
+            <version>3.2.0</version>
+            <configuration>
+                <nonFilteredFileExtensions>
+                    <!--<nonFilteredFileExtension>p12</nonFilteredFileExtension>-->
+                    <nonFilteredFileExtension>jks</nonFilteredFileExtension>
+                </nonFilteredFileExtensions>
+            </configuration>
+        </plugin>
+    </plugins>
+</build>
 </project>

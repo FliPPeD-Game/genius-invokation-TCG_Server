@@ -12,8 +12,5 @@ spring:
         prefix: card-cloud-gateway
       discovery:
         namespace: d9134ab5-743d-48a3-98f0-0db5ab132f80
-    gateway:
-      discovery:
-        locator:
-          enabled: true
-          lower-case-service-id: true
+##开启日志DEBUG级别，便于查看调试信息
+logging.level.org.springframework.security: DEBUG

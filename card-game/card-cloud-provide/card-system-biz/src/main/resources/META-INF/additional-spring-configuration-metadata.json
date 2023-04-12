@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "spring.quartz.wait-for-jobs-to-complete-on-shutdown.properties.org.quartz.jobStore.class",
+      "type": "java.lang.String",
+      "description": "Description for spring.quartz.wait-for-jobs-to-complete-on-shutdown.properties.org.quartz.jobStore.class."
+  }
+] }

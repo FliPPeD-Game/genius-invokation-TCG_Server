@@ -1,8 +1,7 @@
 package com.card.game.service;
 
-import com.card.game.pojo.vo.CardInfoVO;
-import com.card.game.pojo.vo.UserCarInfoConfigVO;
-import java.util.List;
+import com.card.game.common.base.vo.CardInfoVO;
+import com.card.game.common.base.vo.UserCarInfoConfigVO;
 
 public interface CardService {
     /**

@@ -1,9 +1,9 @@
 package com.card.game.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.card.game.pojo.dto.ImageInfoDTO;
-import com.card.game.pojo.entity.SysImageInfoEntity;
-import com.card.game.pojo.vo.ImageInfoVO;
+import com.card.game.common.base.dto.ImageInfoDTO;
+import com.card.game.common.base.entity.SysImageInfoEntity;
+import com.card.game.common.base.vo.ImageInfoVO;
 import java.util.List;
 
 /**

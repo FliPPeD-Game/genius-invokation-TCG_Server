@@ -4,7 +4,7 @@ import cn.hutool.core.lang.Dict;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.card.game.common.constants.TaskType;
+import com.card.game.common.constants.enums.TaskType;
 import com.card.game.task.common.ApiResponse;
 import com.card.game.task.domain.entity.JobAndTriggerEntity;
 import com.card.game.task.domain.model.JobModel;
