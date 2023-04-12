@@ -4,9 +4,11 @@ import cn.hutool.core.convert.Convert;
 
 import com.card.game.gateway.constant.AuthConstant;
 import com.card.game.gateway.constant.RedisConstant;
+
 import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authorization.AuthorizationDecision;
@@ -24,7 +26,7 @@ import reactor.core.publisher.Mono;
 @RequiredArgsConstructor
 public class AuthorizationManager implements ReactiveAuthorizationManager<AuthorizationContext> {
 
-    private final RedisTemplate<String,Object> redisTemplate;
+    private final RedisTemplate<String, Object> redisTemplate;
 
     @Override
     public Mono<AuthorizationDecision> check(Mono<Authentication> mono, AuthorizationContext authorizationContext) {

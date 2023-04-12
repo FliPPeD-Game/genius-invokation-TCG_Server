@@ -2,9 +2,11 @@ package com.card.game.oatuh.config;
 
 import com.card.game.oatuh.component.JwtTokenEnhancer;
 import com.card.game.oatuh.support.userdetails.SecurityMailUserDetailsServiceImpl;
+
 import java.security.KeyPair;
 import java.util.ArrayList;
 import java.util.List;
+
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -38,8 +40,10 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
     // TODO 目前只有一个客户端,先写死
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.inMemory().withClient("client-app").secret(passwordEncoder.encode("123456")).scopes("all")
-                .authorizedGrantTypes("password", "refresh_token").accessTokenValiditySeconds(3600)
+        clients.inMemory().withClient("client-app")
+                .secret(passwordEncoder.encode("123456"))
+                .scopes("all").authorizedGrantTypes("password", "refresh_token")
+                .accessTokenValiditySeconds(3600)
                 .refreshTokenValiditySeconds(86400);
     }
 
@@ -73,8 +77,7 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
     @Bean
     public KeyPair keyPair() {
         //从classpath下的证书中获取秘钥对
-        KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(new ClassPathResource("jwt.jks"),
-                "123456".toCharArray());
+        KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(new ClassPathResource("jwt.jks"), "123456".toCharArray());
         return keyStoreKeyFactory.getKeyPair("jwt", "123456".toCharArray());
     }
 
