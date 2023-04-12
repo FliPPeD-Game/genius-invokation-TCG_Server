@@ -10,7 +10,6 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 /**
  * Redis相关配置
- * Created by macro on 2020/6/19.
  */
 @Configuration
 @EnableRedisRepositories

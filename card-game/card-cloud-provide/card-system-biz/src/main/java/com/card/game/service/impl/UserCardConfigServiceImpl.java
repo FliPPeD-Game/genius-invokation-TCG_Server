@@ -10,8 +10,6 @@ import com.card.game.common.base.vo.ActionCardInfoVO;
 import com.card.game.common.base.vo.CardInfoVO;
 import com.card.game.common.base.vo.RoleCardInfoVO;
 import com.card.game.common.base.vo.UserCarInfoConfigVO;
-import com.card.game.security.support.userdetails.SecurityMailUserDetails;
-import com.card.game.security.utils.SecurityContextUtils;
 import com.card.game.service.ActionCardInfoService;
 import com.card.game.service.RoleCardInfoService;
 import com.card.game.service.UserCardConfigService;
@@ -42,9 +40,9 @@ public class UserCardConfigServiceImpl extends
     @Override
     @AopResult
     public UserCarInfoConfigVO getUserAllCardInfo() {
-        SecurityMailUserDetails currentUserInfo = SecurityContextUtils.getCurrentUserInfo();
-        SysUserDTO userDTO = currentUserInfo.getSysUserDTO();
-        List<UserCardInfoConfigDTO> userCardConfigs = cardInfoConfigMapper.getUserCardConfigs(userDTO.getId());
+//        SecurityMailUserDetails currentUserInfo = SecurityContextUtils.getCurrentUserInfo();
+//        SysUserDTO userDTO = currentUserInfo.getSysUserDTO();
+        List<UserCardInfoConfigDTO> userCardConfigs = cardInfoConfigMapper.getUserCardConfigs(1631578150241624065L);
         UserCarInfoConfigVO userConfig = new UserCarInfoConfigVO();
         List<CardInfoVO> configs = new ArrayList<>();
         userCardConfigs.forEach(config -> {

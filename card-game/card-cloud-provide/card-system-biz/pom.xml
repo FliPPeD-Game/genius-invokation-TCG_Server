@@ -39,7 +39,7 @@
 
         <dependency>
             <groupId>com.card.game</groupId>
-            <artifactId>card-common-security</artifactId>
+            <artifactId>card-common-web</artifactId>
         </dependency>
         <!-- Spock必须的 -->
         <dependency>
