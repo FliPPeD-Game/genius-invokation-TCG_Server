@@ -1,10 +1,12 @@
 package com.card.game.oatuh.support.userdetails;
 
 import com.card.game.api.user.dto.SysUserDTO;
+import java.util.ArrayList;
 import java.util.Collection;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 /**
@@ -23,7 +25,8 @@ public class SecurityMailUserDetails implements UserDetails {
     @Setter
     private String mailAccount;
 
-    private Collection<? extends GrantedAuthority> authorities;
+    // TODO 后面改回来
+    private Collection<GrantedAuthority> authorities;
 
 
     public SecurityMailUserDetails(SysUserDTO sysUserDTO) {
@@ -31,9 +34,12 @@ public class SecurityMailUserDetails implements UserDetails {
         this.userName = sysUserDTO.getUsername();
         this.lockFlg = sysUserDTO.getLockFlag();
         this.mailAccount = sysUserDTO.getEmail();
+        // 测试给每个人管理员
+        this.authorities=new ArrayList<>();
+        authorities.add(new SimpleGrantedAuthority("ADMIN"));
     }
 
-    public void setAuthorities(Collection<? extends GrantedAuthority> authorities) {
+    public void setAuthorities(Collection<GrantedAuthority> authorities) {
         this.authorities = authorities;
     }
 

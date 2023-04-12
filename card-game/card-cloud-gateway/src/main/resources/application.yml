@@ -1,0 +1,47 @@
+#server:
+#  port: 9201
+#spring:
+#  profiles:
+#    active: dev
+#  application:
+#    name: card-oauth2-gateway
+#  cloud:
+#    nacos:
+#        username: nacos
+#        password: nacos
+#        server-addr: 127.0.0.1:8848
+#        discovery:
+#          namespace: d9134ab5-743d-48a3-98f0-0db5ab132f80
+#    gateway:
+#      routes: #配置路由路径
+#        - id: oauth2-api-route
+#          uri: lb://micro-oauth2-api
+#          predicates:
+#            - Path=/api/**
+#          filters:
+#            - StripPrefix=1
+#        - id: oauth2-auth-route
+#          uri: lb://micro-oauth2-auth
+#          predicates:
+#            - Path=/auth/**
+#          filters:
+#            - StripPrefix=1
+#      discovery:
+#        locator:
+#          enabled: true #开启从注册中心动态创建路由的功能
+#          lower-case-service-id: true #使用小写服务名，默认是大写
+#  security:
+#    oauth2:
+#      resource-server:
+#        jwt:
+#          jwk-set-uri: 'http://localhost:9401/rsa/publicKey' #配置RSA的公钥访问地址
+#  redis:
+#    database: 1
+#    port: 6379
+#    host: 124.221.112.135
+#    password: 123456
+#secure:
+#  ignore:
+#    urls: #配置白名单路径
+#      - "/actuator/**"
+#      - "/auth/oauth/token"

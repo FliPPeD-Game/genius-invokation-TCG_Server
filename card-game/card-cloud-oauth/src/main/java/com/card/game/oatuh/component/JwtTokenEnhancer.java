@@ -2,6 +2,7 @@ package com.card.game.oatuh.component;
 
 
 import com.card.game.oatuh.domain.SecurityUser;
+import com.card.game.oatuh.support.userdetails.SecurityMailUserDetails;
 import java.util.HashMap;
 import java.util.Map;
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
@@ -18,10 +19,10 @@ import org.springframework.stereotype.Component;
 public class JwtTokenEnhancer implements TokenEnhancer {
     @Override
     public OAuth2AccessToken enhance(OAuth2AccessToken accessToken, OAuth2Authentication authentication) {
-        SecurityUser securityUser = (SecurityUser) authentication.getPrincipal();
+        SecurityMailUserDetails securityUser = (SecurityMailUserDetails) authentication.getPrincipal();
         Map<String, Object> info = new HashMap<>();
         //把用户ID设置到JWT中
-        info.put("id", securityUser.getId());
+//        info.put("id", securityUser.getId());
         ((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(info);
         return accessToken;
     }

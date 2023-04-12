@@ -34,6 +34,7 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
     private final AuthenticationManager authenticationManager;
     private final JwtTokenEnhancer jwtTokenEnhancer;
 
+
     // TODO 目前只有一个客户端,先写死
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {

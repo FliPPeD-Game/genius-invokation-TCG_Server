@@ -36,7 +36,7 @@ public class SecurityMailUserDetailsServiceImpl extends UserDetailsServiceAdapte
             throw new UsernameNotFoundException(ResultCode.USER_NOT_EXIST.getMessage());
         } else if (!userDetails.isEnabled()) {
             throw new DisabledException(SecurityConstants.ACCOUNT_DISABLE);
-        } else if (userDetails.isAccountNonLocked()) {
+        } else if (!userDetails.isAccountNonLocked()) {
             throw new LockedException(SecurityConstants.ACCOUNT_LOCKED);
         } else if (!userDetails.isAccountNonExpired()) {
             throw new AccountExpiredException(SecurityConstants.ACCOUNT_EXPIRED);
