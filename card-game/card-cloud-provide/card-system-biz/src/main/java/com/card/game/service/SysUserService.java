@@ -24,7 +24,7 @@ public interface SysUserService extends IService<SysUserEntity> {
      * @param emailRegisterDTO 用户注册请求参数
      * @return 注册后的用户信息
      */
-    Map<String, Object> registerUser(EmailRegisterDTO emailRegisterDTO);
+    boolean registerUser(EmailRegisterDTO emailRegisterDTO);
 
 
     /**

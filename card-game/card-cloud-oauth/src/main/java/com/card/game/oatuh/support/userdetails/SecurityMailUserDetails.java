@@ -30,11 +30,12 @@ public class SecurityMailUserDetails implements UserDetails {
 
 
     public SecurityMailUserDetails(SysUserDTO sysUserDTO) {
+
         this.sysUserDTO = sysUserDTO;
-        this.userName = sysUserDTO.getUsername();
         this.lockFlg = sysUserDTO.getLockFlag();
         this.mailAccount = sysUserDTO.getEmail();
         // 测试给每个人管理员
+        this.userName = sysUserDTO.getNickname();
         this.authorities=new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority("ADMIN"));
     }

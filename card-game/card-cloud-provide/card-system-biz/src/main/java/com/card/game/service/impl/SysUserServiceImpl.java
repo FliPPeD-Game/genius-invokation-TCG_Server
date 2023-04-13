@@ -1,36 +1,25 @@
 package com.card.game.service.impl;
 
-import cn.hutool.core.bean.BeanUtil;
-import cn.hutool.core.bean.copier.CopyOptions;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.card.game.aop.AopResult;
-import com.card.game.api.user.dto.AvatarDTO;
-import com.card.game.api.user.dto.SysUserDTO;
 import com.card.game.api.user.vo.SysUserVO;
-import com.card.game.common.exception.BizException;
-import com.card.game.common.redis.RedisCache;
-import com.card.game.common.redis.constants.RedisPrefixConstant;
-import com.card.game.common.result.ResultCode;
-import com.card.game.common.web.utils.BeanMapperUtils;
-import com.card.game.mapper.SysUserMapper;
 import com.card.game.common.base.dto.EmailRegisterDTO;
 import com.card.game.common.base.dto.user.SysUserUpdateDTO;
 import com.card.game.common.base.entity.SysImageInfoEntity;
 import com.card.game.common.base.entity.SysUserEntity;
-
+import com.card.game.common.exception.BizException;
+import com.card.game.common.redis.RedisCache;
+import com.card.game.common.redis.constants.RedisPrefixConstant;
+import com.card.game.common.result.ResultCode;
+import com.card.game.mapper.SysUserMapper;
 import com.card.game.service.SysImageInfoService;
 import com.card.game.service.SysUserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Map;
-import java.util.Objects;
-import java.util.concurrent.TimeUnit;
 
 /**
  * <p>
@@ -46,64 +35,52 @@ import java.util.concurrent.TimeUnit;
 public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUserEntity> implements SysUserService {
 
     private final SysUserMapper sysUserMapper;
+    private final RedisCache redisCache;
+    private final SysImageInfoService sysImageInfoService;
 
     @Override
     @AopResult
-    public Map<String, Object> registerUser(EmailRegisterDTO emailRegisterDTO) {
-        //判断用户是否已经注册
-//        if (isUserRegisteredByMailAccount(emailRegisterDTO.getEmail())) {
-//            throw new BizException(ResultCode.USER_IS_EXIST);
-//        }
-//
-//        //校验邮箱验证码
-//        String cacheCode = redisCache.getCacheObject(
-//                RedisPrefixConstant.MAIL_CODE_PREFIX + emailRegisterDTO.getEmail());
-//        //判断验证码是否存在
-//        if (StringUtils.isBlank(cacheCode)) {
-//            throw new BizException(ResultCode.MAIL_CODE_IS_EXPIRE);
-//        }
-//        //判断验证码是否相同
-//        if (!StringUtils.equals(cacheCode, emailRegisterDTO.getMailCode())) {
-//            throw new BizException(ResultCode.MAIL_CODE_CHECK_ERROR);
-//        }
-//
-//        //校验两次密码是否一致
-//        if (!StringUtils.equals(emailRegisterDTO.getPassword(), emailRegisterDTO.getRePassword())) {
-//            throw new BizException(ResultCode.RE_PASSWORD_CHECK_ERROR);
-//        }
-//        //构造默认用户
-//        SysUserEntity defaultUser = SysUserEntity.buildDefaultUser();
-//        defaultUser.setEmail(emailRegisterDTO.getEmail());
+    public boolean registerUser(EmailRegisterDTO emailRegisterDTO) {
+//        判断用户是否已经注册
+        if (isUserRegisteredByMailAccount(emailRegisterDTO.getEmail())) {
+            throw new BizException(ResultCode.USER_IS_EXIST);
+        }
+
+        //校验邮箱验证码
+        String cacheCode = redisCache.getCacheObject(
+                RedisPrefixConstant.MAIL_CODE_PREFIX + emailRegisterDTO.getEmail());
+        //判断验证码是否存在
+        if (StringUtils.isBlank(cacheCode)) {
+            throw new BizException(ResultCode.MAIL_CODE_IS_EXPIRE);
+        }
+        //判断验证码是否相同
+        if (!StringUtils.equals(cacheCode, emailRegisterDTO.getMailCode())) {
+            throw new BizException(ResultCode.MAIL_CODE_CHECK_ERROR);
+        }
+
+        //校验两次密码是否一致
+        if (!StringUtils.equals(emailRegisterDTO.getPassword(), emailRegisterDTO.getRePassword())) {
+            throw new BizException(ResultCode.RE_PASSWORD_CHECK_ERROR);
+        }
+        //构造默认用户
+        SysUserEntity defaultUser = SysUserEntity.buildDefaultUser();
+        defaultUser.setEmail(emailRegisterDTO.getEmail());
 //        //密码加密
 //        defaultUser.setPassword(passwordEncoder.encode(emailRegisterDTO.getPassword()));
-//
-//        // 获取随机头像
-//        SysImageInfoEntity avatar = sysImageInfoService.getRandomAvatar();
-//
-//        defaultUser.buildAvatarInfo(avatar);
-//
-//        //存入数据库
-//        sysUserMapper.insert(defaultUser);
-//
-//        SecurityMailUserDetails principal = new SecurityMailUserDetails(
-//                BeanMapperUtils.map(defaultUser, SysUserDTO.class));
-//
-//        //存入redis,1天后过期
-//        redisCache.setCacheObject(RedisPrefixConstant.AUTHENTICATION_PREFIX + principal.getMailAccount(),
-//                principal, 24, TimeUnit.HOURS);
-//        //生成token
-//        String token = JwtUtil.createJwt(emailRegisterDTO.getEmail(), SecurityLoginType.MAIL);
-//
-//        return SecurityContextUtils.buildUserMailContext(principal, token);
-        return null;
+
+        // 获取随机头像
+        SysImageInfoEntity avatar = sysImageInfoService.getRandomAvatar();
+
+        defaultUser.buildAvatarInfo(avatar);
+        //存入数据库
+        return sysUserMapper.insert(defaultUser) > 0;
     }
 
     @Override
     @AopResult
     public Boolean isUserRegisteredByMailAccount(String mailAccount) {
-        Long count = sysUserMapper
-                .selectCount(Wrappers.<SysUserEntity>lambdaQuery()
-                        .eq(SysUserEntity::getEmail, mailAccount));
+        Long count = sysUserMapper.selectCount(
+                Wrappers.<SysUserEntity>lambdaQuery().eq(SysUserEntity::getEmail, mailAccount));
         return count > 0;
     }
 

@@ -2,14 +2,14 @@ package com.card.game.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.card.game.aop.AopResult;
-import com.card.game.api.user.dto.SysUserDTO;
-import com.card.game.mapper.UserCardInfoConfigMapper;
 import com.card.game.common.base.dto.UserCardInfoConfigDTO;
 import com.card.game.common.base.entity.UserCardInfoConfigEntity;
 import com.card.game.common.base.vo.ActionCardInfoVO;
 import com.card.game.common.base.vo.CardInfoVO;
 import com.card.game.common.base.vo.RoleCardInfoVO;
 import com.card.game.common.base.vo.UserCarInfoConfigVO;
+import com.card.game.common.web.config.LoginUserHolder;
+import com.card.game.mapper.UserCardInfoConfigMapper;
 import com.card.game.service.ActionCardInfoService;
 import com.card.game.service.RoleCardInfoService;
 import com.card.game.service.UserCardConfigService;
@@ -27,22 +27,22 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class UserCardConfigServiceImpl extends
-        ServiceImpl<UserCardInfoConfigMapper, UserCardInfoConfigEntity> implements
-        UserCardConfigService {
+        ServiceImpl<UserCardInfoConfigMapper, UserCardInfoConfigEntity> implements UserCardConfigService {
 
     private final UserCardInfoConfigMapper cardInfoConfigMapper;
 
     private final RoleCardInfoService roleCardInfoService;
 
     private final ActionCardInfoService actionCardInfoService;
+    private final LoginUserHolder loginUserHolder;
 
 
     @Override
     @AopResult
     public UserCarInfoConfigVO getUserAllCardInfo() {
-//        SecurityMailUserDetails currentUserInfo = SecurityContextUtils.getCurrentUserInfo();
-//        SysUserDTO userDTO = currentUserInfo.getSysUserDTO();
-        List<UserCardInfoConfigDTO> userCardConfigs = cardInfoConfigMapper.getUserCardConfigs(1631578150241624065L);
+
+        List<UserCardInfoConfigDTO> userCardConfigs = cardInfoConfigMapper.getUserCardConfigs(
+                loginUserHolder.getCurrentUser().getId());
         UserCarInfoConfigVO userConfig = new UserCarInfoConfigVO();
         List<CardInfoVO> configs = new ArrayList<>();
         userCardConfigs.forEach(config -> {

@@ -1,22 +1,20 @@
 package com.card.game.controller;
 
-import com.card.game.common.result.Result;
+
 import com.card.game.common.base.vo.ActionCardInfoVO;
 import com.card.game.common.base.vo.CardInfoVO;
 import com.card.game.common.base.vo.RoleCardInfoVO;
 import com.card.game.common.base.vo.UserCarInfoConfigVO;
+import com.card.game.common.result.Result;
 import com.card.game.service.ActionCardInfoService;
 import com.card.game.service.CardService;
 import com.card.game.service.RoleCardInfoService;
-import java.util.Map;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 
 @RestController
@@ -29,6 +27,7 @@ public class CardInfoController {
     private final ActionCardInfoService actionCardInfoService;
 
     private final CardService cardService;
+
 
     @GetMapping("/addRoleCardInfo")
     public Result<Boolean> addRoleCardInfo(@RequestParam("url") String url) {
@@ -51,7 +50,7 @@ public class CardInfoController {
     }
 
     @GetMapping("/getAllCardInfo")
-    public Result<CardInfoVO> getAllCardInfo(@RequestHeader Map<String, String> headers) {
+    public Result<CardInfoVO> getAllCardInfo() {
         return Result.success(cardService.getAllCardInfo());
     }
 
