@@ -7,6 +7,9 @@ import com.card.game.message.pojo.Message;
 import com.card.game.message.pojo.mail.Attachment;
 import com.card.game.message.pojo.mail.MailMessage;
 import com.card.game.message.template.TemplateHandler;
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeMessage;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.core.io.ByteArrayResource;
@@ -15,10 +18,6 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
-import java.util.List;
-
 /**
  * @author tomyou
  * @version v1.0 2023-01-15-9:41 PM
@@ -26,6 +25,7 @@ import java.util.List;
 @Component
 @RequiredArgsConstructor
 public class MailMessageProvider implements MessageProvider {
+
     private final JavaMailSender javaMailSender;
 
     private final TemplateHandler templateHandler;
@@ -44,8 +44,7 @@ public class MailMessageProvider implements MessageProvider {
         //标题
         helper.setSubject(((MailMessage) message).getSubject());
         //内容
-        helper.setText(templateHandler.getTemplateContent(message),
-                emailBodyFormat.equals(EmailBodyFormat.HTML));
+        helper.setText(templateHandler.getTemplateContent(message), emailBodyFormat.equals(EmailBodyFormat.HTML));
         //附件不为空则添加附件
         if (!CollectionUtils.isEmpty(attachments)) {
             attachments.forEach(attachment -> {

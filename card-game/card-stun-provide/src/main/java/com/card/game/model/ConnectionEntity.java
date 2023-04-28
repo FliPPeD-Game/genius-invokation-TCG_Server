@@ -1,6 +1,6 @@
 package com.card.game.model;
 
-import javax.websocket.Session;
+import jakarta.websocket.Session;
 import lombok.Data;
 
 /**

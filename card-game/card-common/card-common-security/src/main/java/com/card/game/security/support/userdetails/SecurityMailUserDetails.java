@@ -1,12 +1,11 @@
 package com.card.game.security.support.userdetails;
 
 import com.card.game.api.user.dto.SysUserDTO;
+import java.util.Collection;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
-import java.util.Collection;
 
 /**
  * @author tomyou
@@ -14,12 +13,10 @@ import java.util.Collection;
  */
 public class SecurityMailUserDetails implements UserDetails {
 
-    private final String userName;
-
-    private final Boolean lockFlg;
     @Getter
     public final SysUserDTO sysUserDTO;
-
+    private final String userName;
+    private final Boolean lockFlg;
     @Getter
     @Setter
     private String mailAccount;
@@ -34,13 +31,13 @@ public class SecurityMailUserDetails implements UserDetails {
         this.mailAccount = sysUserDTO.getEmail();
     }
 
-    public void setAuthorities(Collection<? extends GrantedAuthority> authorities) {
-        this.authorities = authorities;
-    }
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return this.authorities;
+    }
+
+    public void setAuthorities(Collection<? extends GrantedAuthority> authorities) {
+        this.authorities = authorities;
     }
 
     @Override

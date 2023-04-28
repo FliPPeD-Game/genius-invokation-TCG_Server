@@ -10,12 +10,8 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class ExceptionThreadLocal {
+
     private static final ThreadLocal<ResultCode> CODE_HOLDER = new ThreadLocal<>();
-
-
-    public void setResultCode(ResultCode resultCode) {
-        CODE_HOLDER.set(resultCode);
-    }
 
     public ResultCode getResultCode() {
         ResultCode resultCode = CODE_HOLDER.get();
@@ -24,6 +20,10 @@ public class ExceptionThreadLocal {
             CODE_HOLDER.set(resultCode);
         }
         return resultCode;
+    }
+
+    public void setResultCode(ResultCode resultCode) {
+        CODE_HOLDER.set(resultCode);
     }
 
     public void clearContext() {

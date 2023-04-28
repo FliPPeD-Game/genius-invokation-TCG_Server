@@ -10,7 +10,7 @@
     <groupId>com.card.game</groupId>
     <properties>
         <revision>1.0.0-snapshot</revision>
-        <spring.boot.dependence.version>2.7.0</spring.boot.dependence.version>
+        <spring.boot.dependence.version>3.0.6</spring.boot.dependence.version>
         <!-- Web 相关 -->
         <knife4j.version>3.0.3</knife4j.version>
         <swagger-annotations.version>1.6.7</swagger-annotations.version>
@@ -19,13 +19,13 @@
         <mybatis.plus.generator.version>3.5.2</mybatis.plus.generator.version>
         <velocity.version>1.7</velocity.version>
         <!--SpringCloud版本 -->
-        <spring-cloud.version>2021.0.3</spring-cloud.version>
+        <spring-cloud.version>2022.0.2</spring-cloud.version>
         <!--SpringCloudAlibaba版本-->
-        <spring.cloud.alibaba.version>2021.0.1.0</spring.cloud.alibaba.version>
+        <spring.cloud.alibaba.version>2022.0.0.0-RC1</spring.cloud.alibaba.version>
         <!--bean转换版本-->
         <mysql.version>8.0.29</mysql.version>
 
-        <hutool.version>5.8.8</hutool.version>
+        <hutool.version>5.8.16</hutool.version>
         <fastJson2.version>2.0.10</fastJson2.version>
         <!--bean转换相关-->
         <dozer.version>6.5.2</dozer.version>

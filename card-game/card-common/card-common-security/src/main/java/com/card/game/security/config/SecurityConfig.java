@@ -52,10 +52,7 @@ public class SecurityConfig  {
                 .accessDeniedHandler(securityAccessDeniedHandler);
 
 
-        //拦截请求设置
-        httpSecurity.authorizeRequests()
-                .antMatchers(securityUrlProperties.getUrls().toArray(new String[0])).permitAll()
-                .anyRequest().permitAll();
+
 
         //适配邮箱登陆
         httpSecurity.apply(mailAuthenticationConfigurer);

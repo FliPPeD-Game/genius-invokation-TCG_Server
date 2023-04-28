@@ -2,9 +2,10 @@ package com.card.game.util;
 
 import com.alibaba.fastjson2.JSON;
 import com.card.game.model.MessageEntity;
+import jakarta.websocket.Session;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.websocket.Session;
+
 import java.io.IOException;
 
 @Slf4j

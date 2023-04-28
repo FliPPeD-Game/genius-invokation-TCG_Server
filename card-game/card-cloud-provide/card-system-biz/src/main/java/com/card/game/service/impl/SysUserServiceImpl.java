@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.card.game.aop.AopResult;
 import com.card.game.api.user.vo.SysUserVO;
 import com.card.game.common.base.dto.EmailRegisterDTO;
+import com.card.game.common.base.dto.UserInfoDTO;
 import com.card.game.common.base.dto.user.SysUserUpdateDTO;
 import com.card.game.common.base.entity.SysImageInfoEntity;
 import com.card.game.common.base.entity.SysUserEntity;
@@ -13,9 +14,12 @@ import com.card.game.common.exception.BizException;
 import com.card.game.common.redis.RedisCache;
 import com.card.game.common.redis.constants.RedisPrefixConstant;
 import com.card.game.common.result.ResultCode;
+import com.card.game.common.web.config.LoginUserHolder;
 import com.card.game.mapper.SysUserMapper;
 import com.card.game.service.SysImageInfoService;
 import com.card.game.service.SysUserService;
+import com.card.game.utils.BCryptPasswordEncoder;
+import java.util.Objects;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -37,6 +41,8 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUserEntity
     private final SysUserMapper sysUserMapper;
     private final RedisCache redisCache;
     private final SysImageInfoService sysImageInfoService;
+    private final BCryptPasswordEncoder passwordEncoder;
+    private final LoginUserHolder loginUserHolder;
 
     @Override
     @AopResult
@@ -65,9 +71,8 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUserEntity
         //构造默认用户
         SysUserEntity defaultUser = SysUserEntity.buildDefaultUser();
         defaultUser.setEmail(emailRegisterDTO.getEmail());
-//        //密码加密
-//        defaultUser.setPassword(passwordEncoder.encode(emailRegisterDTO.getPassword()));
-
+        //密码加密
+        defaultUser.setPassword(passwordEncoder.encode(emailRegisterDTO.getPassword()));
         // 获取随机头像
         SysImageInfoEntity avatar = sysImageInfoService.getRandomAvatar();
 
@@ -88,22 +93,21 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUserEntity
     @AopResult
     @Transactional(rollbackFor = Exception.class)
     public SysUserVO updateUserInfo(SysUserUpdateDTO sysUserUpdateDTO) {
-//        //校验两次密码是否一致
-//        if (!StringUtils.equals(sysUserUpdateDTO.getPassword(), sysUserUpdateDTO.getRePassword())) {
-//            throw new BizException(ResultCode.RE_PASSWORD_CHECK_ERROR);
-//        }
-//        //密码加密
-//        if (StringUtils.isNotBlank(sysUserUpdateDTO.getPassword())){
-//            sysUserUpdateDTO.setPassword(passwordEncoder.encode(sysUserUpdateDTO.getPassword()));
-//        }
-//
-//        //当前登陆用户信息
-//        SecurityMailUserDetails currentUserInfo = SecurityContextUtils.getCurrentUserInfo();
-//        if (Objects.isNull(currentUserInfo)) {
-//            throw new BizException(ResultCode.ERROR);
-//        }
-//        String currentMailAccount = currentUserInfo.getMailAccount();
-//        Long id = currentUserInfo.getSysUserDTO().getId();
+        //校验两次密码是否一致
+        if (!StringUtils.equals(sysUserUpdateDTO.getPassword(), sysUserUpdateDTO.getRePassword())) {
+            throw new BizException(ResultCode.RE_PASSWORD_CHECK_ERROR);
+        }
+        //密码加密
+        if (StringUtils.isNotBlank(sysUserUpdateDTO.getPassword())) {
+            sysUserUpdateDTO.setPassword(passwordEncoder.encode(sysUserUpdateDTO.getPassword()));
+        }
+
+        //当前登陆用户信息
+        UserInfoDTO currentUserInfo = loginUserHolder.getCurrentUser();
+        if (Objects.isNull(currentUserInfo)) {
+            throw new BizException(ResultCode.ERROR);
+        }
+        Long id = currentUserInfo.getId();
 //
 //
 //        //修改数据库

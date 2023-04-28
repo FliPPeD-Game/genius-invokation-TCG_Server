@@ -4,14 +4,13 @@ package com.card.game.security.handler;
 import com.card.game.common.result.Result;
 import com.card.game.common.result.ResultCode;
 import com.card.game.common.web.utils.ServletUtils;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 /**
  * 认证失败处理器
@@ -21,8 +20,11 @@ import java.io.IOException;
  */
 @Component
 public class SecurityAuthenticationFailureHandler implements AuthenticationFailureHandler {
+
     @Override
-    public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
-        ServletUtils.writeToJson(response, Result.error(ResultCode.AUTHENTICATION_ERROR.getCode(), exception.getMessage()));
+    public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
+            AuthenticationException exception) throws IOException, ServletException {
+        ServletUtils.writeToJson(response,
+                Result.error(ResultCode.AUTHENTICATION_ERROR.getCode(), exception.getMessage()));
     }
 }

@@ -9,16 +9,15 @@ import com.card.game.security.utils.JwtUtil;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.SignatureException;
+import jakarta.servlet.http.HttpServletRequest;
+import java.util.Objects;
+import java.util.function.Supplier;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
-
-import javax.servlet.http.HttpServletRequest;
-import java.util.Objects;
-import java.util.function.Supplier;
 
 /**
  * @author tomyou
@@ -51,7 +50,6 @@ public class SecurityContextRepositoryImpl extends SecurityContextRepositoryAdap
         } else {
             token = request.getHeader(SecurityConstants.AUTHORIZATION);
         }
-
 
         SecurityContext emptyContext = SecurityContextHolder.createEmptyContext();
 

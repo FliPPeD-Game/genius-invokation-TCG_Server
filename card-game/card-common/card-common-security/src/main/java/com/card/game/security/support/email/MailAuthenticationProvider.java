@@ -5,6 +5,8 @@ import com.card.game.common.redis.constants.RedisPrefixConstant;
 import com.card.game.common.result.ResultCode;
 import com.card.game.security.support.userdetails.SecurityMailUserDetails;
 import com.card.game.security.support.userdetails.SecurityMailUserDetailsServiceImpl;
+import java.util.Collections;
+import java.util.Objects;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -13,9 +15,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
-import java.util.Collections;
-import java.util.Objects;
 
 /**
  * @author tomyou
@@ -37,7 +36,8 @@ public class MailAuthenticationProvider implements AuthenticationProvider {
         //邮箱帐号
         String principal = (String) mailAuthenticationToken.getPrincipal();
         //先从redis中取
-        SecurityMailUserDetails userDetails = redisCache.getCacheObject(RedisPrefixConstant.AUTHENTICATION_PREFIX + principal);
+        SecurityMailUserDetails userDetails = redisCache.getCacheObject(
+                RedisPrefixConstant.AUTHENTICATION_PREFIX + principal);
         //没有获取到查询数据库
         if (Objects.isNull(userDetails)) {
             //查询用户信息

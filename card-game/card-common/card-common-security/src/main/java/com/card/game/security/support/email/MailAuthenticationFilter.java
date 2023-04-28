@@ -6,6 +6,13 @@ import com.card.game.common.result.Result;
 import com.card.game.common.result.ResultCode;
 import com.card.game.common.web.utils.ServletUtils;
 import com.card.game.security.constant.SecurityConstants;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.Map;
+import java.util.Objects;
+import java.util.stream.Collectors;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -13,19 +20,12 @@ import org.springframework.security.web.authentication.AbstractAuthenticationPro
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.util.Assert;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.Map;
-import java.util.Objects;
-import java.util.stream.Collectors;
-
 /**
  * @author tomyou
  * @version v1.0 2023-01-07-8:00 PM
  */
 public class MailAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
+
     public static final String SPRING_SECURITY_FORM_MAIL_ACCOUNT_KEY = "mailAccount";
 
     public static final String SPRING_SECURITY_FORM_PASSWORD_KEY = "password";
@@ -34,21 +34,21 @@ public class MailAuthenticationFilter extends AbstractAuthenticationProcessingFi
 
     private String passwordParameter = SPRING_SECURITY_FORM_PASSWORD_KEY;
 
-    private static final AntPathRequestMatcher DEFAULT_ANT_PATH_REQUEST_MATCHER = new AntPathRequestMatcher(SecurityConstants.EMAIL_LOGIN_URL,
-            HttpMethod.POST.name());
+    private static final AntPathRequestMatcher DEFAULT_ANT_PATH_REQUEST_MATCHER = new AntPathRequestMatcher(
+            SecurityConstants.EMAIL_LOGIN_URL, HttpMethod.POST.name());
 
     public MailAuthenticationFilter() {
         super(DEFAULT_ANT_PATH_REQUEST_MATCHER);
     }
 
-    @Override
-    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException, IOException, ServletException {
+    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
+            throws AuthenticationException, IOException, ServletException {
         //从请求体中取出帐号和code
         String data = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
         Map<String, String> map = JSONObject.parseObject(data, new TypeReference<Map<String, String>>() {
         });
 
-        if (Objects.isNull(map)){
+        if (Objects.isNull(map)) {
             ServletUtils.writeToJson(response, Result.error(ResultCode.REQUIRE_MAIL_LOGIN_PARAM));
             return null;
         }
@@ -60,8 +60,9 @@ public class MailAuthenticationFilter extends AbstractAuthenticationProcessingFi
         password = password != null ? password : "";
 
         //未认证状态
-        MailAuthenticationToken mailAuthenticationToken = MailAuthenticationToken.unauthenticated(mailAccount,password);
-        setDetails(request,mailAuthenticationToken);
+        MailAuthenticationToken mailAuthenticationToken = MailAuthenticationToken.unauthenticated(mailAccount,
+                password);
+        setDetails(request, mailAuthenticationToken);
 
         //执行认证
         return this.getAuthenticationManager().authenticate(mailAuthenticationToken);

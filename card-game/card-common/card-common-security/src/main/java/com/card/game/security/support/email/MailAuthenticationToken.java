@@ -1,11 +1,10 @@
 package com.card.game.security.support.email;
 
+import java.util.Collection;
 import lombok.Getter;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.util.Assert;
-
-import java.util.Collection;
 
 /**
  * @author tomyou
@@ -31,6 +30,15 @@ public class MailAuthenticationToken extends AbstractAuthenticationToken {
         super.setAuthenticated(true);
     }
 
+    public static MailAuthenticationToken unauthenticated(Object principal, String password) {
+        return new MailAuthenticationToken(principal, password);
+    }
+
+    public static MailAuthenticationToken authenticated(Object principal,
+            Collection<? extends GrantedAuthority> authorities) {
+        return new MailAuthenticationToken(principal, authorities);
+    }
+
     @Override
     public Object getCredentials() {
         return null;
@@ -40,18 +48,6 @@ public class MailAuthenticationToken extends AbstractAuthenticationToken {
     public Object getPrincipal() {
         return this.principal;
     }
-
-
-    public static MailAuthenticationToken unauthenticated(Object principal, String password) {
-        return new MailAuthenticationToken(principal, password);
-    }
-
-
-    public static MailAuthenticationToken authenticated(Object principal,
-                                                        Collection<? extends GrantedAuthority> authorities) {
-        return new MailAuthenticationToken(principal, authorities);
-    }
-
 
     public void setAuthenticated(boolean isAuthenticated) throws IllegalArgumentException {
         Assert.isTrue(!isAuthenticated,

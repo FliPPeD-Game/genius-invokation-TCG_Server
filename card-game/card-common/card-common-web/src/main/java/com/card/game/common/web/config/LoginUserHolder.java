@@ -3,7 +3,7 @@ package com.card.game.common.web.config;
 import cn.hutool.core.convert.Convert;
 import cn.hutool.json.JSONObject;
 import com.card.game.common.base.dto.UserInfoDTO;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;

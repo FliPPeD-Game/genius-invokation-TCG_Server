@@ -12,10 +12,10 @@
     <artifactId>card-cloud-register</artifactId>
     <packaging>jar</packaging>
     <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <nacos.version>2.2.0.PIGOEM</nacos.version>
+        <nacos.version>2.2.0.1</nacos.version>
     </properties>
 
 

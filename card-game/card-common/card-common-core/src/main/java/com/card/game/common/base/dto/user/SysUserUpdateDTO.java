@@ -2,10 +2,10 @@ package com.card.game.common.base.dto.user;
 
 
 import com.card.game.api.user.dto.AvatarDTO;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
-import javax.validation.constraints.NotBlank;
 
 @Data
 public class SysUserUpdateDTO {
